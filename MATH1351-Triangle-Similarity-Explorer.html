@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parallel Segment Triangle Similarity Explorer</title>
+<style>
+:root{
+  --bg:#ffffff;
+  --panel:#f8fafc;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#667085;
+  --border:#d9e0ea;
+  --accent:#6d28d9;
+  --accent-bg:#f1eafe;
+  --blue:#2563eb;
+  --teal:#0f766e;
+  --orange:#ea580c;
+  --pink:#be185d;
+  --green:#15803d;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
+.app{max-width:1220px;margin:0 auto;padding:24px}
+h1{font-size:1.7rem;margin:0 0 6px}
+.subtitle{color:var(--muted);margin:0 0 18px}
+.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.8fr);gap:18px}
+.panel{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:15px;
+}
+.toolbar{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:9px}
+.pill{
+  display:inline-flex;align-items:center;border:1px solid var(--border);
+  border-radius:999px;padding:6px 10px;background:var(--card);font-size:.9rem;font-weight:700;
+}
+svg{display:block;width:100%;height:auto;touch-action:none}
+.side{stroke:var(--text);stroke-width:4;stroke-linecap:round}
+.extension{stroke:var(--muted);stroke-width:3;stroke-dasharray:8 7;stroke-linecap:round}
+.inner{stroke:var(--blue);stroke-width:5;stroke-linecap:round}
+.vertex{fill:var(--card);stroke:var(--text);stroke-width:3;cursor:grab}
+.innerVertex{fill:var(--blue);stroke:#fff;stroke-width:3;cursor:grab}
+.label{font:700 20px ui-sans-serif,system-ui,sans-serif;fill:var(--text)}
+.copyLabel{font:700 17px ui-sans-serif,system-ui,sans-serif;fill:var(--text)}
+.math{font-family:Georgia,"Times New Roman",serif}
+.copyTri{fill:rgba(15,118,110,.13);stroke:var(--teal);stroke-width:4;stroke-linejoin:round;cursor:grab}
+.angleA{stroke:var(--orange)} .angleD{stroke:var(--pink)} .angleE{stroke:var(--green)}
+.angleArc{fill:none;stroke-width:4;stroke-linecap:round}
+.controls{display:grid;gap:12px}
+.control-title{font-weight:800;margin-bottom:5px}
+.small{font-size:.9rem;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+button{
+  min-height:44px;border:1px solid var(--border);border-radius:10px;padding:9px 12px;
+  background:var(--card);color:var(--text);font-weight:750;cursor:pointer;
+}
+button:hover{background:var(--accent-bg)}
+button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.button-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.range-labels{display:grid;grid-template-columns:1fr 1fr 1fr;font-size:.78rem;color:var(--muted);margin-top:2px}
+.range-labels span:nth-child(2){text-align:center}.range-labels span:nth-child(3){text-align:right}
+.zone{border-radius:10px;padding:9px 10px;background:var(--card);border:1px solid var(--border);font-size:.9rem}
+.hidden{display:none!important}
+.evidence{margin-top:10px;padding:11px;border-radius:12px;border:1px solid var(--border);background:var(--card);font-size:.92rem}
+.evidence div{margin:3px 0}
+.check{display:flex;align-items:center;gap:8px;margin:8px 0}
+.obs{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:10px}
+.footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:16px}
+@media(max-width:860px){
+  .grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  .app{padding:12px}.obs{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="app" id="general-sim-vm">
+  <h1>Parallel Segment Triangle Similarity Explorer</h1>
+  <p class="subtitle">Explore how a line segment parallel to one side of a triangle creates smaller, equal-size, and larger similar triangles.</p>
+
+  <div class="grid">
+    <section>
+      <div class="toolbar">
+        <div class="small">Drag <b>D</b> along the ray. The parallel segment can move inside, onto, or beyond △ABC.</div>
+        <span id="parallelPill" class="pill">DE ∥ BC</span>
+      </div>
+
+      <div class="panel">
+        <svg id="gScene" viewBox="0 0 900 620" role="img" aria-label="Interactive triangle ABC with a parallel segment DE that can move beyond side BC">
+          <polygon id="bigFill" fill="#ffffff"></polygon>
+
+          <line id="AB" class="side"></line>
+          <line id="AC" class="side"></line>
+          <line id="BC" class="side"></line>
+
+          <line id="ABext" class="extension"></line>
+          <line id="ACext" class="extension"></line>
+
+          <polygon id="constructedFill" fill="rgba(37,99,235,.10)"></polygon>
+          <line id="DE" class="inner"></line>
+
+          <g id="angles">
+            <path id="aSmall" class="angleArc angleA"></path>
+            <path id="aBig" class="angleArc angleA"></path>
+            <path id="dArc" class="angleArc angleD"></path>
+            <path id="bArc" class="angleArc angleD"></path>
+            <path id="eArc" class="angleArc angleE"></path>
+            <path id="cArc" class="angleArc angleE"></path>
+          </g>
+
+          <circle id="Apt" class="vertex" r="9"></circle>
+          <circle id="Bpt" class="vertex" r="10"></circle>
+          <circle id="Cpt" class="vertex" r="10"></circle>
+          <circle id="Dpt" class="innerVertex" r="10"></circle>
+          <circle id="Ept" class="innerVertex" r="10"></circle>
+
+          <text id="Alab" class="label">A</text>
+          <text id="Blab" class="label">B</text>
+          <text id="Clab" class="label">C</text>
+          <text id="Dlab" class="label">D</text>
+          <text id="Elab" class="label">E</text>
+
+          <g id="copyZone">
+            <text x="680" y="54" class="copyLabel">Movable copy of △ADE</text>
+            <text x="680" y="78" class="copyLabel" style="font-weight:500;fill:#667085">Drag and resize it to compare.</text>
+            <g id="copyGroup">
+              <polygon id="copyPoly" class="copyTri"></polygon>
+              <circle id="copyA" r="6" fill="#ea580c"></circle>
+              <circle id="copyD" r="6" fill="#be185d"></circle>
+              <circle id="copyE" r="6" fill="#15803d"></circle>
+              <text id="copyAlab" class="copyLabel">A</text>
+              <text id="copyDlab" class="copyLabel">D</text>
+              <text id="copyElab" class="copyLabel">E</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <aside class="controls">
+      <div class="panel">
+        <div class="control-title">Move the parallel segment</div>
+        <label for="positionSlider" class="small">Scale factor from △ABC to △ADE</label>
+        <input id="positionSlider" type="range" min="0.20" max="1.45" step="0.01" value="0.55">
+        <div class="range-labels">
+          <span>k &lt; 1<br>inside</span>
+          <span>k = 1<br>at BC</span>
+          <span>k &gt; 1<br>beyond</span>
+        </div>
+        <div class="math" style="font-size:1.18rem;margin-top:10px">k = <b id="kText">0.55</b></div>
+        <div id="locationStatus" class="zone" style="margin-top:8px" aria-live="polite"></div>
+      </div>
+
+      <div class="panel">
+        <div class="control-title">Test the condition</div>
+        <label class="check">
+          <input id="lockParallel" type="checkbox" checked>
+          <span>Keep DE parallel to BC</span>
+        </label>
+        <div id="freeControls" class="hidden" style="margin-top:10px">
+          <label for="eSlider" class="small">Move E independently</label>
+          <input id="eSlider" type="range" min="0.20" max="1.45" step="0.01" value="0.55">
+        </div>
+        <div id="conditionText" class="small" style="margin-top:10px" aria-live="polite"></div>
+      </div>
+
+      <div class="panel">
+        <div class="control-title">Compare the triangles</div>
+        <label for="copyScale" class="small">Resize movable △ADE</label>
+        <input id="copyScale" type="range" min="0.55" max="5.20" step="0.01" value="1">
+        <div class="button-row">
+          <button id="pullBtn" type="button">Pull out △ADE</button>
+          <button id="matchBtn" type="button">Match △ABC</button>
+        </div>
+        <div id="copyStatus" class="small" style="margin-top:8px" aria-live="polite"></div>
+      </div>
+
+      <div class="panel">
+        <div class="control-title">Similarity evidence</div>
+        <label class="check"><input id="angleToggle" type="checkbox" checked> Show corresponding angles</label>
+        <label class="check"><input id="ratioToggle" type="checkbox" checked> Show corresponding side ratios</label>
+        <div id="ratioPanel" class="evidence math">
+          <div>AD / AB = <span id="rad">k</span></div>
+          <div>AE / AC = <span id="rae">k</span></div>
+          <div>DE / BC = <span id="rde">k</span></div>
+          <div id="similarityStatement" style="font-weight:800;margin-top:8px">△ADE ∼ △ABC</div>
+        </div>
+      </div>
+
+      <div class="button-row">
+        <button id="resetGeneral" type="button">Reset</button>
+        <button id="randomShape" type="button">New triangle shape</button>
+      </div>
+    </aside>
+  </div>
+
+  <div class="panel" style="margin-top:18px">
+    <div class="control-title">What students can observe</div>
+    <div class="obs">
+      <div class="zone"><b>0 &lt; k &lt; 1</b><br>△ADE lies inside △ABC.</div>
+      <div class="zone"><b>k = 1</b><br>DE coincides with BC, so the triangles coincide.</div>
+      <div class="zone"><b>k &gt; 1</b><br>△ADE extends beyond △ABC and is a larger similar triangle.</div>
+    </div>
+    <div style="font-size:.94rem;margin-top:12px">
+      As long as <b>DE ∥ BC</b>, corresponding angles remain congruent and corresponding side lengths remain proportional.
+      Therefore, <b>△ADE ∼ △ABC</b> by AA similarity whether △ADE is smaller, the same size, or larger.
+    </div>
+  </div>
+
+  <div class="footer">© 2026 Luis Miguel Fernández, Ph.D. · CC BY 4.0 · Sharing and adaptation permitted with attribution.</div>
+</div>
+
+<script>
+(()=>{
+ const root=document.getElementById('general-sim-vm');
+ const svg=root.querySelector('#gScene');
+ let A={x:320,y:55}, B={x:115,y:410}, C={x:565,y:410};
+ let tD=.55,tE=.55,locked=true;
+ let copyX=745,copyY=145,copyS=1,copyDragging=false,copyOffset={x:0,y:0};
+ let dragging=null;
+ const q=s=>root.querySelector(s), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+ const lerp=(P,Q,t)=>({x:P.x+(Q.x-P.x)*t,y:P.y+(Q.y-P.y)*t});
+ const dist=(P,Q)=>Math.hypot(Q.x-P.x,Q.y-P.y);
+ const D=()=>lerp(A,B,tD), E=()=>lerp(A,C,tE);
+
+ function svgPt(ev){
+   const p=svg.createSVGPoint();
+   p.x=ev.clientX;p.y=ev.clientY;
+   return p.matrixTransform(svg.getScreenCTM().inverse());
+ }
+ function setLine(el,P,Q){el.setAttribute('x1',P.x);el.setAttribute('y1',P.y);el.setAttribute('x2',Q.x);el.setAttribute('y2',Q.y)}
+ function setPt(el,P){el.setAttribute('cx',P.x);el.setAttribute('cy',P.y)}
+ function setLab(el,P,dx,dy){el.setAttribute('x',P.x+dx);el.setAttribute('y',P.y+dy)}
+ function arcPath(P,Q,R,r=28){
+   const a1=Math.atan2(Q.y-P.y,Q.x-P.x),a2=Math.atan2(R.y-P.y,R.x-P.x);
+   let d=a2-a1;
+   while(d>Math.PI)d-=2*Math.PI;
+   while(d<-Math.PI)d+=2*Math.PI;
+   const s={x:P.x+r*Math.cos(a1),y:P.y+r*Math.sin(a1)};
+   const e={x:P.x+r*Math.cos(a1+d),y:P.y+r*Math.sin(a1+d)};
+   return `M ${s.x} ${s.y} A ${r} ${r} 0 0 ${d>0?1:0} ${e.x} ${e.y}`;
+ }
+ function isParallel(){return Math.abs(tD-tE)<.012}
+
+ function update(){
+   if(locked)tE=tD;
+   const d=D(),e=E(), extB=lerp(A,B,1.50), extC=lerp(A,C,1.50);
+
+   setLine(q('#AB'),A,B); setLine(q('#AC'),A,C); setLine(q('#BC'),B,C);
+   setLine(q('#ABext'),B,extB); setLine(q('#ACext'),C,extC);
+   setLine(q('#DE'),d,e);
+
+   q('#bigFill').setAttribute('points',`${A.x},${A.y} ${B.x},${B.y} ${C.x},${C.y}`);
+   q('#constructedFill').setAttribute('points',`${A.x},${A.y} ${d.x},${d.y} ${e.x},${e.y}`);
+
+   setPt(q('#Apt'),A); setPt(q('#Bpt'),B); setPt(q('#Cpt'),C); setPt(q('#Dpt'),d); setPt(q('#Ept'),e);
+   setLab(q('#Alab'),A,-8,-18); setLab(q('#Blab'),B,-27,25); setLab(q('#Clab'),C,14,25);
+   setLab(q('#Dlab'),d,-29,5); setLab(q('#Elab'),e,13,5);
+
+   q('#aSmall').setAttribute('d',arcPath(A,d,e,30)); q('#aBig').setAttribute('d',arcPath(A,B,C,40));
+   q('#dArc').setAttribute('d',arcPath(d,A,e,24)); q('#bArc').setAttribute('d',arcPath(B,A,C,29));
+   q('#eArc').setAttribute('d',arcPath(e,d,A,24)); q('#cArc').setAttribute('d',arcPath(C,B,A,29));
+
+   const parallel=isParallel();
+   q('#parallelPill').textContent=parallel?'DE ∥ BC':'DE is not parallel to BC';
+   q('#positionSlider').value=tD; q('#eSlider').value=tE; q('#kText').textContent=tD.toFixed(2);
+
+   if(Math.abs(tD-1)<.012){
+     q('#locationStatus').innerHTML='<b>k = 1:</b> DE coincides with BC. △ADE and △ABC are the same size.';
+   } else if(tD<1){
+     q('#locationStatus').innerHTML='<b>k &lt; 1:</b> DE is inside the triangle, so △ADE is a smaller similar triangle.';
+   } else {
+     q('#locationStatus').innerHTML='<b>k &gt; 1:</b> DE has passed BC. D and E lie on the extended rays, creating a larger similar triangle.';
+   }
+
+   const ade=dist(A,d)/dist(A,B), aec=dist(A,e)/dist(A,C), debc=dist(d,e)/dist(B,C);
+   q('#rad').textContent=ade.toFixed(2); q('#rae').textContent=aec.toFixed(2); q('#rde').textContent=debc.toFixed(2);
+
+   if(parallel){
+     q('#conditionText').innerHTML='<b>Parallel:</b> corresponding angles match, so AA similarity applies.';
+     q('#similarityStatement').textContent='△ADE ∼ △ABC';
+   }else{
+     q('#conditionText').innerHTML='<b>Not parallel:</b> the corresponding-angle relationship is lost.';
+     q('#similarityStatement').textContent='△ADE is not guaranteed to be similar to △ABC';
+   }
+
+   const vD={x:d.x-A.x,y:d.y-A.y}, vE={x:e.x-A.x,y:e.y-A.y};
+   q('#copyPoly').setAttribute('points',`0,0 ${vD.x},${vD.y} ${vE.x},${vE.y}`);
+   setPt(q('#copyA'),{x:0,y:0}); setPt(q('#copyD'),vD); setPt(q('#copyE'),vE);
+   setLab(q('#copyAlab'),{x:0,y:0},-8,-12); setLab(q('#copyDlab'),vD,-24,20); setLab(q('#copyElab'),vE,9,20);
+   q('#copyGroup').setAttribute('transform',`translate(${copyX} ${copyY}) scale(${copyS})`);
+
+   const matched=parallel && Math.hypot(copyX-A.x,copyY-A.y)<10 && Math.abs(copyS-1/tD)<.035;
+   q('#copyStatus').textContent=matched
+      ? 'Perfect match: the corresponding vertices, sides, and angles coincide.'
+      : 'Drag the copy or select Match △ABC.';
+ }
+
+ function sideT(P,Q,X){
+   const vx=Q.x-P.x,vy=Q.y-P.y;
+   return clamp(((X.x-P.x)*vx+(X.y-P.y)*vy)/(vx*vx+vy*vy),.20,1.45);
+ }
+
+ ['Bpt','Cpt','Dpt','Ept'].forEach(id=>{
+   const el=q('#'+id);
+   el.addEventListener('pointerdown',ev=>{
+     dragging=id;
+     el.setPointerCapture(ev.pointerId);
+   });
+   el.addEventListener('pointermove',ev=>{
+     if(dragging!==id)return;
+     const p=svgPt(ev);
+     if(id==='Bpt') B={x:clamp(p.x,70,275),y:clamp(p.y,315,430)};
+     if(id==='Cpt') C={x:clamp(p.x,365,625),y:clamp(p.y,315,430)};
+     if(id==='Dpt'){
+       tD=sideT(A,B,p);
+       if(locked)tE=tD;
+     }
+     if(id==='Ept'){
+       if(locked){ tD=sideT(A,C,p); tE=tD; }
+       else tE=sideT(A,C,p);
+     }
+     update();
+   });
+   el.addEventListener('pointerup',()=>dragging=null);
+   el.addEventListener('pointercancel',()=>dragging=null);
+ });
+
+ q('#positionSlider').addEventListener('input',e=>{
+   tD=parseFloat(e.target.value);
+   if(locked)tE=tD;
+   update();
+ });
+ q('#eSlider').addEventListener('input',e=>{
+   tE=parseFloat(e.target.value);
+   update();
+ });
+ q('#lockParallel').addEventListener('change',e=>{
+   locked=e.target.checked;
+   q('#freeControls').classList.toggle('hidden',locked);
+   if(locked)tE=tD;
+   update();
+ });
+ q('#copyScale').addEventListener('input',e=>{
+   copyS=parseFloat(e.target.value);
+   update();
+ });
+
+ const cg=q('#copyGroup');
+ cg.addEventListener('pointerdown',ev=>{
+   copyDragging=true;
+   cg.setPointerCapture(ev.pointerId);
+   const p=svgPt(ev);
+   copyOffset={x:p.x-copyX,y:p.y-copyY};
+ });
+ cg.addEventListener('pointermove',ev=>{
+   if(!copyDragging)return;
+   const p=svgPt(ev);
+   copyX=clamp(p.x-copyOffset.x,20,860);
+   copyY=clamp(p.y-copyOffset.y,20,590);
+   update();
+ });
+ cg.addEventListener('pointerup',()=>copyDragging=false);
+ cg.addEventListener('pointercancel',()=>copyDragging=false);
+
+ q('#pullBtn').addEventListener('click',()=>{
+   copyX=745; copyY=145; copyS=1;
+   q('#copyScale').value=1;
+   update();
+ });
+ q('#matchBtn').addEventListener('click',()=>{
+   if(!isParallel()){
+     q('#copyStatus').textContent='First make DE parallel to BC.';
+     return;
+   }
+   copyX=A.x; copyY=A.y; copyS=1/tD;
+   q('#copyScale').value=clamp(copyS,.55,5.20);
+   update();
+ });
+ q('#angleToggle').addEventListener('change',e=>{
+   q('#angles').style.display=e.target.checked?'':'none';
+ });
+ q('#ratioToggle').addEventListener('change',e=>{
+   q('#ratioPanel').style.display=e.target.checked?'':'none';
+ });
+ q('#resetGeneral').addEventListener('click',()=>{
+   A={x:320,y:55}; B={x:115,y:410}; C={x:565,y:410};
+   tD=.55; tE=.55; locked=true;
+   copyX=745; copyY=145; copyS=1;
+   q('#lockParallel').checked=true;
+   q('#freeControls').classList.add('hidden');
+   q('#copyScale').value=1;
+   update();
+ });
+ q('#randomShape').addEventListener('click',()=>{
+   B={x:90+Math.random()*130,y:350+Math.random()*65};
+   C={x:485+Math.random()*105,y:350+Math.random()*65};
+   tD=.30+Math.random()*1.08;
+   tE=locked?tD:(.30+Math.random()*1.08);
+   copyX=745; copyY=145; copyS=1;
+   q('#copyScale').value=1;
+   update();
+ });
+
+ update();
+})();
+</script>
+</body>
+</html>
