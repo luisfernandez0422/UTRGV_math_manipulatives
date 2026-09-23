@@ -1,41 +1,674 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MATH 1351 Transformation Explorer</title>
-<style>
-:root{--g:#646469;--o:#CB4900;--b:#d8dee8;--m:#667085}*{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:#20242a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header,footer{padding:20px 28px;background:#fff;border-bottom:1px solid var(--b)}footer{border-top:1px solid var(--b);border-bottom:0;text-align:center;color:var(--m);font-size:14px}h1{margin:0;font:400 34px Georgia,serif}p{color:var(--m)}main{max-width:1200px;margin:auto;padding:24px}.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.8fr);gap:18px}.card,.panel{padding:16px;margin-bottom:16px;background:#fff;border:1px solid var(--b);border-radius:14px}.choice{display:grid;gap:7px;margin:12px 0}.choice label,.aid{font-size:14px;font-weight:600}.aid{display:block;margin:12px 0;color:var(--m)}svg{display:block;width:100%;height:auto;background:#fff;border-radius:10px;touch-action:none;cursor:grab}.controls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}.controls label{font-size:14px;font-weight:600}.controls input{width:100%;accent-color:var(--o)}.info{padding:12px;background:#f7f8fa;border-radius:10px;color:var(--m);font-size:14px;line-height:1.45}.big{font-size:18px;font-weight:700}.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;color:var(--m);font-size:13px}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px}@media(max-width:850px){.grid{grid-template-columns:1fr}}@media(max-width:560px){main{padding:12px}.controls{grid-template-columns:1fr}header,footer{padding:18px 16px}}
-</style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MATH 1351 Transformation Explorer</title>
+    <style>
+    :root {
+        --accent: #646469;
+        --accent-bg: #f0f0f1;
+        --panel: #f7f8fa;
+        --card: #fff;
+        --text: #20242a;
+        --muted: #667085;
+        --border: #d8dee8;
+        --object: #646469;
+        --image: #CB4900;
+        --control: #CB4900
+    }
+
+    * {
+        box-sizing:border-box
+    }
+
+    body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f7fa;
+        color:var(--text)
+    }
+
+    header {
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+        padding:22px 28px
+    }
+
+    header h1 {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 34px;
+        font-weight:400
+    }
+
+    header p {
+        margin: 8px 0 0;
+        color:var(--muted)
+    }
+
+    .collection-author {
+        margin: 12px 0 0;
+        color: var(--muted);
+        font-size: 15px;
+        font-weight:700
+    }
+
+    main {
+        max-width: 1200px;
+        margin: auto;
+        padding:24px
+    }
+
+    .back {
+        display: inline-block;
+        margin-bottom: 14px;
+        color: var(--control);
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration:none
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(260px, .8fr);
+        gap:18px
+    }
+
+    .card, .panel {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom:16px
+    }
+
+    .toprow {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: flex-start;
+        flex-wrap:wrap
+    }
+
+    .small {
+        font-size: 14px;
+        color:var(--muted)
+    }
+
+    .choice {
+        display: grid;
+        gap: 7px;
+        margin-top:12px
+    }
+
+    .choice label, .aid-toggle {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 14px;
+        font-weight:600
+    }
+
+    .choice input, .aid-toggle input {
+        accent-color:var(--accent)
+    }
+
+    .aid-toggle {
+        margin-top: 14px;
+        color:var(--muted)
+    }
+
+    svg {
+        width: 100%;
+        height: auto;
+        display: block;
+        background: #fff;
+        border-radius: 10px;
+        touch-action: none;
+        cursor:grab
+    }
+
+    .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top:12px
+    }
+
+    .controls label span:first-child {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom:6px
+    }
+
+    .controls input {
+        width: 100%;
+        accent-color:var(--control)
+    }
+
+    .panel h2 {
+        margin: 0 0 6px;
+        font-size:16px
+    }
+
+    .big {
+        font-size: 18px;
+        font-weight:700
+    }
+
+    .info {
+        margin-top: 10px;
+        background: var(--panel);
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 14px;
+        line-height:1.45
+    }
+
+    .legend {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        font-size: 13px;
+        color: var(--muted);
+        margin-top:10px
+    }
+
+    .swatch {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 5px;
+        vertical-align:-1px
+    }
+
+    .handle {
+        cursor:grab
+    }
+
+    .handle:focus-visible, input:focus-visible, button:focus-visible, svg:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset:2px
+    }
+
+    .handle:active {
+        cursor:grabbing
+    }
+
+    .footer {
+        border-top: 1px solid var(--border);
+        background: #fff;
+        color: var(--muted);
+        padding: 20px 28px;
+        text-align: center;
+        font-size: 14px;
+        font-weight:600
+    }
+
+    @media (max-width: 850px) {
+        .grid {
+            grid-template-columns:1fr
+        }
+    }
+
+    @media (max-width: 560px) {
+        main {
+            padding:12px
+        }
+
+        .controls {
+            grid-template-columns:1fr
+        }
+
+        header {
+            padding:18px 16px
+        }
+
+        .footer {
+            padding: 18px 16px
+        }
+    }
+    </style>
 </head>
 <body>
-<header><h1>Transformation Explorer</h1><p>Explore rotation, reflection, dilation, and translation with a movable triangle.</p></header>
-<main><div class="grid"><section><div class="card">
-<strong>Explore transformations</strong><p class="small">Drag vertices or the center. Pinch with two fingers to zoom the graph only.</p>
-<div class="choice"><label><input type="radio" name="mode" value="rotation" checked> Rotation</label><label><input type="radio" name="mode" value="reflection"> Reflection</label><label><input type="radio" name="mode" value="translation"> Translation</label><label><input type="radio" name="mode" value="dilation"> Dilation (Similarity)</label></div>
-<label class="aid"><input id="showAids" type="checkbox" checked> Show transformation aids</label>
-<svg id="board" viewBox="0 0 700 520" aria-label="Interactive coordinate grid"></svg>
-<div class="legend"><span><i class="dot" style="background:#646469"></i>Original object</span><span><i class="dot" style="background:#CB4900"></i>Image</span></div>
-<div id="controls" class="controls"></div></div></section>
-<aside><div class="panel"><h2>Current transformation</h2><div class="big" id="name">Rotation</div><div class="info" id="summary"></div></div><div class="panel"><h2>Try this</h2><div class="info">Move the center onto a vertex, change the angle, then compare different transformations.</div></div></aside>
-</div></main>
-<footer>© 2026 Luis Miguel Fernández, Ph.D. · CC BY 4.0</footer>
-<script>
-const svg=document.querySelector("#board"),controls=document.querySelector("#controls"),W=700,H=520,B=42;
-let origin=[285,260],unit=B*.8,drag=null,pinch=null,pts=new Map;
-const s={mode:"rotation",angle:180,scale:1.5,dx:3,dy:2,reflect:0,center:[0,0],points:[[3,5],[5.3,4.6],[4.6,1.1]],aids:true};
-const S=p=>[origin[0]+p[0]*unit,origin[1]-p[1]*unit],U=p=>[(p[0]-origin[0])/unit,(origin[1]-p[1])/unit],cl=(v,a,b)=>Math.max(a,Math.min(b,v));
-function T([x,y]){let[c,d]=s.center;if(s.mode=="rotation"){let a=s.angle*Math.PI/180,X=x-c,Y=y-d;return[c+X*Math.cos(a)-Y*Math.sin(a),d+X*Math.sin(a)+Y*Math.cos(a)]}if(s.mode=="reflection"){let a=s.reflect*Math.PI/180,X=x-c,Y=y-d;return[c+X*Math.cos(2*a)+Y*Math.sin(2*a),d+X*Math.sin(2*a)-Y*Math.cos(2*a)]}if(s.mode=="dilation")return[c+(x-c)*s.scale,d+(y-d)*s.scale];return[x+s.dx,y+s.dy]}
-function P(a){return a.map((p,i)=>{let q=S(p);return(i?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1)}).join("")+"Z"}
-function G(){let h="",a=Math.floor(-origin[0]/unit),b=Math.ceil((W-origin[0])/unit),c=Math.floor((origin[1]-H)/unit),d=Math.ceil(origin[1]/unit);for(let x=a;x<=b;x++){let X=S([x,0])[0];h+=`<path d="M${X} 0V${H}" stroke="${x?"#e4e8ee":"#8d99a8"}"/>`;if(x)h+=`<text x="${X+3}" y="${origin[1]+15}" fill="#667085" font-size="11">${x}</text>`}for(let y=c;y<=d;y++){let Y=S([0,y])[1];h+=`<path d="M0 ${Y}H${W}" stroke="${y?"#e4e8ee":"#8d99a8"}"/>`;if(y)h+=`<text x="${origin[0]-16}" y="${Y-3}" fill="#667085" font-size="11">${y}</text>`}return h}
-function aids(){if(!s.aids)return"";let[c,d]=s.center,C=S([c,d]);if(s.mode=="reflection"){let a=s.reflect*Math.PI/180,v=[Math.cos(a),Math.sin(a)],z=30,A=S([c-v[0]*z,d-v[1]*z]),D=S([c+v[0]*z,d+v[1]*z]);return`<path d="M${A}L${D}" stroke="#CB4900" stroke-width="2.5" stroke-dasharray="7 6"/>`}if(s.mode=="translation")return s.points.map(p=>{let A=S(p),D=S(T(p));return`<path d="M${A}L${D}" stroke="#646469" stroke-width="2" stroke-dasharray="7 6"/>`}).join("");if(s.mode=="dilation")return s.points.map(p=>{let q=T(p),v=[q[0]-c,q[1]-d],l=Math.hypot(...v)||1,D=S([c+v[0]*30/l,d+v[1]*30/l]);return`<path d="M${C}L${D}" stroke="#646469" stroke-width="1.5" stroke-dasharray="6 6"/>`}).join("");let q=s.points.reduce((r,p)=>[r[0]+p[0]/3,r[1]+p[1]/3],[0,0]),r=Math.hypot(q[0]-c,q[1]-d),st=Math.atan2(q[1]-d,q[0]-c),en=st+s.angle*Math.PI/180,A=S([c+r*Math.cos(st),d+r*Math.sin(st)]),D=S([c+r*Math.cos(en),d+r*Math.sin(en)]);return`<path d="M${C}L${A} M${C}L${D}" stroke="#646469" stroke-dasharray="6 5"/><circle cx="${C[0]}" cy="${C[1]}" r="${r*unit}" fill="none" stroke="#CB4900" stroke-opacity=".35" stroke-dasharray="6 6"/>`}
-function draw(){let im=s.points.map(T),C=S(s.center);svg.innerHTML=G()+aids()+`<path d="${P(im)}" fill="#CB490026" stroke="#CB4900" stroke-width="2.5"/><path data-t="object" d="${P(s.points)}" fill="#64646926" stroke="#646469" stroke-width="2.5"/>`+s.points.map((p,i)=>{let q=S(p);return`<circle data-t="point" data-i="${i}" cx="${q[0]}" cy="${q[1]}" r="9" fill="#646469" stroke="white" stroke-width="2"/>`}).join("")+(s.mode!="translation"&&s.mode!="reflection"?`<circle data-t="center" cx="${C[0]}" cy="${C[1]}" r="9" fill="#646469" stroke="white" stroke-width="2"/>`:"");let n={rotation:"Rotation",reflection:"Reflection",translation:"Translation",dilation:"Dilation (Similarity)"}[s.mode];name.textContent=n;summary.textContent=n+" transformation."}
-function UI(){let f=(l,k,a,b,z,u="")=>`<label>${l}: <output>${s[k]}${u}</output><input data-k="${k}" type="range" min="${a}" max="${b}" step="${z}" value="${s[k]}"></label>`;controls.innerHTML=s.mode=="rotation"?f("Angle","angle",-360,360,1,"°"):s.mode=="reflection"?f("Line angle","reflect",0,180,1,"°"):s.mode=="dilation"?f("Scale factor","scale",.2,3,.1):f("Horizontal change","dx",-6,6,1)+f("Vertical change","dy",-6,6,1);controls.querySelectorAll("input").forEach(e=>e.oninput=()=>{s[e.dataset.k]=+e.value;UI();draw()})}
-function pos(e){let r=svg.getBoundingClientRect();return U([(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*W/r.width])}
-svg.onpointerdown=e=>{svg.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);if(pts.size==2){let[a,b]=[...pts.values()];pinch=[Math.hypot(a[0]-b[0],a[1]-b[1]),unit];drag=null;return}let t=e.target.dataset.t;drag=t?{t,i:+e.target.dataset.i,p:pos(e),old:s.points.map(x=>[...x])}:{t:"pan",x:e.clientX,y:e.clientY,o:[...origin]}};
-svg.onpointermove=e=>{if(pts.has(e.pointerId))pts.set(e.pointerId,[e.clientX,e.clientY]);if(pinch&&pts.size==2){let[a,b]=[...pts.values()];unit=cl(pinch[1]*Math.hypot(a[0]-b[0],a[1]-b[1])/pinch[0],B*.5,B*1.8);draw();return}if(!drag)return;if(drag.t=="pan"){let r=svg.getBoundingClientRect();origin=[drag.o[0]+(e.clientX-drag.x)*W/r.width,drag.o[1]+(e.clientY-drag.y)*W/r.width]}else{let p=pos(e);if(drag.t=="point")s.points[drag.i]=p;if(drag.t=="center")s.center=p;if(drag.t=="object")s.points=drag.old.map(q=>[q[0]+p[0]-drag.p[0],q[1]+p[1]-drag.p[1]])}draw()};
-svg.onpointerup=svg.onpointercancel=e=>{pts.delete(e.pointerId);pinch=null;drag=null};svg.onwheel=e=>{e.preventDefault();unit=cl(unit+(e.deltaY<0?4:-4),B*.5,B*1.8);draw()};showAids.onchange=e=>{s.aids=e.target.checked;draw()};document.querySelectorAll("[name=mode]").forEach(e=>e.onchange=()=>{s.mode=e.value;UI();draw()});UI();draw();
-</script>
+    <header>
+        <a class="back" href="index.html">← Back to collection</a>
+        <h1>Transformation Explorer</h1>
+        <p>Explore rotation, reflection, dilation, and translation with a movable triangle.</p>
+        <p class="collection-author">Luis Miguel Fernández, Ph.D.</p>
+    </header>
+    <main>
+        <div class="grid">
+            <section>
+                <div class="card">
+                    <div class="toprow">
+                        <div>
+                            <strong>Explore transformations</strong>
+                            <div class="small">Drag the gray vertices or center point. Use the controls to change the image.</div>
+                        </div>
+                    </div>
+                    <div class="choice" role="radiogroup" aria-label="Choose transformation">
+                        <label>
+                            <input type="radio" name="mode" value="rotation" checked>
+                             Rotation
+                        </label>
+                        <label>
+                            <input type="radio" name="mode" value="reflection">
+                             Reflection
+                        </label>
+                        <label>
+                            <input type="radio" name="mode" value="translation">
+                             Translation
+                        </label>
+                        <label>
+                            <input type="radio" name="mode" value="dilation">
+                             Dilation (Similarity)
+                        </label>
+                    </div>
+                    <label class="aid-toggle">
+                        <input id="showAids" type="checkbox" checked>
+                         Show transformation aids
+                    </label>
+                    <svg id="board" viewBox="0 0 700 520" role="img" tabindex="0" aria-label="Coordinate grid with an original gray triangle and transformed orange triangle. Use the mouse wheel or plus and minus keys to zoom."></svg>
+                    <div class="legend">
+                        <span>
+                            <i class="swatch" style="background:var(--object)"></i>
+                            Original object
+                        </span>
+                        <span>
+                            <i class="swatch" style="background:var(--image)"></i>
+                            Image
+                        </span>
+                        <span>
+                            <i class="swatch" style="background:var(--control)"></i>
+                            Transformation control
+                        </span>
+                    </div>
+                    <div class="controls" id="controls"></div>
+                </div>
+            </section>
+            <aside>
+                <div class="panel">
+                    <h2>Current transformation</h2>
+                    <div class="big" id="name">Rotation</div>
+                    <div class="info" id="summary" aria-live="polite"></div>
+                </div>
+                <div class="panel">
+                    <h2>Notice</h2>
+                    <div class="info" id="notice">A rotation preserves side lengths and angle measures. Every point remains the same distance from the center.</div>
+                </div>
+                <div class="panel">
+                    <h2>Try this</h2>
+                    <div class="info">Move the center onto a vertex, then change the rotation angle. Switch to dilation and compare a scale factor less than 1 with one greater than 1.</div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <footer class="footer">© 2026 Luis Miguel Fernández, Ph.D. · CC BY 4.0 · Sharing and adaptation permitted with attribution.</footer>
+    <script>
+    const svg = document.getElementById('board'),
+        controls = document.getElementById('controls');
+    const state = {
+        mode: 'rotation',
+        angle: 180,
+        scale: 1.5,
+        dx: 3,
+        dy: 2,
+        reflect: 0,
+        center: [0, 0],
+        points: [[3, 5], [5.3, 4.6], [4.6, 1.1]],
+        showAids: true,
+        started: {
+            rotation: true,
+            reflection: false,
+            dilation: false,
+            translation: false
+        }
+    };
+    const modeDefaults = {
+        translation: {
+            points: [[2, 1.8], [4.1, 1.3], [3.4, -2.2]],
+            dx: 4,
+            dy: 0
+        }
+    };
+    const W = 700,
+        H = 520,
+        baseUnit = 42;
+    let origin = [285, 260],
+        unit = baseUnit,
+        drag = null;
+    const activePointers = new Map();
+    let pinch = null;
+    const S = (p) => [origin[0] + p[0] * unit, origin[1] - p[1] * unit],
+        U = (p) => [(p[0] - origin[0]) / unit, (origin[1] - p[1]) / unit];
+    function esc(s) {
+        return String(s).replace(/[&<>]/g, c => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;'
+        }[c]))
+    }
+    function transform(p) {
+        let [x, y] = p,
+            [cx, cy] = state.center;
+        if (state.mode === 'rotation') {
+            let a = state.angle * Math.PI / 180,
+                dx = x - cx,
+                dy = y - cy;
+            return [cx + dx * Math.cos(a) - dy * Math.sin(a), cy + dx * Math.sin(a) + dy * Math.cos(a)]
+        }
+        if (state.mode === 'reflection') {
+            let a = state.reflect * Math.PI / 180,
+                dx = x - cx,
+                dy = y - cy;
+            return [cx + dx * Math.cos(2 * a) + dy * Math.sin(2 * a), cy + dx * Math.sin(2 * a) - dy * Math.cos(2 * a)]
+        }
+        if (state.mode === 'dilation')
+            return [cx + (x - cx) * state.scale, cy + (y - cy) * state.scale];
+        return [x + state.dx, y + state.dy]
+    }
+    function poly(ps) {
+        return ps.map((p, i) => {
+            let q = S(p);
+            return (i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1)
+        }).join(' ') + ' Z'
+    }
+    function grid() {
+        let g = '',
+            minX = Math.floor(-origin[0] / unit),
+            maxX = Math.ceil((W - origin[0]) / unit),
+            minY = Math.floor((origin[1] - H) / unit),
+            maxY = Math.ceil(origin[1] / unit);
+        for (let x = minX; x <= maxX; x++) {
+            let a = S([x, minY]),
+                b = S([x, maxY]);
+            g += `<path d="M${a[0]} ${a[1]}V${b[1]}" stroke="${x === 0 ? '#8d99a8' : '#e4e8ee'}" stroke-width="${x === 0 ? 1.5 : 1}"/>`;
+            if (x !== 0)
+                g += `<text x="${a[0] + 3}" y="${origin[1] + 15}" fill="#667085" font-size="11">${x}</text>`
+        }
+        for (let y = minY; y <= maxY; y++) {
+            let a = S([minX, y]),
+                b = S([maxX, y]);
+            g += `<path d="M${a[0]} ${a[1]}H${b[0]}" stroke="${y === 0 ? '#8d99a8' : '#e4e8ee'}" stroke-width="${y === 0 ? 1.5 : 1}"/>`;
+            if (y !== 0)
+                g += `<text x="${origin[0] - 16}" y="${a[1] - 3}" fill="#667085" font-size="11">${y}</text>`
+        }
+        return g
+    }
+    function controlLine() {
+        let [cx, cy] = state.center;
+        if (state.mode === 'reflection') {
+            let a = state.reflect * Math.PI / 180,
+                v = [Math.cos(a), Math.sin(a)],
+                span = Math.max(W, H) / unit * 2,
+                p1 = [cx - v[0] * span, cy - v[1] * span],
+                p2 = [cx + v[0] * span, cy + v[1] * span],
+                A = S(p1),
+                B = S(p2),
+                M = S([cx, cy]);
+            return `<path class="handle control" data-type="reflection" d="M${A}L${B}" stroke="#CB4900" stroke-width="22" stroke-opacity="0" aria-label="Drag line of reflection"/><path class="control" d="M${A}L${B}" stroke="#CB4900" stroke-width="2.5" stroke-dasharray="7 6"/><text class="control" x="${M[0] + 10}" y="${M[1] - 10}" fill="#CB4900" font-size="13" font-weight="600">line of reflection</text>`
+        }
+        if (state.mode === 'translation') {
+            let arrows = state.points.map(p => {
+                let A = S(p),
+                    B = S(transform(p));
+                return `<path d="M${A}L${B}" fill="none" stroke="#646469" stroke-width="2" stroke-dasharray="7 6" marker-end="url(#translationArrow)"/>`
+            }).join('');
+            return `<defs><marker id="translationArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8Z" fill="#646469"/></marker></defs>${arrows}`
+        }
+        return ''
+    }
+    function rotationVisual() {
+        if (state.mode !== 'rotation')
+            return '';
+        let [cx, cy] = state.center,
+            centroid = state.points.reduce((sum, p) => [sum[0] + p[0] / 3, sum[1] + p[1] / 3], [0, 0]),
+            imageCentroid = transform(centroid),
+            theta = state.angle * Math.PI / 180,
+            dist = Math.hypot(centroid[0] - cx, centroid[1] - cy),
+            r = Math.max(.65, dist),
+            start = Math.atan2(centroid[1] - cy, centroid[0] - cx),
+            steps = Math.max(2, Math.ceil(Math.abs(state.angle) / 8)),
+            d = [];
+        for (let i = 0; i <= steps; i++) {
+            let a = start + theta * i / steps,
+                q = S([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
+            d.push((i ? 'L' : 'M') + q[0].toFixed(1) + ' ' + q[1].toFixed(1))
+        }
+        let C = S([cx, cy]),
+            O = S(centroid),
+            I = S(imageCentroid),
+            mid = start + theta / 2,
+            label = S([cx + r * .58 * Math.cos(mid), cy + r * .58 * Math.sin(mid)]),
+            direction = state.angle < 0 ? 'clockwise' : 'counterclockwise',
+            arc = d.join(' '),
+            sector = arc + ` L${C[0]} ${C[1]} Z`;
+        return `<defs><marker id="angleArrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8Z" fill="#CB4900"/></marker></defs><path class="control" d="${sector}" fill="#CB4900" fill-opacity=".14" stroke="none"/><path class="control" d="M${C}L${O} M${C}L${I}" fill="none" stroke="#646469" stroke-width="1.6" stroke-dasharray="6 5"/><circle class="control" cx="${O[0]}" cy="${O[1]}" r="4" fill="#646469"/><circle class="control" cx="${I[0]}" cy="${I[1]}" r="4" fill="#CB4900"/><path class="control" d="${arc}" fill="none" stroke="#CB4900" stroke-width="2.5" marker-end="url(#angleArrow)"/><text class="control" x="${label[0]}" y="${label[1]}" fill="#CB4900" font-size="13" font-weight="700" text-anchor="middle">${Math.abs(state.angle)}°</text><text class="control" x="${label[0]}" y="${label[1] + 15}" fill="#CB4900" font-size="11" text-anchor="middle">${direction}</text>`
+    }
+    function dilationGuides() {
+        if (state.mode !== 'dilation')
+            return '';
+        let [cx, cy] = state.center,
+            span = Math.max(W, H) / unit * 2;
+        return state.points.map(p => {
+            let q = transform(p),
+                vx = q[0] - cx,
+                vy = q[1] - cy,
+                len = Math.hypot(vx, vy);
+            if (!len)
+                return '';
+            let A = S([cx, cy]),
+                B = S([cx + vx / len * span, cy + vy / len * span]);
+            return `<path d="M${A}L${B}" fill="none" stroke="#646469" stroke-width="1.8" stroke-dasharray="6 6" opacity=".85"/>`
+        }).join('')
+    }
+    function draw() {
+        let image = state.points.map(transform),
+            C = S(state.center),
+            aids = state.showAids ? dilationGuides() + controlLine() + rotationVisual() : '';
+        let h = grid() + aids + `<path class="shape" d="${poly(image)}" fill="#CB490026" stroke="#CB4900" stroke-width="2.5"/><text class="shape" x="${S(image[0])[0] + 8}" y="${S(image[0])[1] - 10}" fill="#CB4900" font-size="13">Image</text><path class="shape handle" data-type="object" tabindex="0" aria-label="Drag entire original triangle" d="${poly(state.points)}" fill="#64646926" stroke="#646469" stroke-width="2.5"/><text class="shape" x="${S(state.points[0])[0] + 8}" y="${S(state.points[0])[1] - 10}" fill="#646469" font-size="13">Original</text>`;
+        state.points.forEach((p, i) => {
+            let q = S(p);
+            h += `<circle class="handle" data-type="point" data-i="${i}" tabindex="0" cx="${q[0]}" cy="${q[1]}" r="8" fill="#646469" stroke="white" stroke-width="2" aria-label="Move triangle vertex ${i + 1}"/>`
+        });
+        if (state.showAids && state.mode !== 'translation' && state.mode !== 'reflection') {
+            h += `<circle class="handle" data-type="center" tabindex="0" cx="${C[0]}" cy="${C[1]}" r="8" fill="#646469" stroke="white" stroke-width="2" aria-label="Move transformation center"/><text x="${C[0] + 10}" y="${C[1] - 10}" fill="#646469" font-size="13" font-weight="600">center</text>`
+        }
+        svg.innerHTML = h;
+        svg.querySelectorAll('.handle').forEach(el => {
+            el.addEventListener('pointerdown', start);
+            el.addEventListener('keydown', keyMove)
+        });
+        updateText()
+    }
+    function beginPointer(e) {
+        activePointers.set(e.pointerId, {
+            x: e.clientX,
+            y: e.clientY
+        });
+        svg.setPointerCapture(e.pointerId);
+        if (activePointers.size === 2) {
+            let [a, b] = [...activePointers.values()];
+            pinch = {
+                distance: Math.hypot(a.x - b.x, a.y - b.y),
+                zoom: state.zoom
+            };
+            drag = {
+                type: 'pinch'
+            }
+        }
+    }
+    svg.addEventListener('pointerdown', beginPointer, {
+        capture: true
+    });
+    function start(e) {
+        e.stopPropagation();
+        if (pinch)
+            return;
+        let r = svg.getBoundingClientRect(),
+            p = U([(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * W / r.width]);
+        drag = {
+            type: e.target.dataset.type,
+            i: e.target.dataset.i,
+            startPoint: p,
+            startCenter: [...state.center],
+            startPoints: state.points.map(p => [...p])
+        };
+        svg.setPointerCapture(e.pointerId)
+    }
+    svg.addEventListener('pointerdown', e => {
+        if (e.target.closest('.handle,.shape,.control'))
+            return;
+        if (pinch)
+            return;
+        drag = {
+            type: 'pan',
+            x: e.clientX,
+            y: e.clientY,
+            origin: [...origin]
+        };
+        svg.setPointerCapture(e.pointerId)
+    });
+    svg.addEventListener('pointermove', e => {
+        if (activePointers.has(e.pointerId))
+            activePointers.set(e.pointerId, {
+                x: e.clientX,
+                y: e.clientY
+            });
+        if (pinch && activePointers.size === 2) {
+            let [a, b] = [...activePointers.values()];
+            setZoom(pinch.zoom * Math.hypot(a.x - b.x, a.y - b.y) / pinch.distance);
+            return
+        }
+        if (!drag)
+            return;
+        let r = svg.getBoundingClientRect();
+        if (drag.type === 'pan') {
+            origin = [drag.origin[0] + (e.clientX - drag.x) * W / r.width, drag.origin[1] + (e.clientY - drag.y) * W / r.width];
+            draw();
+            return
+        }
+        let p = U([(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * W / r.width]).map(n => Math.round(n * 10) / 10);
+        if (drag.type === 'object')
+            state.points = drag.startPoints.map(q => [+(q[0] + p[0] - drag.startPoint[0]).toFixed(1), +(q[1] + p[1] - drag.startPoint[1]).toFixed(1)]);
+        else if (drag.type === 'center')
+            state.center = p;
+        else if (drag.type === 'reflection')
+            state.center = [+(drag.startCenter[0] + p[0] - drag.startPoint[0]).toFixed(1), +(drag.startCenter[1] + p[1] - drag.startPoint[1]).toFixed(1)];
+        else
+            state.points[drag.i] = p;
+        draw()
+    });
+    svg.addEventListener('pointerup', e => {
+        activePointers.delete(e.pointerId);
+        pinch = null;
+        drag = null
+    });
+    svg.addEventListener('pointercancel', e => {
+        activePointers.delete(e.pointerId);
+        pinch = null;
+        drag = null
+    });
+    function keyMove(e) {
+        let d = {
+            ArrowLeft: [-.2, 0],
+            ArrowRight: [.2, 0],
+            ArrowUp: [0, .2],
+            ArrowDown: [0, -.2]
+        }[e.key];
+        if (!d)
+            return;
+        e.preventDefault();
+        let el = e.target;
+        if (el.dataset.type === 'object') {
+            state.points = state.points.map(p => [+(p[0] + d[0]).toFixed(1), +(p[1] + d[1]).toFixed(1)]);
+            draw();
+            return
+        }
+        let cur = el.dataset.type === 'center' ? state.center : state.points[el.dataset.i],
+            next = [+(cur[0] + d[0]).toFixed(1), +(cur[1] + d[1]).toFixed(1)];
+        if (el.dataset.type === 'center')
+            state.center = next;
+        else
+            state.points[el.dataset.i] = next;
+        draw()
+    }
+    function slider(label, key, min, max, step, suffix='') {
+        return `<label><span><span>${label}</span><output id="out-${key}">${state[key]}${suffix}</output></span><input id="in-${key}" type="range" min="${min}" max="${max}" step="${step}" value="${state[key]}"></label>`
+    }
+    function showControls() {
+        let html = state.mode === 'rotation' ? slider('Angle of rotation', 'angle', -360, 360, 1, '°') : state.mode === 'reflection' ? slider('Line angle', 'reflect', 0, 180, 1, '°') : state.mode === 'dilation' ? slider('Scale factor', 'scale', 0.2, 3, 0.1, '') : slider('Horizontal change', 'dx', -6, 6, 1, '') + slider('Vertical change', 'dy', -6, 6, 1, '');
+        controls.innerHTML = html;
+        controls.querySelectorAll('input').forEach(i => i.addEventListener('input', () => {
+            let key = i.id.slice(3),
+                out = document.getElementById('out-' + key);
+            state[key] = +i.value;
+            out.textContent = i.value + (key === 'angle' || key === 'reflect' ? '°' : '');
+            draw()
+        }))
+    }
+    function updateText() {
+        let n = {
+                rotation: 'Rotation',
+                reflection: 'Reflection',
+                dilation: 'Dilation (Similarity)',
+                translation: 'Translation'
+            }[state.mode],
+            t = state.mode === 'rotation' ? `A ${state.angle}° rotation about (${state.center[0]}, ${state.center[1]}).` : state.mode === 'reflection' ? `A reflection across a line through (${state.center[0]}, ${state.center[1]}).` : state.mode === 'dilation' ? `A dilation centered at (${state.center[0]}, ${state.center[1]}) with scale factor ${state.scale}.` : `A translation by the vector ⟨${state.dx}, ${state.dy}⟩.`;
+        document.getElementById('name').textContent = n;
+        document.getElementById('summary').textContent = t;
+        document.getElementById('notice').textContent = state.mode === 'dilation' ? 'A dilation preserves angle measures but changes lengths by the scale factor. It is non-rigid.' : 'This is a rigid transformation: it preserves both side lengths and angle measures.'
+    }
+    function setZoom(value) {
+        state.zoom = Math.max(.5, Math.min(1.8, +value));
+        unit = baseUnit * state.zoom;
+        draw()
+    }
+    svg.addEventListener('wheel', e => {
+        e.preventDefault();
+        setZoom((state.zoom || 1) + (e.deltaY < 0 ? .1 : -.1))
+    }, {
+        passive: false
+    });
+    svg.addEventListener('keydown', e => {
+        if (e.key === '+' || e.key === '=') {
+            e.preventDefault();
+            setZoom((state.zoom || 1) + .1)
+        }
+        if (e.key === '-') {
+            e.preventDefault();
+            setZoom((state.zoom || 1) - .1)
+        }
+    });
+    state.zoom = .8;
+    unit = baseUnit * state.zoom;
+    document.getElementById('showAids').addEventListener('change', e => {
+        state.showAids = e.target.checked;
+        draw()
+    });
+    document.querySelectorAll('input[name=mode]').forEach(i => i.addEventListener('change', () => {
+        state.mode = i.value;
+        if (!state.started[state.mode]) {
+            let d = modeDefaults[state.mode];
+            if (d) {
+                state.points = d.points.map(p => [...p]);
+                if ('dx' in d)
+                    state.dx = d.dx;
+                if ('dy' in d)
+                    state.dy = d.dy
+            }
+            state.started[state.mode] = true
+        }
+        showControls();
+        draw()
+    }));
+    showControls();
+    draw();
+    </script>
 </body>
 </html>
-```
