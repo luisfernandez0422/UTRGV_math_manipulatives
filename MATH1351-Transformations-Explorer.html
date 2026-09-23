@@ -2,252 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>MATH 1351 Transformation Explorer</title>
 <style>
-:root{--gray:#646469;--orange:#CB4900;--border:#d8dee8;--muted:#667085}
-*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f7fa;color:#20242a}
-header,footer{background:#fff;padding:20px 28px;border-bottom:1px solid var(--border)}footer{border-top:1px solid var(--border);border-bottom:0;text-align:center;color:var(--muted);font-size:14px}
-h1{margin:0;font:400 34px Georgia,serif}header p{margin:8px 0;color:var(--muted)}main{max-width:1200px;margin:auto;padding:24px}
-.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.8fr);gap:18px}.card,.panel{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:16px}
-.choice,.controls{display:grid;gap:10px;margin:14px 0}.choice label{font-weight:600}.controls{grid-template-columns:1fr 1fr}.controls label{font-size:14px;font-weight:600}.controls input{width:100%;accent-color:var(--orange)}
-svg{display:block;width:100%;height:auto;background:#fff;border-radius:10px;touch-action:none;cursor:grab}.small,.info{color:var(--muted);font-size:14px}.info{background:#f7f8fa;border-radius:10px;padding:12px;line-height:1.45}.big{font-size:18px;font-weight:700}
-.legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-top:10px}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px}
-@media(max-width:850px){.grid{grid-template-columns:1fr}}@media(max-width:560px){main{padding:12px}.controls{grid-template-columns:1fr}header,footer{padding:18px 16px}}
+:root{--g:#646469;--o:#CB4900;--b:#d8dee8;--m:#667085}*{box-sizing:border-box}body{margin:0;background:#f5f7fa;color:#20242a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header,footer{padding:20px 28px;background:#fff;border-bottom:1px solid var(--b)}footer{border-top:1px solid var(--b);border-bottom:0;text-align:center;color:var(--m);font-size:14px}h1{margin:0;font:400 34px Georgia,serif}p{color:var(--m)}main{max-width:1200px;margin:auto;padding:24px}.grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.8fr);gap:18px}.card,.panel{padding:16px;margin-bottom:16px;background:#fff;border:1px solid var(--b);border-radius:14px}.choice{display:grid;gap:7px;margin:12px 0}.choice label,.aid{font-size:14px;font-weight:600}.aid{display:block;margin:12px 0;color:var(--m)}svg{display:block;width:100%;height:auto;background:#fff;border-radius:10px;touch-action:none;cursor:grab}.controls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}.controls label{font-size:14px;font-weight:600}.controls input{width:100%;accent-color:var(--o)}.info{padding:12px;background:#f7f8fa;border-radius:10px;color:var(--m);font-size:14px;line-height:1.45}.big{font-size:18px;font-weight:700}.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;color:var(--m);font-size:13px}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:5px}@media(max-width:850px){.grid{grid-template-columns:1fr}}@media(max-width:560px){main{padding:12px}.controls{grid-template-columns:1fr}header,footer{padding:18px 16px}}
 </style>
 </head>
 <body>
-<header>
-  <h1>Transformation Explorer</h1>
-  <p>Explore rotation, reflection, dilation, and translation with a movable triangle.</p>
-</header>
-
-<main>
-  <div class="grid">
-    <section>
-      <div class="card">
-        <strong>Explore transformations</strong>
-        <div class="small">Drag the gray vertices or center point. Pinch the graph with two fingers to zoom.</div>
-
-        <div class="choice">
-          <label><input type="radio" name="mode" value="rotation" checked> Rotation</label>
-          <label><input type="radio" name="mode" value="reflection"> Reflection</label>
-          <label><input type="radio" name="mode" value="translation"> Translation</label>
-          <label><input type="radio" name="mode" value="dilation"> Dilation (Similarity)</label>
-        </div>
-
-        <svg id="board" viewBox="0 0 700 520" aria-label="Interactive coordinate grid"></svg>
-
-        <div class="legend">
-          <span><i class="dot" style="background:#646469"></i>Original object</span>
-          <span><i class="dot" style="background:#CB4900"></i>Image</span>
-        </div>
-
-        <div id="controls" class="controls"></div>
-      </div>
-    </section>
-
-    <aside>
-      <div class="panel">
-        <h2>Current transformation</h2>
-        <div class="big" id="name">Rotation</div>
-        <div class="info" id="summary"></div>
-      </div>
-      <div class="panel">
-        <h2>How to use it</h2>
-        <div class="info">Use one finger to drag a vertex, the center, or empty graph space. Use two fingers to zoom only the graph.</div>
-      </div>
-    </aside>
-  </div>
-</main>
-
+<header><h1>Transformation Explorer</h1><p>Explore rotation, reflection, dilation, and translation with a movable triangle.</p></header>
+<main><div class="grid"><section><div class="card">
+<strong>Explore transformations</strong><p class="small">Drag vertices or the center. Pinch with two fingers to zoom the graph only.</p>
+<div class="choice"><label><input type="radio" name="mode" value="rotation" checked> Rotation</label><label><input type="radio" name="mode" value="reflection"> Reflection</label><label><input type="radio" name="mode" value="translation"> Translation</label><label><input type="radio" name="mode" value="dilation"> Dilation (Similarity)</label></div>
+<label class="aid"><input id="showAids" type="checkbox" checked> Show transformation aids</label>
+<svg id="board" viewBox="0 0 700 520" aria-label="Interactive coordinate grid"></svg>
+<div class="legend"><span><i class="dot" style="background:#646469"></i>Original object</span><span><i class="dot" style="background:#CB4900"></i>Image</span></div>
+<div id="controls" class="controls"></div></div></section>
+<aside><div class="panel"><h2>Current transformation</h2><div class="big" id="name">Rotation</div><div class="info" id="summary"></div></div><div class="panel"><h2>Try this</h2><div class="info">Move the center onto a vertex, change the angle, then compare different transformations.</div></div></aside>
+</div></main>
 <footer>© 2026 Luis Miguel Fernández, Ph.D. · CC BY 4.0</footer>
-
 <script>
-const svg=document.querySelector("#board"),controls=document.querySelector("#controls");
-const W=700,H=520,base=42;
-let origin=[285,260],unit=base*.8,drag=null,pinch=null;
-const touches=new Map();
-
-const state={
-  mode:"rotation",angle:180,scale:1.5,dx:3,dy:2,
-  reflect:0,center:[0,0],points:[[3,5],[5.3,4.6],[4.6,1.1]]
-};
-
-const screen=p=>[origin[0]+p[0]*unit,origin[1]-p[1]*unit];
-const graph=p=>[(p[0]-origin[0])/unit,(origin[1]-p[1])/unit];
-const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-
-function transform([x,y]){
-  const [cx,cy]=state.center;
-  if(state.mode==="rotation"){
-    const a=state.angle*Math.PI/180,dx=x-cx,dy=y-cy;
-    return [cx+dx*Math.cos(a)-dy*Math.sin(a),cy+dx*Math.sin(a)+dy*Math.cos(a)];
-  }
-  if(state.mode==="reflection"){
-    const a=state.reflect*Math.PI/180,dx=x-cx,dy=y-cy;
-    return [cx+dx*Math.cos(2*a)+dy*Math.sin(2*a),cy+dx*Math.sin(2*a)-dy*Math.cos(2*a)];
-  }
-  if(state.mode==="dilation") return [cx+(x-cx)*state.scale,cy+(y-cy)*state.scale];
-  return [x+state.dx,y+state.dy];
-}
-
-function path(points){
-  return points.map((p,i)=>{
-    const [x,y]=screen(p);
-    return `${i?"L":"M"}${x.toFixed(1)} ${y.toFixed(1)}`;
-  }).join("")+"Z";
-}
-
-function grid(){
-  let html="";
-  const minX=Math.floor(-origin[0]/unit),maxX=Math.ceil((W-origin[0])/unit);
-  const minY=Math.floor((origin[1]-H)/unit),maxY=Math.ceil(origin[1]/unit);
-
-  for(let x=minX;x<=maxX;x++){
-    const [sx]=screen([x,0]);
-    html+=`<path d="M${sx} 0V${H}" stroke="${x===0?"#8d99a8":"#e4e8ee"}"/>`;
-    if(x) html+=`<text x="${sx+3}" y="${origin[1]+15}" fill="#667085" font-size="11">${x}</text>`;
-  }
-  for(let y=minY;y<=maxY;y++){
-    const [,sy]=screen([0,y]);
-    html+=`<path d="M0 ${sy}H${W}" stroke="${y===0?"#8d99a8":"#e4e8ee"}"/>`;
-    if(y) html+=`<text x="${origin[0]-16}" y="${sy-3}" fill="#667085" font-size="11">${y}</text>`;
-  }
-  return html;
-}
-
-function draw(){
-  const image=state.points.map(transform);
-  const [cx,cy]=screen(state.center);
-
-  svg.innerHTML=grid()+
-    `<path d="${path(image)}" fill="#CB490026" stroke="#CB4900" stroke-width="2.5"/>
-     <path data-drag="object" d="${path(state.points)}" fill="#64646926" stroke="#646469" stroke-width="2.5"/>`+
-    state.points.map((p,i)=>{
-      const [x,y]=screen(p);
-      return `<circle data-drag="point" data-i="${i}" cx="${x}" cy="${y}" r="9" fill="#646469" stroke="white" stroke-width="2"/>`;
-    }).join("")+
-    (state.mode!=="translation"&&state.mode!=="reflection"
-      ?`<circle data-drag="center" cx="${cx}" cy="${cy}" r="9" fill="#646469" stroke="white" stroke-width="2"/>
-        <text x="${cx+11}" y="${cy-11}" fill="#646469" font-size="13">center</text>`:"");
-
-  updateText();
-}
-
-function updateText(){
-  const names={rotation:"Rotation",reflection:"Reflection",translation:"Translation",dilation:"Dilation (Similarity)"};
-  document.querySelector("#name").textContent=names[state.mode];
-
-  const text=state.mode==="rotation"
-    ?`A ${state.angle}° rotation about (${state.center[0]}, ${state.center[1]}).`
-    :state.mode==="reflection"
-    ?`A reflection across a line through (${state.center[0]}, ${state.center[1]}).`
-    :state.mode==="dilation"
-    ?`A dilation centered at (${state.center[0]}, ${state.center[1]}) with scale factor ${state.scale}.`
-    :`A translation by ⟨${state.dx}, ${state.dy}⟩.`;
-
-  document.querySelector("#summary").textContent=text;
-}
-
-function showControls(){
-  const slider=(label,key,min,max,step,suffix="")=>
-    `<label>${label}: <output id="out-${key}">${state[key]}${suffix}</output>
-    <input data-key="${key}" type="range" min="${min}" max="${max}" step="${step}" value="${state[key]}"></label>`;
-
-  controls.innerHTML=state.mode==="rotation"
-    ?slider("Angle","angle",-360,360,1,"°")
-    :state.mode==="reflection"
-    ?slider("Line angle","reflect",0,180,1,"°")
-    :state.mode==="dilation"
-    ?slider("Scale factor","scale",.2,3,.1)
-    :slider("Horizontal change","dx",-6,6,1)+slider("Vertical change","dy",-6,6,1);
-
-  controls.querySelectorAll("input").forEach(input=>input.addEventListener("input",()=>{
-    state[input.dataset.key]=+input.value;
-    document.querySelector(`#out-${input.dataset.key}`).textContent=
-      input.value+(["angle","reflect"].includes(input.dataset.key)?"°":"");
-    draw();
-  }));
-}
-
-function pointFromEvent(e){
-  const r=svg.getBoundingClientRect();
-  return graph([(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*W/r.width]);
-}
-
-svg.addEventListener("pointerdown",e=>{
-  svg.setPointerCapture(e.pointerId);
-  touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
-
-  if(touches.size===2){
-    const [a,b]=[...touches.values()];
-    pinch={distance:Math.hypot(a.x-b.x,a.y-b.y),unit};
-    drag=null;
-    return;
-  }
-
-  const target=e.target.dataset.drag;
-  if(target){
-    drag={type:target,index:+e.target.dataset.i,start:pointFromEvent(e),
-      points:state.points.map(p=>[...p]),center:[...state.center]};
-  }else{
-    drag={type:"pan",x:e.clientX,y:e.clientY,origin:[...origin]};
-  }
-});
-
-svg.addEventListener("pointermove",e=>{
-  if(touches.has(e.pointerId)) touches.set(e.pointerId,{x:e.clientX,y:e.clientY});
-
-  if(pinch&&touches.size===2){
-    const [a,b]=[...touches.values()];
-    unit=clamp(pinch.unit*Math.hypot(a.x-b.x,a.y-b.y)/pinch.distance,base*.5,base*1.8);
-    draw();
-    return;
-  }
-
-  if(!drag) return;
-
-  if(drag.type==="pan"){
-    const r=svg.getBoundingClientRect();
-    origin=[drag.origin[0]+(e.clientX-drag.x)*W/r.width,drag.origin[1]+(e.clientY-drag.y)*W/r.width];
-    draw();
-    return;
-  }
-
-  const p=pointFromEvent(e).map(v=>Math.round(v*10)/10);
-
-  if(drag.type==="point") state.points[drag.index]=p;
-  if(drag.type==="center") state.center=p;
-  if(drag.type==="object"){
-    const dx=p[0]-drag.start[0],dy=p[1]-drag.start[1];
-    state.points=drag.points.map(q=>[+(q[0]+dx).toFixed(1),+(q[1]+dy).toFixed(1)]);
-  }
-  draw();
-});
-
-function endPointer(e){
-  touches.delete(e.pointerId);
-  pinch=null;
-  drag=null;
-}
-svg.addEventListener("pointerup",endPointer);
-svg.addEventListener("pointercancel",endPointer);
-
-svg.addEventListener("wheel",e=>{
-  e.preventDefault();
-  unit=clamp(unit+(e.deltaY<0?base*.1:-base*.1),base*.5,base*1.8);
-  draw();
-},{passive:false});
-
-document.querySelectorAll('input[name="mode"]').forEach(input=>input.addEventListener("change",()=>{
-  state.mode=input.value;
-  showControls();
-  draw();
-}));
-
-showControls();
-draw();
+const svg=document.querySelector("#board"),controls=document.querySelector("#controls"),W=700,H=520,B=42;
+let origin=[285,260],unit=B*.8,drag=null,pinch=null,pts=new Map;
+const s={mode:"rotation",angle:180,scale:1.5,dx:3,dy:2,reflect:0,center:[0,0],points:[[3,5],[5.3,4.6],[4.6,1.1]],aids:true};
+const S=p=>[origin[0]+p[0]*unit,origin[1]-p[1]*unit],U=p=>[(p[0]-origin[0])/unit,(origin[1]-p[1])/unit],cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+function T([x,y]){let[c,d]=s.center;if(s.mode=="rotation"){let a=s.angle*Math.PI/180,X=x-c,Y=y-d;return[c+X*Math.cos(a)-Y*Math.sin(a),d+X*Math.sin(a)+Y*Math.cos(a)]}if(s.mode=="reflection"){let a=s.reflect*Math.PI/180,X=x-c,Y=y-d;return[c+X*Math.cos(2*a)+Y*Math.sin(2*a),d+X*Math.sin(2*a)-Y*Math.cos(2*a)]}if(s.mode=="dilation")return[c+(x-c)*s.scale,d+(y-d)*s.scale];return[x+s.dx,y+s.dy]}
+function P(a){return a.map((p,i)=>{let q=S(p);return(i?"L":"M")+q[0].toFixed(1)+" "+q[1].toFixed(1)}).join("")+"Z"}
+function G(){let h="",a=Math.floor(-origin[0]/unit),b=Math.ceil((W-origin[0])/unit),c=Math.floor((origin[1]-H)/unit),d=Math.ceil(origin[1]/unit);for(let x=a;x<=b;x++){let X=S([x,0])[0];h+=`<path d="M${X} 0V${H}" stroke="${x?"#e4e8ee":"#8d99a8"}"/>`;if(x)h+=`<text x="${X+3}" y="${origin[1]+15}" fill="#667085" font-size="11">${x}</text>`}for(let y=c;y<=d;y++){let Y=S([0,y])[1];h+=`<path d="M0 ${Y}H${W}" stroke="${y?"#e4e8ee":"#8d99a8"}"/>`;if(y)h+=`<text x="${origin[0]-16}" y="${Y-3}" fill="#667085" font-size="11">${y}</text>`}return h}
+function aids(){if(!s.aids)return"";let[c,d]=s.center,C=S([c,d]);if(s.mode=="reflection"){let a=s.reflect*Math.PI/180,v=[Math.cos(a),Math.sin(a)],z=30,A=S([c-v[0]*z,d-v[1]*z]),D=S([c+v[0]*z,d+v[1]*z]);return`<path d="M${A}L${D}" stroke="#CB4900" stroke-width="2.5" stroke-dasharray="7 6"/>`}if(s.mode=="translation")return s.points.map(p=>{let A=S(p),D=S(T(p));return`<path d="M${A}L${D}" stroke="#646469" stroke-width="2" stroke-dasharray="7 6"/>`}).join("");if(s.mode=="dilation")return s.points.map(p=>{let q=T(p),v=[q[0]-c,q[1]-d],l=Math.hypot(...v)||1,D=S([c+v[0]*30/l,d+v[1]*30/l]);return`<path d="M${C}L${D}" stroke="#646469" stroke-width="1.5" stroke-dasharray="6 6"/>`}).join("");let q=s.points.reduce((r,p)=>[r[0]+p[0]/3,r[1]+p[1]/3],[0,0]),r=Math.hypot(q[0]-c,q[1]-d),st=Math.atan2(q[1]-d,q[0]-c),en=st+s.angle*Math.PI/180,A=S([c+r*Math.cos(st),d+r*Math.sin(st)]),D=S([c+r*Math.cos(en),d+r*Math.sin(en)]);return`<path d="M${C}L${A} M${C}L${D}" stroke="#646469" stroke-dasharray="6 5"/><circle cx="${C[0]}" cy="${C[1]}" r="${r*unit}" fill="none" stroke="#CB4900" stroke-opacity=".35" stroke-dasharray="6 6"/>`}
+function draw(){let im=s.points.map(T),C=S(s.center);svg.innerHTML=G()+aids()+`<path d="${P(im)}" fill="#CB490026" stroke="#CB4900" stroke-width="2.5"/><path data-t="object" d="${P(s.points)}" fill="#64646926" stroke="#646469" stroke-width="2.5"/>`+s.points.map((p,i)=>{let q=S(p);return`<circle data-t="point" data-i="${i}" cx="${q[0]}" cy="${q[1]}" r="9" fill="#646469" stroke="white" stroke-width="2"/>`}).join("")+(s.mode!="translation"&&s.mode!="reflection"?`<circle data-t="center" cx="${C[0]}" cy="${C[1]}" r="9" fill="#646469" stroke="white" stroke-width="2"/>`:"");let n={rotation:"Rotation",reflection:"Reflection",translation:"Translation",dilation:"Dilation (Similarity)"}[s.mode];name.textContent=n;summary.textContent=n+" transformation."}
+function UI(){let f=(l,k,a,b,z,u="")=>`<label>${l}: <output>${s[k]}${u}</output><input data-k="${k}" type="range" min="${a}" max="${b}" step="${z}" value="${s[k]}"></label>`;controls.innerHTML=s.mode=="rotation"?f("Angle","angle",-360,360,1,"°"):s.mode=="reflection"?f("Line angle","reflect",0,180,1,"°"):s.mode=="dilation"?f("Scale factor","scale",.2,3,.1):f("Horizontal change","dx",-6,6,1)+f("Vertical change","dy",-6,6,1);controls.querySelectorAll("input").forEach(e=>e.oninput=()=>{s[e.dataset.k]=+e.value;UI();draw()})}
+function pos(e){let r=svg.getBoundingClientRect();return U([(e.clientX-r.left)*W/r.width,(e.clientY-r.top)*W/r.width])}
+svg.onpointerdown=e=>{svg.setPointerCapture(e.pointerId);pts.set(e.pointerId,[e.clientX,e.clientY]);if(pts.size==2){let[a,b]=[...pts.values()];pinch=[Math.hypot(a[0]-b[0],a[1]-b[1]),unit];drag=null;return}let t=e.target.dataset.t;drag=t?{t,i:+e.target.dataset.i,p:pos(e),old:s.points.map(x=>[...x])}:{t:"pan",x:e.clientX,y:e.clientY,o:[...origin]}};
+svg.onpointermove=e=>{if(pts.has(e.pointerId))pts.set(e.pointerId,[e.clientX,e.clientY]);if(pinch&&pts.size==2){let[a,b]=[...pts.values()];unit=cl(pinch[1]*Math.hypot(a[0]-b[0],a[1]-b[1])/pinch[0],B*.5,B*1.8);draw();return}if(!drag)return;if(drag.t=="pan"){let r=svg.getBoundingClientRect();origin=[drag.o[0]+(e.clientX-drag.x)*W/r.width,drag.o[1]+(e.clientY-drag.y)*W/r.width]}else{let p=pos(e);if(drag.t=="point")s.points[drag.i]=p;if(drag.t=="center")s.center=p;if(drag.t=="object")s.points=drag.old.map(q=>[q[0]+p[0]-drag.p[0],q[1]+p[1]-drag.p[1]])}draw()};
+svg.onpointerup=svg.onpointercancel=e=>{pts.delete(e.pointerId);pinch=null;drag=null};svg.onwheel=e=>{e.preventDefault();unit=cl(unit+(e.deltaY<0?4:-4),B*.5,B*1.8);draw()};showAids.onchange=e=>{s.aids=e.target.checked;draw()};document.querySelectorAll("[name=mode]").forEach(e=>e.onchange=()=>{s.mode=e.value;UI();draw()});UI();draw();
 </script>
 </body>
 </html>
