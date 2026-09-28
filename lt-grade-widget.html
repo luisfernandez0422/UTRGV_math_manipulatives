@@ -1,0 +1,132 @@
+<!-- MATH 1351 final-grade calculator. Paste this entire block into an HTML/embed area. -->
+<section class="lt-grade-widget" aria-labelledby="lt-grade-title">
+  <style>
+    .lt-grade-widget { max-width: 680px; margin: 1.5rem auto; padding: 1.5rem; border: 1px solid #b7b7b9; border-radius: 14px; background: #fff; color: #333336; font: 16px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; box-shadow: 0 3px 12px rgba(100,100,105,.16); }
+    .lt-grade-widget h2 { margin: 0 0 .35rem; font-size: 1.45rem; }
+    .lt-grade-widget p { margin: .35rem 0 1.2rem; }
+    .lt-grade-widget .lt-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .lt-grade-widget label { display: block; font-weight: 650; }
+    .lt-grade-widget input, .lt-grade-widget select { box-sizing: border-box; width: 100%; margin-top: .35rem; padding: .6rem .65rem; border: 1px solid #646469; border-radius: 7px; background: #fff; color: inherit; font: inherit; }
+    .lt-grade-widget .lt-course { margin-bottom: .85rem; }
+    .lt-grade-widget button { margin-top: 1.25rem; padding: .65rem 1rem; border: 0; border-radius: 7px; background: #cb4900; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+    .lt-grade-widget button:hover, .lt-grade-widget button:focus { background: #9d3900; }
+    .lt-grade-widget .lt-result { margin-top: 1.25rem; padding: 1rem; border-radius: 8px; background: #f8e8df; }
+    .lt-grade-widget .lt-result[hidden] { display: none; }
+    .lt-grade-widget .lt-grade { font-size: 1.55rem; font-weight: 800; }
+    .lt-grade-widget .lt-next { margin-top: .35rem; }
+    .lt-grade-widget .lt-path { margin: .85rem 0 0; padding-left: 1.2rem; }
+    .lt-grade-widget .lt-path li { margin: .5rem 0; }
+    .lt-grade-widget .lt-note { margin-top: 1rem; font-size: .9rem; color: #646469; }
+    .lt-grade-widget table { width: 100%; margin-top: 1.5rem; border-collapse: collapse; }
+    .lt-grade-widget caption { margin-bottom: .5rem; text-align: left; font-weight: 700; }
+    .lt-grade-widget th, .lt-grade-widget td { padding: .65rem; border: 1px solid #c6d0da; text-align: center; }
+    .lt-grade-widget th { background: #646469; color: #fff; font-weight: 700; }
+    .lt-grade-widget tbody tr.lt-active { background: #f8e8df; outline: 2px solid #cb4900; outline-offset: -2px; }
+    @media (max-width: 540px) { .lt-grade-widget .lt-fields { grid-template-columns: 1fr; } }
+  </style>
+
+  <h2 id="lt-grade-title">Final Grade Calculator</h2>
+  <p>Choose your course and enter your current totals to estimate your final course grade.</p>
+  <label>Course
+    <select class="lt-course" aria-label="Course">
+      <option value="1350" selected>MATH 1350 Fundamentals of Mathematics I</option>
+      <option value="1351">MATH 1351 Fundamentals of Mathematics II</option>
+    </select>
+  </label>
+  <div class="lt-fields">
+    <label><span class="lt-lts-label">LTs Mastered (0&ndash;20)</span>
+      <input class="lt-lts" type="number" min="0" max="20" step="1" inputmode="numeric" required>
+    </label>
+    <label>Homework average (%)
+      <input class="lt-homework" type="number" min="0" max="100" step="0.01" inputmode="decimal" required>
+    </label>
+    <label>Participation average (%)
+      <input class="lt-participation" type="number" min="0" max="100" step="0.01" inputmode="decimal" required>
+    </label>
+  </div>
+  <button class="lt-calculate" type="button">Calculate grade</button>
+  <div class="lt-result" aria-live="polite" hidden></div>
+  <table>
+    <caption>Final grade requirements</caption>
+    <thead>
+      <tr><th scope="col">Grade</th><th scope="col">LTs Mastered</th><th scope="col">Homework average</th><th scope="col">Participation average</th></tr>
+    </thead>
+    <tbody>
+      <tr data-grade="A"><th scope="row">A</th><td>18&ndash;20</td><td>At least 90%</td><td>At least 90%</td></tr>
+      <tr data-grade="B"><th scope="row">B</th><td>16&ndash;17</td><td>At least 80%</td><td>At least 80%</td></tr>
+      <tr data-grade="C"><th scope="row">C</th><td>14&ndash;15</td><td>At least 70%</td><td>At least 70%</td></tr>
+      <tr data-grade="D"><th scope="row">D</th><td>12&ndash;13</td><td>At least 60%</td><td>At least 60%</td></tr>
+      <tr data-grade="F"><th scope="row">F</th><td colspan="3">Does not satisfy all requirements for a D</td></tr>
+    </tbody>
+  </table>
+  <p class="lt-note">This calculator provides an estimate. Please contact your instructor to double-check your final grade.</p>
+
+  <script>
+    (() => {
+      const widget = document.currentScript.closest('.lt-grade-widget');
+      const input = (selector) => widget.querySelector(selector);
+      const lts = input('.lt-lts'), homework = input('.lt-homework'), participation = input('.lt-participation');
+      const course = input('.lt-course');
+      const result = input('.lt-result');
+      const courses = {
+        '1351': { maxLts: 20, tiers: [
+          { letter: 'A', lts: 18, homework: 90, participation: 90 }, { letter: 'B', lts: 16, homework: 80, participation: 80 },
+          { letter: 'C', lts: 14, homework: 70, participation: 70 }, { letter: 'D', lts: 12, homework: 60, participation: 60 }
+        ]},
+        '1350': { maxLts: 19, tiers: [
+          { letter: 'A', lts: 17, homework: 90, participation: 90 }, { letter: 'B', lts: 15, homework: 80, participation: 80 },
+          { letter: 'C', lts: 13, homework: 70, participation: 70 }, { letter: 'D', lts: 11, homework: 60, participation: 60 }
+        ]}
+      };
+      const currentCourse = () => courses[course.value];
+      function renderTable() {
+        const { maxLts, tiers } = currentCourse();
+        const rows = tiers.map((tier, index) => {
+          const upper = index === 0 ? maxLts : tiers[index - 1].lts - 1;
+          return `<tr data-grade="${tier.letter}"><th scope="row">${tier.letter}</th><td>${tier.lts}&ndash;${upper}</td><td>At least ${tier.homework}%</td><td>At least ${tier.participation}%</td></tr>`;
+        }).join('');
+        widget.querySelector('tbody').innerHTML = `${rows}<tr data-grade="F"><th scope="row">F</th><td colspan="3">Does not satisfy all requirements for a D</td></tr>`;
+        lts.max = maxLts;
+        input('.lt-lts-label').innerHTML = `LTs Mastered (0&ndash;${maxLts})`;
+      }
+
+      function calculate() {
+        const { maxLts, tiers } = currentCourse();
+        const values = [Number(lts.value), Number(homework.value), Number(participation.value)];
+        if (values.some((value) => !Number.isFinite(value)) || values[0] < 0 || values[0] > maxLts || values[1] < 0 || values[1] > 100 || values[2] < 0 || values[2] > 100) {
+          result.innerHTML = `Please enter valid values: 0&ndash;${maxLts} LTs and 0&ndash;100% for homework and participation.`;
+          result.hidden = false;
+          return;
+        }
+        const grade = tiers.find((tier) => values[0] >= tier.lts && values[1] >= tier.homework && values[2] >= tier.participation);
+        const letter = grade ? grade.letter : 'F';
+        widget.querySelectorAll('tbody tr').forEach((row) => row.classList.toggle('lt-active', row.dataset.grade === letter));
+        const message = grade ? `Your current estimated grade is <span class="lt-grade">${grade.letter}</span>.` : 'Your current estimated grade is <span class="lt-grade">F</span>.';
+        const gradeIndex = grade ? tiers.indexOf(grade) : tiers.length;
+        const higherTiers = tiers.slice(0, gradeIndex);
+        const requirement = (current, target, label, unit, pluralUnit = unit) => {
+          const difference = Math.max(0, target - current);
+          return difference === 0
+            ? `${label}: met (${current}${unit})`
+            : unit === '%'
+              ? `${label}: need ${difference.toFixed(2).replace(/\.00$/, '')}% more`
+              : `${label}: need ${difference.toFixed(2).replace(/\.00$/, '')} more ${difference === 1 ? unit : pluralUnit}`;
+        };
+        const path = higherTiers.map((tier) => {
+          const needs = [
+            requirement(values[0], tier.lts, 'LTs', 'LT', 'LTs'),
+            requirement(values[1], tier.homework, 'Homework', '%'),
+            requirement(values[2], tier.participation, 'Participation', '%')
+          ];
+          return `<li><strong>${tier.letter}</strong> &mdash; ${needs.join('; ')}.</li>`;
+        }).join('');
+        result.innerHTML = `${message}${path ? `<div class="lt-next">To reach each higher grade:</div><ul class="lt-path">${path}</ul>` : ''}`;
+        result.hidden = false;
+      }
+      input('.lt-calculate').addEventListener('click', calculate);
+      [lts, homework, participation].forEach((field) => field.addEventListener('keydown', (event) => { if (event.key === 'Enter') calculate(); }));
+      course.addEventListener('change', () => { result.hidden = true; widget.querySelectorAll('tbody tr').forEach((row) => row.classList.remove('lt-active')); renderTable(); });
+      renderTable();
+    })();
+  </script>
+</section>

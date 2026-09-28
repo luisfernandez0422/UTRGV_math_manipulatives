@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Interactive tools for teaching and learning MATH 1350 and MATH 1351, curated by Luis Miguel Fernández, Ph.D.">
+  <meta name="description" content="Interactive mathematics tools and course resources for MATH 1350 and MATH 1351, curated by Luis Miguel Fernández, Ph.D.">
   <meta name="color-scheme" content="light">
-  <title>Interactive Mathematics Manipulatives</title>
+  <title>Interactive Mathematics Resources</title>
   <style>
     :root { --ink: #333336; --muted: #646469; --paper: #ffffff; --line: #dedee0; --accent: #CB4900; --link: #CB4900; }
     * { box-sizing: border-box; }
@@ -26,6 +26,7 @@
     .intro { max-width: 630px; color: var(--muted); font-size: 1.13rem; margin: 0 0 23px; }
     .author { margin: 0; font-size: .94rem; font-weight: 650; }
     .collection { border-top: 1px solid var(--line); padding-top: 30px; padding-bottom: 70px; }
+    .course-tools { padding-bottom: 48px; }
     .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
     h2 { font-size: 1.35rem; letter-spacing: -.02em; margin: 0; line-height: 1.4; }
     .course-title { color: var(--muted); font-size: .95rem; margin: 4px 0 0; }
@@ -99,9 +100,9 @@
 
   <main id="main" class="wrap">
     <section class="hero" aria-labelledby="page-title">
-      <p class="eyebrow">Explore. Notice. Make connections.</p>
-      <h1 id="page-title">Interactive Mathematics Manipulatives</h1>
-      <p class="intro">Interactive tools for teaching and learning MATH 1350 and MATH 1351. Explore mathematical ideas, investigate relationships, and build understanding through discovery.</p>
+      <p class="eyebrow">Explore. Practice. Make connections.</p>
+      <h1 id="page-title">Interactive Mathematics Resources</h1>
+      <p class="intro">Interactive tools and course resources for MATH 1350 and MATH 1351. Explore mathematical ideas, investigate relationships, monitor your progress, and build understanding through discovery.</p>
       <p class="author">Luis Miguel Fernández, Ph.D.</p>
     </section>
 
@@ -231,6 +232,42 @@
               <p class="description">Scan a cube, rectangular prism, or triangular prism marker. Unfold the colored faces with a slider and investigate how a flat net becomes a solid. Includes a camera-free preview.</p>
               <a class="open" href="nets-ar/" aria-label="Open Nets of Polyhedra">
                 <span class="link-label">Open manipulative</span><span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <section class="collection course-tools" aria-labelledby="tools-heading">
+      <div class="section-heading">
+        <div>
+          <h2 id="tools-heading">Course Tools</h2>
+          <p class="course-title">Resources for MATH 1350 and MATH 1351</p>
+        </div>
+        <span class="count">1 tool</span>
+      </div>
+
+      <ul class="cards">
+        <li>
+          <article class="card" aria-labelledby="grade-calculator-title">
+            <div class="illustration angles" aria-hidden="true">
+              <svg viewBox="0 0 240 150" fill="none" focusable="false">
+                <rect x="55" y="23" width="130" height="104" rx="8" fill="#fff" stroke="#646469" stroke-width="2"/>
+                <path d="M79 55h48M79 77h24M79 99h48" stroke="#646469" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="151" cy="54" r="13" fill="#CB4900"/>
+                <path d="m145 54 4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="151" cy="99" r="13" fill="#646469"/>
+                <path d="M145 99h12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Course progress</p>
+              <h3 id="grade-calculator-title">Grade Progress Calculator</h3>
+              <p class="description">Estimate your current course grade using LTs Mastered, homework, and participation. View the requirements for every letter grade in MATH 1350 and MATH 1351.</p>
+              <a class="open" href="lt-grade-widget.html" aria-label="Open Grade Progress Calculator">
+                <span class="link-label">Open calculator</span>
+                <span class="arrow" aria-hidden="true">→</span>
               </a>
             </div>
           </article>
