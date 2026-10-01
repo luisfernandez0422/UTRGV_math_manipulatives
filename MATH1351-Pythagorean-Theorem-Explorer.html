@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Construct squares on a right triangle and explore the Pythagorean theorem with an interactive geometric rotation.">
+<title>Pythagorean Theorem Explorer</title>
+<style>
+:root{color-scheme:light;--ink:#292c2c;--muted:#5d6264;--line:#dedfdf;--accent:#ad4b21;--a:#2563a6;--b:#267564;--c:#8449a2;--af:#e4effb;--bf:#e2f2ec;--cf:#f0e7f7}
+*{box-sizing:border-box}body{margin:0;border-top:4px solid var(--accent);background:#f8f9f8;color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent)}header{background:white;border-bottom:1px solid var(--line)}.wrap{max-width:1200px;margin:auto;padding:28px 32px}.nav{display:flex;justify-content:space-between;gap:16px;align-items:center;font-size:.8rem;font-weight:700}.nav a{text-decoration:none}.eyebrow{text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-size:.75rem;font-weight:700}h1{font:700 clamp(2rem,4.5vw,3rem)/1.12 Georgia,serif;margin:26px 0 12px;letter-spacing:-.025em}header p{margin:0 0 10px;color:var(--muted)}.author{font-size:.85rem;font-weight:600}main.wrap{padding-top:24px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:22px;box-shadow:0 1px 3px #00000004}.scene-card{padding:0;overflow:hidden}.scene-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid #eee;font-size:.86rem;color:var(--muted)}.badge{font-size:.75rem;font-weight:700;white-space:nowrap;background:#f3f4f3;border-radius:30px;padding:5px 10px;color:var(--ink)}svg{display:block;width:100%;height:auto}#scene{aspect-ratio:760/590}.scene-note{padding:10px 20px 15px;font-size:.8rem;color:var(--muted);margin:0}.legend{display:flex;gap:18px;flex-wrap:wrap;padding:0 20px 15px;font-size:.84rem;font-weight:600}.a{color:var(--a)}.b{color:var(--b)}.c{color:var(--c)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:currentColor;margin-right:6px}.sidebar{display:grid;gap:16px}h2{font-size:1rem;margin:0 0 8px}p{margin:8px 0}.hint{font-size:.85rem;color:var(--muted)}.range-head{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:650;font-size:.92rem}output{font-variant-numeric:tabular-nums}.percent{font:700 1.3rem Georgia,serif;color:var(--accent)}input[type=range]{width:100%;height:44px;margin:3px 0 0;accent-color:var(--accent);cursor:pointer}input[type=checkbox]{width:19px;height:19px;accent-color:var(--accent);margin:0}.ticks{display:flex;justify-content:space-between;gap:8px;font-size:.72rem;color:var(--muted)}.stage{background:#f5f5f3;border-radius:9px;padding:12px;font-size:.85rem;min-height:94px;margin:15px 0}.buttons{display:flex;gap:9px}.extra-buttons{display:grid;gap:9px;margin-top:9px}button[aria-pressed="true"]{background:#f9e9df;border-color:var(--accent);color:var(--accent)}button{border:1px solid var(--line);border-radius:8px;min-height:44px;padding:10px 15px;font:600 .87rem system-ui;cursor:pointer;background:white;color:var(--ink)}button.primary{background:var(--accent);color:white;border-color:var(--accent);flex:1}button:hover{filter:brightness(.95)}:focus-visible{outline:3px solid #202f65;outline-offset:4px}.leg-control{margin:16px 0 6px}.readout{border-top:1px solid var(--line);padding-top:12px;margin-top:12px;font-size:.86rem}.check{display:flex;gap:10px;align-items:center;min-height:44px;font-size:.86rem;cursor:pointer}.areas{margin-top:20px}.areas-head{display:flex;align-items:start;justify-content:space-between;gap:20px}.formula{font:700 clamp(1.4rem,3vw,2rem)/1.3 Georgia,serif;white-space:nowrap;margin:0}.area-rows{display:grid;grid-template-columns:155px minmax(0,1fr);gap:12px 18px;align-items:center;margin:20px 0}.bar{display:flex;height:32px;background:#f0f1ef;border:1px solid #d9ddda;border-radius:5px;overflow:hidden}.bar span{display:block;height:100%;background:var(--a);min-width:0}.bar .b-fill{background:var(--b)}.bar .c-fill{background:var(--c)}.row-label{font-size:.86rem;font-weight:600}.numeric{font-size:1.05rem;font-weight:650;font-variant-numeric:tabular-nums}.question{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:.9rem}.status{color:var(--muted);font-size:.85rem;min-height:1.6em}footer{text-align:center;padding:24px 18px 30px;color:var(--muted);font-size:.75rem}.skip{position:absolute;left:12px;top:-80px;background:white;padding:10px;z-index:5}.skip:focus{top:8px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}svg text{font-family:system-ui,sans-serif;paint-order:stroke;stroke:white;stroke-width:5px;stroke-linejoin:round}svg .square-label{stroke-width:4px;font-weight:700}svg path,svg line,svg polygon{stroke-linejoin:round;stroke-linecap:round}
+@media(max-width:850px){.layout{grid-template-columns:minmax(0,1fr)}.sidebar{grid-template-columns:1fr 1fr}.wrap{padding:24px}.areas-head{flex-wrap:wrap}}@media(max-width:540px){.wrap{padding:20px 14px}.nav{align-items:start}.eyebrow{font-size:.64rem;text-align:right;max-width:155px}.sidebar{grid-template-columns:1fr}.card{padding:18px}.scene-card{padding:0}.scene-top{padding:12px;font-size:.75rem}.scene-note,.legend{padding-left:12px;padding-right:12px}.legend{gap:12px;font-size:.75rem}.area-rows{grid-template-columns:1fr;gap:6px;margin:15px 0}.bar{margin-bottom:6px}.formula{font-size:1.7rem}.scene-top .badge{font-size:.65rem}h1{margin-top:22px}.stage{min-height:0}svg text{font-size:27px}svg .square-label{font-size:30px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to explorer</a>
+<header><div class="wrap"><nav class="nav" aria-label="Collection navigation"><a href="https://luisfernandez0422.github.io/UTRGV_math_manipulatives/" target="_top">← Back to collection</a><span class="eyebrow">MATH 1351 · Interactive Mathematics</span></nav><h1>Pythagorean Theorem Explorer</h1><p>Turn each side into a square. Discover how their areas fit together.</p><div class="author">Luis Miguel Fernández, Ph.D.</div></div></header>
+<main class="wrap" id="main">
+<div class="layout">
+<section class="card scene-card" aria-label="Geometric construction">
+<div class="scene-top"><span id="sceneCaption">Start with a right triangle.</span><span class="badge">One grid cell = 1 square unit</span></div>
+<svg id="scene" viewBox="0 0 760 590" role="img" aria-labelledby="sceneTitle sceneDesc"><title id="sceneTitle">A right triangle with legs a and b and hypotenuse c</title><desc id="sceneDesc"></desc><g id="drawing" aria-hidden="true"></g></svg>
+<div class="legend"><span class="a"><i class="dot"></i>Leg a → a²</span><span class="b"><i class="dot"></i>Leg b → b²</span><span class="c"><i class="dot"></i>Hypotenuse c → c²</span></div>
+<p class="scene-note">Each new edge is made by rotating a same-length copy around a corner. All four sides of each square are equal.</p>
+</section>
+<div class="sidebar">
+<section class="card"><h2>Build the squares</h2><p class="hint" id="sliderHelp">Drag slowly, or use the arrow keys. Move backward to undo the construction.</p><div class="range-head"><label for="progress">Construction</label><output id="progressValue" for="progress" class="percent">0%</output></div><input id="progress" type="range" min="0" max="100" step="0.1" value="0" aria-describedby="sliderHelp"><div class="ticks"><span>0% · Triangle</span><span>⅓ · 1st turn</span><span>100% · Squares</span></div><p id="stage" class="stage"></p><div class="buttons"><button id="play" class="primary" type="button">Play construction</button><button id="reset" type="button">Reset</button></div><div class="extra-buttons"><button id="loop" type="button" aria-pressed="false">Loop construction</button><button id="labels" type="button" aria-pressed="false" aria-controls="drawing">Show square labels &amp; areas</button></div></section>
+<section class="card"><h2>Change the right triangle</h2><p class="hint">Lengths are in units. The legs always meet at 90°.</p><div class="leg-control"><div class="range-head"><label class="a" for="legA">Leg a</label><output id="valueA" for="legA">3</output></div><input id="legA" type="range" min="1" max="8" step="0.1" value="3"></div><div class="leg-control"><div class="range-head"><label class="b" for="legB">Leg b</label><output id="valueB" for="legB">5</output></div><input id="legB" type="range" min="1" max="8" step="0.1" value="5"></div><p class="readout c">Hypotenuse <strong id="valueC">c ≈ 5.83</strong><br><span class="hint">c = √(a² + b²); rounded when needed.</span></p><label class="check"><input id="grid" type="checkbox" checked> Show unit grid in the squares</label></section>
+</div></div>
+<section class="card areas" aria-labelledby="areaHeading"><div class="areas-head"><div><h2 id="areaHeading">Compare the areas</h2><p class="hint" id="areaHint">Complete the three turns to compare the square areas.</p></div><p class="formula" id="formula" hidden><span class="a">a²</span> + <span class="b">b²</span> = <span class="c">c²</span></p></div><div class="area-rows"><div class="row-label"><span class="a">a²</span> + <span class="b">b²</span> · combined</div><div class="bar" role="img" id="sumBar" aria-label="Leg-square areas not yet swept"><span id="barA"></span><span class="b-fill" id="barB"></span></div><div class="row-label c">c² · hypotenuse</div><div class="bar" role="img" id="hypBar" aria-label="Hypotenuse-square area not yet swept"><span class="c-fill" id="barC"></span></div></div><p class="numeric" id="equation"></p><p class="status" id="areaStatus"></p><p class="question"><strong>Try this:</strong> Complete the squares, then change either leg. What changes about the squares? What stays true about their areas?</p></section>
+<p class="sr-only" id="announcement" role="status" aria-live="polite"></p>
+<noscript><p>This explorer needs JavaScript enabled to draw the triangle and operate its controls.</p></noscript>
+</main>
+<footer>© 2026 Luis Miguel Fernández, Ph.D. · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> · Sharing and adaptation permitted with attribution.</footer>
+<script>
+'use strict';
+/* Self-contained; no libraries or network requests. Coordinates below use screen y-down.
+   Vertices are clockwise, so (-dy, dx) is an OUTWARD normal of equal length.
+   Three successive 90-degree rotations build the three new edges.
+   Each rotation starts as a copy of the preceding edge and pivots around its
+   free endpoint. Completed edges remain in place. Color/grid appear only at 100%. */
+const $ = id => document.getElementById(id);
+const colors={a:['#2563a6','#e4effb'],b:['#267564','#e2f2ec'],c:['#8449a2','#f0e7f7']};
+const fmt=n=>Number(n.toFixed(2)).toString();
+const add=(p,q)=>[p[0]+q[0],p[1]+q[1]];
+const mul=(p,t)=>[p[0]*t,p[1]*t];
+function squareGeometry(p,q){const v=[q[0]-p[0],q[1]-p[1]],n=[-v[1],v[0]];return {p,q,v,n,length:Math.hypot(...v),corners:[p,q,add(q,n),add(p,n)]};}
+function model(a,b,progress){const O=[0,0],A=[a,0],B=[0,-b];return {a,b,c:Math.hypot(a,b),triangle:[O,A,B],squares:[{key:'a',...squareGeometry(O,A)},{key:'c',...squareGeometry(A,B)},{key:'b',...squareGeometry(B,O)}],filled:progress>=100?1:0};}
+function construction(s,progress){
+ const turns=Math.max(0,Math.min(3,progress*3/100));
+ const phase=Math.min(2,Math.floor(turns));
+ const angle=(turns-phase)*Math.PI/2;
+ const r=add(s.p,s.n),t=add(r,s.v);
+ const pivots=[s.p,r,t],vectors=[s.v,mul(s.n,-1),mul(s.v,-1)];
+ const pivot=pivots[phase],v=vectors[phase];
+ const end=add(pivot,[v[0]*Math.cos(angle)-v[1]*Math.sin(angle),v[0]*Math.sin(angle)+v[1]*Math.cos(angle)]);
+ return {phase,angle,pivot,end,edges:[[s.p,r],[r,t],[t,s.q]].slice(0,Math.floor(turns))};
+}
+let frame=0,lastTime=null,playing=false,looping=false,holdStarted=null,animationProgress=0,showLabels=false;
+function render(){
+ const a=+$('legA').value,b=+$('legB').value,progress=+$('progress').value,m=model(a,b,progress),done=progress>=100;
+ const all=m.squares.flatMap(s=>s.corners),xs=all.map(p=>p[0]),ys=all.map(p=>p[1]);
+ const minX=Math.min(...xs),maxX=Math.max(...xs),minY=Math.min(...ys),maxY=Math.max(...ys);
+ const scale=Math.min(630/(maxX-minX),470/(maxY-minY));
+ const map=p=>[380+(p[0]-(minX+maxX)/2)*scale,295+(p[1]-(minY+maxY)/2)*scale];
+ const points=arr=>arr.map(p=>map(p).join(',')).join(' ');
+ const line=(p,q,stroke,width=2,extra='')=>`<line x1="${map(p)[0]}" y1="${map(p)[1]}" x2="${map(q)[0]}" y2="${map(q)[1]}" stroke="${stroke}" stroke-width="${width}" ${extra}/>`;
+ let html='';
+ for(const s of m.squares){
+  const [color,fill]=colors[s.key],{p,q,v,n}=s;
+  if(done){
+   html+=`<polygon data-square="${s.key}" points="${points(s.corners)}" fill="${fill}" stroke="${color}" stroke-width="2"/>`;
+   if($('grid').checked){
+    for(let k=1;k<s.length-1e-8;k++){
+     const f=k/s.length;
+     html+=line(add(p,mul(v,f)),add(add(p,mul(v,f)),n),color,0.7,'opacity=".36"');
+     html+=line(add(p,mul(n,f)),add(add(p,mul(n,f)),v),color,0.7,'opacity=".36"');
+    }
+   }
+  }else if(progress>0){
+   const motion=construction(s,progress);
+   for(const [start,end] of motion.edges)html+=line(start,end,color,2.5);
+   html+=line(motion.pivot,motion.end,color,4);
+   const pivot=map(motion.pivot),ep=map(motion.end);
+   html+=`<circle cx="${pivot[0]}" cy="${pivot[1]}" r="4" fill="white" stroke="${color}" stroke-width="2"/><circle cx="${ep[0]}" cy="${ep[1]}" r="4.5" fill="${color}"/>`;
+  }
+  if(done&&showLabels&&s.length*scale>65){const center=map(add(add(p,mul(v,.5)),mul(n,.5)));html+=`<text class="square-label" x="${center[0]}" y="${center[1]-6}" fill="${color}" text-anchor="middle" font-size="23">${s.key}²</text><text x="${center[0]}" y="${center[1]+18}" fill="${color}" text-anchor="middle" font-size="15">${fmt(s.length*s.length)} units²</text>`;}
+ }
+ html+=`<polygon points="${points(m.triangle)}" fill="#fafaf8" stroke="#343c40" stroke-width="2.5"/>`;
+ const r=Math.min(a,b)*.16;
+ html+=`<polyline points="${points([[0,-r],[r,-r],[r,0]])}" fill="none" stroke="#60676b" stroke-width="1.8"/>`;
+ for(const s of m.squares){const {p,q,v,n}=s;html+=line(p,q,colors[s.key][0],3);const pos=map(add(p,mul(v,.5)));const offset=19;pos[0]+=n[0]/s.length*offset;pos[1]+=n[1]/s.length*offset;html+=`<text x="${pos[0]}" y="${pos[1]}" text-anchor="middle" dominant-baseline="middle" font-size="19" font-weight="700" fill="${colors[s.key][0]}">${s.key}</text>`;}
+ $('drawing').innerHTML=html;
+ $('valueA').textContent=fmt(a);$('valueB').textContent=fmt(b);
+ const cExact=Math.abs(m.c-Number(m.c.toFixed(2)))<1e-9;
+ $('valueC').textContent=`c ${cExact?'=':'≈'} ${fmt(m.c)}`;
+ $('progressValue').textContent=`${Math.round(progress)}%`;
+ const turn=construction(m.squares[0],progress);
+ const stage=progress===0?'Start: Each triangle side will be copied to make three more equal sides.':done?'Squares complete: Each outline has four equal sides and four right angles. Now color reveals its area.':`Turn ${turn.phase+1} of 3: Pivot a same-length copy ${Math.round(turn.angle*180/Math.PI)}° around the corner. The completed edges stay in place; the moving side keeps its length.`;
+ $('stage').textContent=stage;
+ $('sceneCaption').textContent=progress===0?'Start with a right triangle.':done?'Four equal sides. Now compare the areas.':`Turn ${turn.phase+1} of 3 · Build the next equal side.`;
+ $('progress').setAttribute('aria-valuetext',`${fmt(progress)} percent. ${done?'Squares complete':`Turn ${turn.phase+1} of 3`}`);
+ $('sceneDesc').textContent=`Right triangle with leg a ${fmt(a)}, leg b ${fmt(b)}, and hypotenuse c ${cExact?'':'approximately '}${fmt(m.c)} units. ${stage}${done?` Square areas: a squared ${fmt(a*a)}, b squared ${fmt(b*b)}, c squared ${fmt(a*a+b*b)} square units. The two leg-square areas sum to the hypotenuse-square area.`:''}`;
+ const total=a*a+b*b;
+ $('barA').style.width=`${100*m.filled*a*a/total}%`;$('barB').style.width=`${100*m.filled*b*b/total}%`;$('barC').style.width=`${100*m.filled}%`;
+ $('formula').hidden=!done;
+ $('equation').textContent=done?`${fmt(a*a)} + ${fmt(b*b)} = ${fmt(total)} square units`:'Area bars appear when the squares are complete.';
+ $('areaHint').textContent=done?'Each bar uses the same area scale. The two leg-square areas together exactly match the hypotenuse square.':'Complete the three turns to compare the square areas.';
+ $('areaStatus').textContent=done?`a² = ${fmt(a)} × ${fmt(a)} = ${fmt(a*a)}; b² = ${fmt(b)} × ${fmt(b)} = ${fmt(b*b)}; c² = ${fmt(total)}. Areas use unrounded side lengths.`:'Three quarter-turns create three new equal sides. Color appears only after each square closes.';
+ $('sumBar').setAttribute('aria-label',`Combined completed leg-square area: ${fmt(m.filled*total)} square units${done?`, a squared ${fmt(a*a)} plus b squared ${fmt(b*b)}`:''}`);
+ $('hypBar').setAttribute('aria-label',`Completed hypotenuse-square area: ${fmt(m.filled*total)} square units`);
+}
+function playbackButtons(){
+ $('play').textContent=playing?'Pause':'Play construction';
+ $('loop').textContent=looping?'Stop loop':'Loop construction';
+ $('loop').setAttribute('aria-pressed',String(looping));
+}
+function stop(){playing=false;looping=false;cancelAnimationFrame(frame);lastTime=null;holdStarted=null;playbackButtons();}
+function start(){
+ if(+$('progress').value>=100)$('progress').value=0;
+ animationProgress=+$('progress').value;lastTime=null;holdStarted=null;
+ playing=true;playbackButtons();render();frame=requestAnimationFrame(tick);
+}
+function tick(time){
+ if(!playing)return;
+ if(holdStarted!==null){
+  // Leave the finished squares visible briefly before repeating.
+  if(time-holdStarted>=1800){animationProgress=0;$('progress').value=0;holdStarted=null;render();}
+  lastTime=time;frame=requestAnimationFrame(tick);return;
+ }
+ if(lastTime!==null)animationProgress=Math.min(100,animationProgress+(time-lastTime)/120);
+ lastTime=time;$('progress').value=animationProgress;render();
+ if(animationProgress>=100){
+  if(looping){holdStarted=time;}else{stop();announce();return;}
+ }
+ frame=requestAnimationFrame(tick);
+}
+function announce(){$('announcement').textContent=$('sceneDesc').textContent;}
+$('play').addEventListener('click',()=>{if(playing){stop();return;}start();});
+$('loop').addEventListener('click',()=>{
+ if(looping){stop();return;}
+ stop();looping=true;start();
+});
+$('labels').addEventListener('click',()=>{
+ showLabels=!showLabels;
+ $('labels').setAttribute('aria-pressed',String(showLabels));
+ $('labels').textContent=showLabels?'Hide square labels & areas':'Show square labels & areas';
+ render();
+});
+for(const id of ['progress','legA','legB']){$(id).addEventListener('input',()=>{stop();render();});$(id).addEventListener('change',announce);}
+$('grid').addEventListener('change',render);
+$('reset').addEventListener('click',()=>{stop();$('legA').value=3;$('legB').value=5;$('progress').value=0;$('grid').checked=true;showLabels=false;$('labels').setAttribute('aria-pressed','false');$('labels').textContent='Show square labels & areas';render();$('announcement').textContent='Reset. Legs a = 3 and b = 5. Construction at zero percent.';});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
+// No automatic motion: animation starts only when the learner presses Play.
+render();
+</script>
+</body>
+</html>
