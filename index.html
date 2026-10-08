@@ -1,1 +1,418 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GIF Collection | MATH 1351</title><link rel="stylesheet" href="style.css"></head><body><a class="skip" href="#main">Skip to content</a><header><nav class="wrap" aria-label="Main navigation"><a href="../">← Mathematics home</a></nav></header><main id="main" class="wrap"><p class="eyebrow">Fundamentals of Mathematics II</p><h1>MATH 1351 GIFs</h1><p class="muted">Explore geometry diagrams and area relationships. Choose an image to open its individual page.</p><ul class="grid"><li><a class="card" href="triangle-base-height/"><div class="thumb"><img src="triangle-base-height/triangle-base-height.gif" alt="A right triangle with base b and perpendicular height h." loading="lazy"></div><div class="body"><h2>Triangle: Base &amp; Height</h2><p class="muted">A right triangle with base b and perpendicular height h.</p><span class="open">View GIF →</span></div></a></li><li><a class="card" href="irregular-polygons/"><div class="thumb"><img src="irregular-polygons/irregular-polygons.gif" alt="Three irregular polygons, including convex and concave examples." loading="lazy"></div><div class="body"><h2>Irregular Polygons</h2><p class="muted">Three irregular polygons, including convex and concave examples.</p><span class="open">View GIF →</span></div></a></li><li><a class="card" href="parallelogram-base-height/"><div class="thumb"><img src="parallelogram-base-height/parallelogram-base-height.gif" alt="A parallelogram with base b and perpendicular height h." loading="lazy"></div><div class="body"><h2>Parallelogram: Base &amp; Height</h2><p class="muted">A parallelogram with base b and perpendicular height h.</p><span class="open">View GIF →</span></div></a></li><li><a class="card" href="trapezoid-bases-height/"><div class="thumb"><img src="trapezoid-bases-height/trapezoid-bases-height.gif" alt="A trapezoid with parallel bases b₁ and b₂ and perpendicular height h." loading="lazy"></div><div class="body"><h2>Trapezoid: Bases &amp; Height</h2><p class="muted">A trapezoid with parallel bases b₁ and b₂ and perpendicular height h.</p><span class="open">View GIF →</span></div></a></li><li><a class="card" href="regular-polygons/"><div class="thumb"><img src="regular-polygons/regular-polygons.gif" alt="A regular hexagon, pentagon, and octagon." loading="lazy"></div><div class="body"><h2>Regular Polygons</h2><p class="muted">A regular hexagon, pentagon, and octagon.</p><span class="open">View GIF →</span></div></a></li><li><a class="card" href="polygon-area-triangle-sum/"><div class="thumb"><img src="polygon-area-triangle-sum/polygon-area-triangle-sum.gif" alt="An area expression that adds triangle areas, with labels for triangle height, side length, and perimeter." loading="lazy"></div><div class="body"><h2>Polygon Area: Sum of Triangles</h2><p class="muted">An area expression that adds triangle areas, with labels for triangle height, side length, and perimeter.</p><span class="open">View GIF →</span></div></a></li><li><a class="card" href="circle-area-rearrangement/"><div class="thumb"><img src="circle-area-rearrangement/circle-area-labeled.gif" alt="A circle with circumference C and radius r rearranges into a rectangle with base b and height h." loading="lazy"></div><div class="body"><h2>Circle Area: Sector Rearrangement</h2><p class="muted">Follow a circle labeled C and r as its sectors form a rectangle labeled b and h.</p><span class="open">View GIF →</span></div></a></li></ul></main><footer><div class="wrap">MATH 1351 · Luis Miguel Fernández, Ph.D.</div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive mathematics tools and course resources for MATH 1350 and MATH 1351, curated by Luis Miguel Fernández, Ph.D.">
+  <meta name="color-scheme" content="light">
+  <title>Interactive Mathematics Resources</title>
+  <style>
+    :root { --ink: #333336; --muted: #646469; --paper: #ffffff; --line: #dedee0; --accent: #CB4900; --link: #CB4900; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    a { color: inherit; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 6px; border-radius: 3px; }
+    .wrap { width: min(1160px, calc(100% - 64px)); margin-inline: auto; }
+    .skip { position: absolute; top: 12px; left: 16px; z-index: 2; padding: 10px 16px; background: white; transform: translateY(-180%); }
+    .skip:focus { transform: translateY(0); }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 25px; border-bottom: 1px solid var(--line); font-size: .83rem; }
+    .brand { display: flex; align-items: center; gap: 11px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .brand-mark { width: 24px; height: 24px; display: inline-block; border: 2px solid var(--accent); border-radius: 50%; position: relative; flex: 0 0 auto; }
+    .brand-mark::after { content: ""; position: absolute; inset: 5px; border: 1px solid var(--accent); transform: rotate(45deg); }
+    .masthead > span { color: var(--muted); }
+    .hero { padding: 76px 0 65px; max-width: 860px; }
+    .eyebrow { color: var(--accent); font-size: .78rem; font-weight: 750; letter-spacing: .15em; text-transform: uppercase; margin: 0 0 20px; }
+    h1 { font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.5rem, 5.6vw, 4.65rem); font-weight: 400; letter-spacing: -.045em; line-height: 1.08; margin: 0 0 24px; text-wrap: balance; }
+    .intro { max-width: 630px; color: var(--muted); font-size: 1.13rem; margin: 0 0 23px; }
+    .author { margin: 0; font-size: .94rem; font-weight: 650; }
+    .collection { border-top: 1px solid var(--line); padding-top: 30px; padding-bottom: 70px; }
+    .course-tools { padding-bottom: 48px; }
+    .section-heading { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    h2 { font-size: 1.35rem; letter-spacing: -.02em; margin: 0; line-height: 1.4; }
+    .course-title { color: var(--muted); font-size: .95rem; margin: 4px 0 0; }
+    .count { border: 1px solid var(--line); padding: 4px 12px; border-radius: 30px; font-size: .78rem; color: var(--muted); white-space: nowrap; }
+    .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; list-style: none; padding: 0; margin: 0; }
+    .cards > li { display: flex; min-width: 0; }
+    .card { display: flex; flex-direction: column; width: 100%; background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: 0 4px 16px #6464690a; }
+    .illustration { height: 172px; display: grid; place-items: center; background: #f0f0f1; border-bottom: 1px solid var(--line); }
+    .illustration.angles { background: #fff2eb; }
+    .illustration.triangles { background: #f4f4f5; }
+    .illustration svg { width: 230px; max-width: 90%; height: 145px; }
+    .card-body { padding: 25px; display: flex; flex-direction: column; flex: 1; }
+    .topic { margin: 0 0 9px; color: var(--muted); font-size: .69rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    h3 { font-size: 1.25rem; letter-spacing: -.025em; line-height: 1.35; margin: 0 0 13px; }
+    .description { color: var(--muted); font-size: .93rem; margin: 0 0 26px; }
+    .open { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0 0; margin-top: auto; border-top: 1px solid var(--line); color: var(--link); text-decoration: none; font-size: .88rem; font-weight: 750; min-height: 48px; }
+    .open:hover .link-label { text-decoration: underline; text-underline-offset: 4px; }
+    .arrow { font-size: 1.3rem; font-weight: 400; }
+    footer { border-top: 1px solid var(--line); padding: 26px 0 35px; color: var(--muted); font-size: .79rem; }
+    .footer-content { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 28px; }
+    footer p { margin: 0; }
+
+    @media (max-width: 900px) {
+      .cards { grid-template-columns: 1fr; }
+      .card { flex-direction: row; }
+      .illustration { width: 29%; height: auto; flex-shrink: 0; border-bottom: 0; border-right: 1px solid var(--line); }
+      .description { margin-bottom: 18px; }
+      .hero { padding-block: 55px; }
+    }
+
+    @media (max-width: 560px) {
+      .wrap { width: calc(100% - 36px); }
+      .masthead { flex-wrap: wrap; gap: 6px; padding-block: 19px; }
+      .masthead > span { padding-left: 35px; }
+      .hero { padding-block: 42px; }
+      .intro { font-size: 1rem; }
+      .section-heading { align-items: flex-start; gap: 12px; }
+      .count { margin-top: 3px; }
+      h2 { font-size: 1.2rem; }
+      .course-title { font-size: .84rem; }
+      .card { flex-direction: column; }
+      .illustration { width: 100%; height: 155px; border-right: 0; border-bottom: 1px solid var(--line); }
+      .card-body { padding: 23px; }
+      .collection { padding-bottom: 42px; }
+    }
+
+    @media (forced-colors: active) {
+      .card, .illustration, .open { border-color: CanvasText; }
+    }
+
+    @media print {
+      .skip, .illustration { display: none; }
+      .hero { padding-block: 25px; }
+      .cards { display: block; }
+      .cards > li { margin-bottom: 16px; break-inside: avoid; }
+      .card { box-shadow: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="wrap masthead">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      Mathematics collection
+    </div>
+    <span>MATH 1350 &amp; MATH 1351</span>
+  </header>
+
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">Explore. Practice. Make connections.</p>
+      <h1 id="page-title">Interactive Mathematics Resources</h1>
+      <p class="intro">Interactive tools and course resources for MATH 1350 and MATH 1351. Explore mathematical ideas, investigate relationships, monitor your progress, and build understanding through discovery.</p>
+      <p class="author">Luis Miguel Fernández, Ph.D.</p>
+    </section>
+
+    <section class="collection" aria-labelledby="course-heading">
+      <div class="section-heading">
+        <div>
+          <h2 id="course-heading">MATH 1351</h2>
+          <p class="course-title">Fundamentals of Mathematics II</p>
+        </div>
+        <span class="count">10 manipulatives</span>
+      </div>
+
+      <ul class="cards">
+        <li>
+          <article class="card" aria-labelledby="planes-title">
+            <div class="illustration">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <path d="M35 101 148 86 205 110 92 125Z" fill="#d0d0d2" stroke="#646469" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M35 47 148 32 205 56 92 71Z" fill="#e5e5e6" stroke="#646469" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M121 57V110" stroke="#CB4900" stroke-width="2" stroke-dasharray="4 4"/>
+                <path d="m117 62 4-5 4 5m-8 43 4 5 4-5" stroke="#CB4900" stroke-width="2"/>
+                <path d="m121 102 8-1v8" stroke="#646469" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Spatial relationships</p>
+              <h3 id="planes-title">Parallel Planes Explorer</h3>
+              <p class="description">Explore parallel and intersecting planes. Investigate the constant perpendicular distance between parallel planes and what changes when planes intersect.</p>
+              <a class="open" href="MATH1351-Parallel-Planes-Explorer.html" aria-label="Open Parallel Planes Explorer">
+                <span class="link-label">Open manipulative</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="card" aria-labelledby="angles-title">
+            <div class="illustration angles">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <path d="M105 48h28a28 28 0 0 0-13-24Z" fill="#efb693"/>
+                <path d="M140 106h28a28 28 0 0 0-13-24Z" fill="#efb693"/>
+                <path d="M105 48H80a25 25 0 0 0 12 21Z" fill="#d0d0d2"/>
+                <path d="M140 106h-25a25 25 0 0 0 12 21Z" fill="#d0d0d2"/>
+                <path d="M30 48h180M30 106h180" stroke="#646469" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="m84 13 77 128" stroke="#CB4900" stroke-width="2.2" stroke-linecap="round"/>
+                <path d="m183 43 7 5-7 5m0 48 7 5-7 5" stroke="#646469" stroke-width="1.6"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Angle relationships</p>
+              <h3 id="angles-title">Transversal Angle Explorer</h3>
+              <p class="description">Investigate vertical angles, supplementary angles and linear pairs; interior and exterior angles; corresponding angles; and alternate and same-side interior and exterior angle pairs.</p>
+              <a class="open" href="MATH1351-Transversal-Angle-Explorer.html" aria-label="Open Transversal Angle Explorer">
+                <span class="link-label">Open manipulative</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="card" aria-labelledby="triangles-title">
+            <div class="illustration triangles">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <path d="m109 22-65 106h153Z" fill="#e5e5e6" stroke="#646469" stroke-width="2" stroke-linejoin="round"/>
+                <path d="m109 22-35 57h83Z" fill="#efb693" stroke="#646469" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M74 79h83" stroke="#CB4900" stroke-width="2.5"/>
+                <path d="m115 75 6 4-6 4m0 41 6 4-6 4" stroke="#CB4900" stroke-width="1.7"/>
+                <path d="M61 128a17 17 0 0 0-9-15m35-34a13 13 0 0 0-6-11" stroke="#646469" stroke-width="1.6"/>
+                <circle cx="109" cy="22" r="3" fill="#646469"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Similarity &amp; proportion</p>
+              <h3 id="triangles-title">Triangle Similarity Explorer</h3>
+              <p class="description">Explore how a segment parallel to one side of a triangle creates a similar triangle. Investigate scale factor, corresponding angles, and ratios of corresponding sides.</p>
+              <a class="open" href="MATH1351-Triangle-Similarity-Explorer.html" aria-label="Open Triangle Similarity Explorer">
+                <span class="link-label">Open manipulative</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="card" aria-labelledby="pythagorean-title">
+            <div class="illustration triangles">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <path d="M90 95h36v36H90Z" fill="#e4effb" stroke="#2563a6" stroke-width="1.8"/>
+                <path d="M30 35h60v60H30Z" fill="#e2f2ec" stroke="#267564" stroke-width="1.8"/>
+                <path d="m90 35 36 60 60-36-36-60Z" fill="#f0e7f7" stroke="#8449a2" stroke-width="1.8"/>
+                <path d="M90 35v60h36Z" fill="#fff" stroke="#646469" stroke-width="2"/>
+                <path d="M90 87h8v8" stroke="#646469" stroke-width="1.5"/>
+                <g font-family="Georgia, serif" font-size="17" font-weight="bold" text-anchor="middle">
+                  <text x="108" y="118" fill="#2563a6">a²</text>
+                  <text x="60" y="70" fill="#267564">b²</text>
+                  <text x="138" y="52" fill="#8449a2">c²</text>
+                </g>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Right triangles &amp; area</p>
+              <h3 id="pythagorean-title">Pythagorean Theorem Explorer</h3>
+              <p class="description">Rotate a copy of each triangle side around successive corners to construct a square. Adjust the legs and compare the areas to explore why a² + b² = c².</p>
+              <a class="open" href="MATH1351-Pythagorean-Theorem-Explorer.html" aria-label="Open Pythagorean Theorem Explorer">
+                <span class="link-label">Open manipulative</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="card" aria-labelledby="circle-title">
+            <div class="illustration triangles">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="120" cy="47" r="29" stroke="#8449a2" stroke-width="2.2"/>
+                <path d="M91 47h58" stroke="#2563a6" stroke-width="2"/>
+                <path d="M29 99h182" stroke="#8449a2" stroke-width="3"/>
+                <path d="M29 119h174" stroke="#2563a6" stroke-width="3"/>
+                <path d="M203 119h8" stroke="#ad4b21" stroke-width="4"/>
+                <path d="M29 114v10m58-10v10m58-10v10m58-10v10" stroke="#2563a6" stroke-width="1.5"/>
+                <text x="120" y="39" text-anchor="middle" fill="#2563a6" font-size="14">d</text>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Circles &amp; measurement</p>
+              <h3 id="circle-title">Circumference &amp; Diameter Explorer</h3>
+              <p class="description">Unwrap a circle and compare its circumference with equal copies of its diameter. Change the circle size and explore why circumference divided by diameter is always π.</p>
+              <a class="open" href="MATH1351-Circumference-Diameter-Explorer.html" aria-label="Open Circumference and Diameter Explorer">
+                <span class="link-label">Open manipulative</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="card" aria-labelledby="circle-area-title">
+            <div class="illustration angles">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <circle cx="65" cy="70" r="36" fill="#d7552d" stroke="#005bbb" stroke-width="3"/>
+                <path d="M65 70H29" stroke="#6822aa" stroke-width="3"/>
+                <path d="M118 51H210V91H118Z" fill="#d7552d"/>
+                <path d="M118 51H210M118 91H210" stroke="#005bbb" stroke-width="3"/>
+                <path d="M118 51V91" stroke="#6822aa" stroke-width="3"/>
+                <path d="M130 51 142 91 154 51 166 91 178 51 190 91 202 51" stroke="#646469" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Circles &amp; area</p>
+              <h3 id="circle-area-title">Circle Area Explorer</h3>
+              <p class="description">Divide a circle into wedges and rearrange them into a rectangle-like shape. Adjust the number of wedges and follow the circumference and radius to discover the area relationship.</p>
+              <a class="open" href="MATH1351-Circle-Area-Explorer.html" aria-label="Open Circle Area Explorer">
+                <span class="link-label">Open manipulative</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="card" aria-labelledby="transformations-title">
+            <div class="illustration triangles">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <path d="M57 98 104 42 131 110Z" fill="#64646926" stroke="#646469" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M109 98 156 42 183 110Z" fill="#CB490026" stroke="#CB4900" stroke-width="2.2" stroke-linejoin="round"/>
+                <path d="M72 73h77" stroke="#646469" stroke-width="1.8" stroke-dasharray="6 5"/>
+                <path d="m143 68 8 5-8 5" stroke="#CB4900" stroke-width="1.8"/>
+                <path d="M109 98h47" stroke="#646469" stroke-width="1.8" stroke-dasharray="6 5"/>
+                <path d="m150 93 8 5-8 5" stroke="#CB4900" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Geometric transformations</p>
+              <h3 id="transformations-title">Transformation Explorer</h3>
+              <p class="description">Explore rotations, reflections, translations, and dilation through movable figures, dynamic images, and visual transformation aids.</p>
+              <a class="open" href="MATH1351-Transformations-Explorer.html" aria-label="Open Transformation Explorer">
+                <span class="link-label">Open manipulative</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="card" aria-labelledby="nets-title">
+            <div class="illustration angles">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <g stroke="#646469" stroke-width="1.7" stroke-linejoin="round">
+                  <path d="M83 16h36v36H83Z" fill="#efb693"/>
+                  <path d="M47 52h36v36H47Z" fill="#d4e9e6"/>
+                  <path d="M83 52h36v36H83Z" fill="#e8ac47"/>
+                  <path d="M119 52h36v36h-36Z" fill="#b8c4e2"/>
+                  <path d="M155 52h36v36h-36Z" fill="#e2bed2"/>
+                  <path d="M83 88h36v36H83Z" fill="#bdd4bc"/>
+                </g>
+                <path d="M83 52h36v36H83Z" stroke="#CB4900" stroke-width="2" stroke-dasharray="4 3"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Solids &amp; their nets · Augmented reality</p>
+              <h3 id="nets-title">Nets of Polyhedra</h3>
+              <p class="description">Scan a cube, rectangular prism, or triangular prism marker. Unfold the colored faces with a slider and investigate how a flat net becomes a solid. Includes a camera-free preview.</p>
+              <a class="open" href="nets-ar/" aria-label="Open Nets of Polyhedra">
+                <span class="link-label">Open manipulative</span><span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+        <li>
+          <article class="card" aria-labelledby="area-tiles-title">
+            <div class="illustration angles">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <defs><pattern id="area-card-grid" width="15" height="15" patternUnits="userSpaceOnUse"><path d="M15 0H0V15" stroke="#646469" stroke-width="1"/></pattern></defs>
+                <path d="M45 15H135V75H195V135H45Z" fill="#fff2eb"/>
+                <path d="M45 15H135V75H195V135H45Z" fill="url(#area-card-grid)" stroke="#646469" stroke-width="2"/>
+                <path d="M45 144H195M45 140V148M195 140V148" stroke="#CB4900" stroke-width="1.6"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Area &amp; measurement</p>
+              <h3 id="area-tiles-title">Measuring Area with Square Tiles</h3>
+              <p class="description">Cover an L-shaped floor with equal square tiles. Change the tile size, compare tile counts, and reveal the grid, measurements, or decorative tile design.</p>
+              <a class="open" href="MATH1351-Measuring-Area-Square-Tiles.html" aria-label="Open Measuring Area with Square Tiles">
+                <span class="link-label">Open manipulative</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+
+        <li>
+          <article class="card" aria-labelledby="triangle-area-title">
+            <div class="illustration angles">
+              <svg viewBox="0 0 240 150" fill="none" aria-hidden="true" focusable="false">
+                <defs><pattern id="triangle-area-card-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" stroke="#646469" stroke-width=".7"/></pattern></defs>
+                <path d="M40 20H160L200 130H80Z" fill="#e4effb"/>
+                <path d="M40 20L80 130H200Z" fill="#efb693"/>
+                <path d="M40 20H160L200 130H80Z" fill="url(#triangle-area-card-grid)" stroke="#646469" stroke-width="2"/>
+                <path d="M40 20L200 130" stroke="#CB4900" stroke-width="2"/>
+                <circle cx="40" cy="20" r="5" fill="#2563a6"/>
+                <path d="M40 34V130M80 141H200" stroke="#646469" stroke-width="1.3" stroke-dasharray="4 3"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Triangle area &amp; rearrangement</p>
+              <h3 id="triangle-area-title">Measuring Triangle Area with Square Tiles</h3>
+              <p class="description">Drag a triangle’s vertex while keeping its base and height fixed. Compare Terracotta and Talavera tile areas, and scrub through a rearrangement into equal rectangles to explore why triangle area is base × height divided by 2.</p>
+              <a class="open" href="MATH1351-Triangle-Area-Square-Tiles.html" aria-label="Open Measuring Triangle Area with Square Tiles">
+                <span class="link-label">Open manipulative</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+
+      </ul>
+    </section>
+
+    <section class="collection" aria-labelledby="gifs-heading">
+      <div class="section-heading"><div><h2 id="gifs-heading">MATH 1351 GIFs</h2><p class="course-title">Geometry diagrams &amp; area relationships</p></div><span class="count">6 GIFs</span></div>
+      <article class="card" style="flex-direction:row;flex-wrap:wrap">
+        <div style="flex:1 1 260px;display:grid;place-items:center;padding:28px;background:#fff2eb"><img src="math1351-gifs/regular-polygons/regular-polygons.gif" alt="Regular hexagon, pentagon, and octagon" style="max-width:100%;max-height:180px;object-fit:contain" loading="lazy"></div>
+        <div class="card-body" style="flex:2 1 300px"><p class="topic">Visual resources</p><h3>Explore the GIF Collection</h3><p class="description">View triangles, parallelograms, trapezoids, and polygons. Each GIF has its own page for easy access and sharing.</p><a class="open" href="math1351-gifs/"><span class="link-label">Browse MATH 1351 GIFs</span><span class="arrow" aria-hidden="true">→</span></a></div>
+      </article>
+    </section>
+
+    <section class="collection course-tools" aria-labelledby="tools-heading">
+      <div class="section-heading">
+        <div>
+          <h2 id="tools-heading">Course Tools</h2>
+          <p class="course-title">Resources for MATH 1350 and MATH 1351</p>
+        </div>
+        <span class="count">1 tool</span>
+      </div>
+
+      <ul class="cards">
+        <li>
+          <article class="card" aria-labelledby="grade-calculator-title">
+            <div class="illustration angles" aria-hidden="true">
+              <svg viewBox="0 0 240 150" fill="none" focusable="false">
+                <rect x="55" y="23" width="130" height="104" rx="8" fill="#fff" stroke="#646469" stroke-width="2"/>
+                <path d="M79 55h48M79 77h24M79 99h48" stroke="#646469" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="151" cy="54" r="13" fill="#CB4900"/>
+                <path d="m145 54 4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="151" cy="99" r="13" fill="#646469"/>
+                <path d="M145 99h12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="card-body">
+              <p class="topic">Course progress</p>
+              <h3 id="grade-calculator-title">Grade Progress Calculator</h3>
+              <p class="description">Estimate your current course grade using LTs Mastered, homework, and participation. View the requirements for every letter grade in MATH 1350 and MATH 1351.</p>
+              <a class="open" href="lt-grade-widget.html" aria-label="Open Grade Progress Calculator">
+                <span class="link-label">Open calculator</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-content">
+      <p>© 2026 Luis Miguel Fernández, Ph.D.</p>
+      <p>Individual manipulatives are licensed under CC BY 4.0 where indicated.</p>
+    </div>
+  </footer>
+</body>
+</html>
