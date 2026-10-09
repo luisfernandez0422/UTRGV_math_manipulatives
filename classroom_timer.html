@@ -52,7 +52,7 @@ function renderWheel(seconds){
  clock.setAttribute('aria-label',`${Math.floor(seconds/60)} minutes ${seconds%60} seconds remaining`);
  displayedSeconds=seconds;
 }
-function render(){let s=Math.max(0,Math.ceil(remaining));renderWheel(s);toggle.textContent=running?'Pause':remaining>0&&remaining<original?'Resume':'Start';$('finish').textContent=alarmInterval!==null?'Dismiss':completed?'Play sound':'Finish Now';status.textContent=running?'Running':completed?'Time is up!':remaining===original?'Ready':'Paused'}function stop(){running=false;if(interval!==null){clearInterval(interval);interval=null}}function done(){stopMomentum();stop();remaining=0;if(!completed){completed=true;startAlarm()}render()}function tick(){if(!running)return;remaining=Math.max(0,(deadline-performance.now())/1000);if(remaining<=0&&!drag)done();else render()}function start(){stopAlarm();if(remaining<=0){remaining=original;completed=false}unlock();deadline=performance.now()+remaining*1000;running=true;interval=setInterval(tick,100);render()}toggle.onclick=()=>{stopMomentum();if(running){tick();stop();render()}else start()};$('finish').onclick=()=>{stopMomentum();if(alarmInterval!==null){stopAlarm();render()}else if(completed){startAlarm();render()}else done()};// Integrate horizontal motion into the live remaining time. Fractional seconds
+function render(){document.querySelectorAll('[data-preset]').forEach(b=>{b.textContent=(running?'+':'')+Number(b.dataset.preset)/60+' min';b.setAttribute('aria-label',(running?'Add ':'Set timer to ')+Number(b.dataset.preset)/60+' minutes')});let s=Math.max(0,Math.ceil(remaining));renderWheel(s);toggle.textContent=running?'Pause':remaining>0&&remaining<original?'Resume':'Start';$('finish').textContent=alarmInterval!==null?'Dismiss':completed?'Play sound':'Finish Now';status.textContent=running?'Running':completed?'Time is up!':remaining===original?'Ready':'Paused'}function stop(){running=false;if(interval!==null){clearInterval(interval);interval=null}}function done(){stopMomentum();stop();remaining=0;if(!completed){completed=true;startAlarm()}render()}function tick(){if(!running)return;remaining=Math.max(0,(deadline-performance.now())/1000);if(remaining<=0&&!drag)done();else render()}function start(){stopAlarm();if(remaining<=0){remaining=original;completed=false}unlock();deadline=performance.now()+remaining*1000;running=true;interval=setInterval(tick,100);render()}toggle.onclick=()=>{stopMomentum();if(running){tick();stop();render()}else start()};$('finish').onclick=()=>{stopMomentum();if(alarmInterval!==null){stopAlarm();render()}else if(completed){startAlarm();render()}else done()};// Integrate horizontal motion into the live remaining time. Fractional seconds
 // are retained; the display still shows whole seconds. Velocity increases gain.
 let drag=null,momentumFrame=null,wheelEnd=null,lastWheelTime=null;
 const momentumThreshold=8,coastTime=.45;
@@ -178,5 +178,14 @@ clock.addEventListener('lostpointercapture',endDrag);
 window.addEventListener('blur',stopMomentum);
 window.addEventListener('pagehide',stopMomentum);
 $('volume').addEventListener('input',()=>{$('volume-value').textContent=$('volume').value+'%'});
-function setDuration(n){stopMomentum();stopAlarm();stop();original=n;remaining=n;completed=false;render()}document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{let n=Number(b.dataset.preset);setDuration(n)});render()})();
+function setDuration(n){stopMomentum();stopAlarm();stop();original=n;remaining=n;completed=false;render()}document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{
+ const n=Number(b.dataset.preset);
+ if(!running){setDuration(n);return;}
+ stopMomentum();
+ const now=performance.now();
+ remaining=Math.min(59999,Math.max(0,(deadline-now)/1000)+n);
+ deadline=now+remaining*1000;
+ completed=false;
+ render();
+});render()})();
 </script></body></html>
