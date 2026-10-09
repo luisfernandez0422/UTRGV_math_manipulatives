@@ -82,7 +82,7 @@ clock.addEventListener('pointerdown',e=>{
  if(drag||!e.isPrimary||e.button!==0)return;
  unlock();stopMomentum();lastWheelTime=null;
  if(running)tick();
- drag={id:e.pointerId,x:e.clientX,t:e.timeStamp,velocity:0,lastMotion:e.timeStamp};
+ drag={id:e.pointerId,x:e.clientX,t:e.timeStamp,samples:[{x:e.clientX,t:e.timeStamp}]};
  e.preventDefault();clock.setPointerCapture(e.pointerId);
  clock.classList.add('dragging');
 });
@@ -95,18 +95,14 @@ function moveDrag(e){
  // Slow motion is roughly 6 pixels per second; fast sweeps have more gain.
  const speed=Math.min(2.5,Math.abs(dx)/elapsed);
  const adjustment=-dx*(.15+.7*speed);
- const velocity=adjustment/(elapsed/1000);
- drag.velocity=Math.sign(velocity)!==Math.sign(drag.velocity)?velocity:.4*drag.velocity+.6*velocity;
- drag.lastMotion=e.timeStamp;
+ drag.samples.push({x:e.clientX,t:e.timeStamp});
+ while(drag.samples.length>2&&drag.samples[1].t<e.timeStamp-120)drag.samples.shift();
  adjustRemaining(adjustment);
 }
 function wheelFeedback(crossed){
  if(!crossed)return;
- // Keep rapid sweeps compact, rather than leaving a queue of clicks afterward.
+ // Keep rapid sweeps to a brief haptic pulse pattern.
  const count=Math.min(32,crossed),spacing=Math.min(.025,.06/count);
- if(audio&&audio.state==='running'){
-  try{for(let i=0;i<count;i++)tone(1800,i*spacing,.025,'triangle',.035);}catch(e){}
- }
  if(typeof navigator!=='undefined'&&typeof navigator.vibrate==='function'){
   const pulses=[];
   for(let i=0;i<count;i++){if(i)pulses.push(Math.max(2,spacing*1000-5));pulses.push(5);}
@@ -137,7 +133,7 @@ clock.addEventListener('wheel',e=>{
   const adjustment=delta*(.08+.08*Math.min(2,Math.abs(delta)/120));
   adjustRemaining(adjustment);
   // Native trackpad tails end with tiny events: do not amplify their momentum.
-  const velocity=adjustment/(elapsed/1000);
+  const velocity=Math.abs(delta)>=12&&Math.abs(delta)/elapsed>=.5?adjustment/(elapsed/1000):0;
   wheelEnd=setTimeout(()=>{wheelEnd=null;lastWheelTime=null;coast(velocity);},100);
  }
 },{passive:false});
@@ -146,11 +142,32 @@ clock.addEventListener('keydown',e=>{
  e.preventDefault();unlock();stopMomentum();adjustRemaining(e.key==='ArrowLeft'?1:-1);
 });
 clock.addEventListener('pointermove',moveDrag);
+function releaseVelocity(now){
+ const samples=drag.samples;
+ const first=samples[0],last=samples[samples.length-1];
+ // A lift is not a movement sample. Include the stationary time before lifting.
+ if(now-last.t>60||now-first.t<40)return 0;
+ function positionAt(t){
+  if(t<=first.t)return first.x;
+  for(let i=1;i<samples.length;i++){
+   const a=samples[i-1],b=samples[i];
+   if(t<=b.t)return a.x+(b.x-a.x)*(t-a.t)/Math.max(1,b.t-a.t);
+  }
+  return last.x;
+ }
+ const start=Math.max(first.t,now-120),tail=Math.max(first.t,now-60);
+ const distance=last.x-positionAt(start),speed=distance/(now-start);
+ const tailSpeed=(last.x-positionAt(tail))/(now-tail);
+ // Require a sustained flick, not a tiny lift jitter or a long slow adjustment.
+ if(Math.abs(distance)<18||Math.abs(speed)<.25||Math.abs(tailSpeed)<.25||Math.sign(speed)!==Math.sign(tailSpeed))return 0;
+ const releaseSpeed=Math.min(Math.abs(speed),Math.abs(tailSpeed),2.5);
+ return -Math.sign(speed)*releaseSpeed*1000*(.15+.7*releaseSpeed);
+}
 function endDrag(e){
  if(!drag||drag.id!==e.pointerId)return;
- if(e.type==='pointerup')moveDrag(e);
+ // Use actual movement history; pointerup coordinates can jump on touch release.
  if(running)tick();
- const id=drag.id,velocity=e.type==='pointerup'&&e.timeStamp-drag.lastMotion<100?drag.velocity:0;
+ const id=drag.id,velocity=e.type==='pointerup'?releaseVelocity(e.timeStamp):0;
  drag=null;clock.classList.remove('dragging');
  if(clock.hasPointerCapture(id))clock.releasePointerCapture(id);
  if(remaining<=0&&!completed)done();else {render();coast(velocity);}
