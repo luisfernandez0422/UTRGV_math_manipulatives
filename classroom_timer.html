@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Classroom Timer</title><style>
-:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#343437;background:#f7f7f7}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px}.panel{width:min(680px,100%);background:white;border-radius:24px;padding:clamp(20px,5vw,44px);box-shadow:0 15px 55px #64646920}h1{margin:0;font-size:1.35rem}p{color:#646469;margin:8px 0 20px}.clock{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;position:relative;border-radius:16px;transition:background .15s}.clock.dragging{background:#CB490010;outline:2px solid #CB490044}.clock::after{content:"↔";position:absolute;top:4px;right:12px;font-size:22px;letter-spacing:0;color:#646469;opacity:.65;pointer-events:none}.drag-hint{text-align:center;color:#646469;font-size:.85rem;margin:-8px 0 16px}.clock{color:#CB4900;text-align:center;font-size:clamp(72px,16vw,126px);font-variant-numeric:tabular-nums;font-weight:750;letter-spacing:-.06em;margin:12px 0 18px}.status{text-align:center;color:#646469;font-weight:650;min-height:24px}.row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.row>*{flex:1}button{font:inherit;cursor:pointer;border:1px solid #c9c9cb;background:#f5f5f5;border-radius:12px;padding:13px 10px;font-weight:650;color:#424246;min-width:72px}button:hover{background:#ececed}button.primary:hover{background:#a83d00}button.danger:hover{background:#4c4c50}button.primary{background:#CB4900;color:white;border-color:#CB4900}button.danger{background:#646469;color:white;border-color:#646469}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #CB4900;outline-offset:2px}label{font-size:.9rem;font-weight:650;color:#646469}input,select{width:100%;padding:12px;border:1px solid #c9c9cb;border-radius:10px;font:inherit;margin-top:5px}.inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px}.section{font-size:.83rem;font-weight:750;text-transform:uppercase;letter-spacing:.08em;color:#646469;margin-top:24px}.foot{font-size:.78rem;color:#646469;margin-top:20px}@media(max-width:430px){button{min-width:60px;padding:12px 6px}.panel{padding:18px}}
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#343437;background:#f7f7f7}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:20px}.panel{width:min(680px,100%);background:white;border-radius:24px;padding:clamp(20px,5vw,44px);box-shadow:0 15px 55px #64646920}h1{margin:0;font-size:1.35rem}p{color:#646469;margin:8px 0 20px}.clock{touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;position:relative;border-radius:16px;transition:background .15s}.clock.dragging{background:#CB490010;outline:2px solid #CB490044}.drag-hint{text-align:center;color:#646469;font-size:.85rem;margin:-8px 0 16px}.clock{color:#CB4900;text-align:center;font-size:clamp(72px,16vw,126px);font-variant-numeric:tabular-nums;font-weight:750;letter-spacing:-.06em;margin:12px 0 18px}.status{text-align:center;color:#646469;font-weight:650;min-height:24px}.row{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}.row>*{flex:1}button{font:inherit;cursor:pointer;border:1px solid #c9c9cb;background:#f5f5f5;border-radius:12px;padding:13px 10px;font-weight:650;color:#424246;min-width:72px}button:hover{background:#ececed}button.primary:hover{background:#a83d00}button.danger:hover{background:#4c4c50}button.primary{background:#CB4900;color:white;border-color:#CB4900}button.danger{background:#646469;color:white;border-color:#646469}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #CB4900;outline-offset:2px}label{font-size:.9rem;font-weight:650;color:#646469}input,select{width:100%;padding:12px;border:1px solid #c9c9cb;border-radius:10px;font:inherit;margin-top:5px}.inputs{display:grid;grid-template-columns:1fr 1fr;gap:12px}.section{font-size:.83rem;font-weight:750;text-transform:uppercase;letter-spacing:.08em;color:#646469;margin-top:24px}.foot{font-size:.78rem;color:#646469;margin-top:20px}@media(max-width:430px){button{min-width:60px;padding:12px 6px}.panel{padding:18px}}
 
 .clock{height:170px;overflow:hidden;container-type:inline-size;--wheel-step:34cqw;mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(to right,transparent,#000 12%,#000 88%,transparent)}
 .clock.dragging{cursor:grabbing}
@@ -10,8 +10,8 @@
 .clock:focus-visible{outline:2px solid #CB4900;outline-offset:3px}
 @media(max-width:430px){.clock{height:120px}}
 @media(prefers-reduced-motion:reduce){.wheel-time,.wheel-ruler{will-change:auto}}
-</style></head><body><main class="panel"><h1>Classroom Timer</h1><div id="clock" class="clock" role="timer" aria-live="off" tabindex="0" aria-label="3 minutes remaining" aria-description="Scroll or drag to adjust time. Drag left to add time and right to subtract. Arrow left adds one second; arrow right subtracts one second."><span id="wheel0" class="wheel-time" aria-hidden="true"></span><span id="wheel1" class="wheel-time" aria-hidden="true"></span><span id="wheel2" class="wheel-time" aria-hidden="true"></span><span id="wheel3" class="wheel-time" aria-hidden="true"></span><span id="wheel4" class="wheel-time" aria-hidden="true"></span><span id="wheel-ruler" class="wheel-ruler" aria-hidden="true"></span><span class="wheel-marker" aria-hidden="true"></span></div><div id="status" class="status" aria-live="polite">Ready</div><div class="row"><button class="primary" id="toggle">Start</button><button id="reset">Reset</button><button class="danger" id="finish">Finish Now</button></div><div class="section">Add time</div><div class="row"><button data-add="15">+15 sec</button><button data-add="30">+30 sec</button><button data-add="60">+1 min</button></div><div class="section">Subtract time</div><div class="row"><button data-add="-15">−15 sec</button><button data-add="-30">−30 sec</button><button data-add="-60">−1 min</button></div><div class="section">Quick presets</div><div class="row"><button data-preset="60">1 min</button><button data-preset="120">2 min</button><button data-preset="180">3 min</button><button data-preset="240">4 min</button><button data-preset="300">5 min</button></div><div class="section">Custom starting time</div><div class="inputs"><label>Minutes<input id="mins" type="number" min="0" max="999" value="3"></label><label>Seconds<input id="secs" type="number" min="0" max="59" value="0"></label></div><div class="row"><button id="set">Set Duration</button></div><div class="section">Timer sound</div><label for="sound">Choose alert sound</label><select id="sound" aria-label="Choose timer alert"><option value="chime">Gentle chime</option><option value="bell">School bell</option><option value="alarm">Noticeable alarm</option></select><label for="volume" style="display:block;margin-top:16px">Volume <output id="volume-value" for="volume">50%</output></label><input id="volume" type="range" min="0" max="100" value="50" style="accent-color:#CB4900;padding:0" aria-label="Alert volume"><div class="row"><button id="test">▶ Test selected sound</button></div></main><script>
-(()=>{'use strict';let original=180,remaining=180,deadline=0,running=false,interval=null,completed=false;const $=id=>document.getElementById(id),clock=$('clock'),status=$('status'),toggle=$('toggle');let audio=null,alarmInterval=null;const voices=new Set();function unlock(){try{audio??=new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}catch(e){}}function tone(freq,offset,duration,kind='sine',volume=.2,decay=.08){const level=Number($('volume').value)/100;if(level===0)return;const t=audio.currentTime+offset;let osc=audio.createOscillator(),gain=audio.createGain();osc.type=kind;osc.frequency.setValueAtTime(freq,t);gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(Math.max(.0001,volume*level),t+.015);gain.gain.exponentialRampToValueAtTime(.0001,t+duration);const voice={osc,gain};voices.add(voice);osc.onended=()=>{voices.delete(voice);osc.disconnect();gain.disconnect()};osc.connect(gain).connect(audio.destination);osc.start(t);osc.stop(t+duration+.02)}function bell(){unlock();if(!audio)return;const mode=$('sound').value;if(mode==='chime'){[784,988,1175].forEach((f,i)=>tone(f,i*.19,.43,'sine',.2))}else if(mode==='bell'){[0,.72].forEach(offset=>{tone(660,offset,1.35,'sine',.18);tone(990,offset,1.1,'sine',.09);tone(1320,offset,.9,'sine',.045)})}else{[0,.34,.68,1.02].forEach((offset,i)=>{tone(i%2?740:880,offset,.27,'square',.12)})}}// Keep expiry alerts repeating; cancel both future repeats and scheduled tones.
+</style></head><body><main class="panel"><h1>Classroom Timer</h1><div id="clock" class="clock" role="timer" aria-live="off" tabindex="0" aria-label="3 minutes remaining" aria-description="Scroll or drag to adjust time. Drag left to add time and right to subtract. Arrow left adds one second; arrow right subtracts one second."><span id="wheel0" class="wheel-time" aria-hidden="true"></span><span id="wheel1" class="wheel-time" aria-hidden="true"></span><span id="wheel2" class="wheel-time" aria-hidden="true"></span><span id="wheel3" class="wheel-time" aria-hidden="true"></span><span id="wheel4" class="wheel-time" aria-hidden="true"></span><span id="wheel-ruler" class="wheel-ruler" aria-hidden="true"></span><span class="wheel-marker" aria-hidden="true"></span></div><div id="status" class="status" aria-live="polite">Ready</div><div class="row"><button class="primary" id="toggle">Start</button><button class="danger" id="finish">Finish Now</button></div><div class="section">Quick presets</div><div class="row"><button data-preset="60">1 min</button><button data-preset="120">2 min</button><button data-preset="180">3 min</button><button data-preset="240">4 min</button><button data-preset="300">5 min</button></div><div class="section">Timer sound</div><label for="volume" style="display:block;margin-top:16px">Volume <output id="volume-value" for="volume">100%</output></label><input id="volume" type="range" min="0" max="100" value="100" style="accent-color:#CB4900;padding:0" aria-label="Sound volume"><footer style="margin-top:24px;text-align:center"><a href="index.html" style="color:#646469;font-size:.9rem;text-underline-offset:3px">← Back to homepage</a></footer></main><script>
+(()=>{'use strict';let original=180,remaining=180,deadline=0,running=false,interval=null,completed=false;const $=id=>document.getElementById(id),clock=$('clock'),status=$('status'),toggle=$('toggle');let audio=null,alarmInterval=null;const voices=new Set();function unlock(){try{audio??=new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}catch(e){}}function tone(freq,offset,duration,kind='sine',volume=.2,decay=.08){const level=Number($('volume').value)/100;if(level===0)return;const t=audio.currentTime+offset;let osc=audio.createOscillator(),gain=audio.createGain();osc.type=kind;osc.frequency.setValueAtTime(freq,t);gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(Math.max(.0001,volume*level),t+.015);gain.gain.exponentialRampToValueAtTime(.0001,t+duration);const voice={osc,gain};voices.add(voice);osc.onended=()=>{voices.delete(voice);osc.disconnect();gain.disconnect()};osc.connect(gain).connect(audio.destination);osc.start(t);osc.stop(t+duration+.02)}function bell(){unlock();if(!audio)return;[0,.34,.68,1.02].forEach((offset,i)=>tone(i%2?740:880,offset,.27,'square',.12))}// Keep expiry alerts repeating; cancel both future repeats and scheduled tones.
 function stopAlarm(){
  if(alarmInterval!==null){clearInterval(alarmInterval);alarmInterval=null}
  for(const {osc,gain} of voices){try{osc.stop()}catch(e){}gain.disconnect()}
@@ -39,7 +39,7 @@ function renderWheel(seconds){
   const target=wheelStyle(position);
   Object.assign(node.style,target);
   if(shift&&!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches&&node.animate){
-   wheelAnimations.push(node.animate([wheelStyle(position+shift),target],{duration:drag?100:240,easing:'cubic-bezier(.2,.7,.2,1)'}));
+   wheelAnimations.push(node.animate([wheelStyle(position+shift),target],{duration:drag||momentumFrame!==null?70:240,easing:'cubic-bezier(.2,.7,.2,1)'}));
   }
  });
  // Major ticks align with the numbers; minor ticks reveal the sideways motion.
@@ -47,18 +47,42 @@ function renderWheel(seconds){
   wheelAnimations.push(ruler.animate([
    {transform:`translateX(calc(var(--wheel-step) * ${shift}))`},
    {transform:'translateX(0)'}
-  ],{duration:drag?100:240,easing:'cubic-bezier(.2,.7,.2,1)'}));
+  ],{duration:drag||momentumFrame!==null?70:240,easing:'cubic-bezier(.2,.7,.2,1)'}));
  }
  clock.setAttribute('aria-label',`${Math.floor(seconds/60)} minutes ${seconds%60} seconds remaining`);
  displayedSeconds=seconds;
 }
-function render(){let s=Math.max(0,Math.ceil(remaining));renderWheel(s);toggle.textContent=running?'Pause':remaining>0&&remaining<original?'Resume':'Start';$('finish').textContent=alarmInterval!==null?'Dismiss':completed?'Play sound':'Finish Now';status.textContent=running?'Running':completed?'Time is up!':remaining===original?'Ready':'Paused'}function stop(){running=false;if(interval!==null){clearInterval(interval);interval=null}}function done(){stop();remaining=0;if(!completed){completed=true;startAlarm()}render()}function tick(){if(!running)return;remaining=Math.max(0,(deadline-performance.now())/1000);if(remaining<=0&&!drag)done();else render()}function start(){stopAlarm();if(remaining<=0){remaining=original;completed=false}unlock();deadline=performance.now()+remaining*1000;running=true;interval=setInterval(tick,100);render()}toggle.onclick=()=>{if(running){tick();stop();render()}else start()};$('reset').onclick=()=>{stopAlarm();stop();remaining=original;completed=false;render()};$('finish').onclick=()=>{if(alarmInterval!==null){stopAlarm();render()}else if(completed){startAlarm();render()}else done()};document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{if(running)tick();if(!running&&completed&&Number(b.dataset.add)>0){stopAlarm();completed=false}remaining=Math.max(0,remaining+Number(b.dataset.add));if(remaining===0){done();return}if(running)deadline=performance.now()+remaining*1000;render()});// Integrate horizontal motion into the live remaining time. Fractional seconds
+function render(){let s=Math.max(0,Math.ceil(remaining));renderWheel(s);toggle.textContent=running?'Pause':remaining>0&&remaining<original?'Resume':'Start';$('finish').textContent=alarmInterval!==null?'Dismiss':completed?'Play sound':'Finish Now';status.textContent=running?'Running':completed?'Time is up!':remaining===original?'Ready':'Paused'}function stop(){running=false;if(interval!==null){clearInterval(interval);interval=null}}function done(){stopMomentum();stop();remaining=0;if(!completed){completed=true;startAlarm()}render()}function tick(){if(!running)return;remaining=Math.max(0,(deadline-performance.now())/1000);if(remaining<=0&&!drag)done();else render()}function start(){stopAlarm();if(remaining<=0){remaining=original;completed=false}unlock();deadline=performance.now()+remaining*1000;running=true;interval=setInterval(tick,100);render()}toggle.onclick=()=>{stopMomentum();if(running){tick();stop();render()}else start()};$('finish').onclick=()=>{stopMomentum();if(alarmInterval!==null){stopAlarm();render()}else if(completed){startAlarm();render()}else done()};// Integrate horizontal motion into the live remaining time. Fractional seconds
 // are retained; the display still shows whole seconds. Velocity increases gain.
-let drag=null;
+let drag=null,momentumFrame=null,wheelEnd=null,lastWheelTime=null;
+const momentumThreshold=8,coastTime=.45;
+function stopMomentum(){
+ if(momentumFrame!==null)cancelAnimationFrame(momentumFrame);
+ if(wheelEnd!==null)clearTimeout(wheelEnd);
+ momentumFrame=null;wheelEnd=null;
+}
+function coast(velocity){
+ stopMomentum();
+ if(Math.abs(velocity)<momentumThreshold||remaining<=0||remaining>=59999)return;
+ velocity=Math.max(-90,Math.min(90,velocity));
+ let last=performance.now();
+ function frame(now){
+  const dt=Math.min(.05,Math.max(0,(now-last)/1000));last=now;
+  const decay=Math.exp(-dt/coastTime);
+  // Integrate exponential friction so travel is independent of frame rate.
+  adjustRemaining(velocity*coastTime*(1-decay));velocity*=decay;
+  if(momentumFrame===null)return;
+  if(Math.abs(velocity)<.8||remaining<=0||remaining>=59999){stopMomentum();return;}
+  momentumFrame=requestAnimationFrame(frame);
+ }
+ momentumFrame=requestAnimationFrame(frame);
+}
+
 clock.addEventListener('pointerdown',e=>{
  if(drag||!e.isPrimary||e.button!==0)return;
+ unlock();stopMomentum();lastWheelTime=null;
  if(running)tick();
- drag={id:e.pointerId,x:e.clientX,t:e.timeStamp};
+ drag={id:e.pointerId,x:e.clientX,t:e.timeStamp,velocity:0,lastMotion:e.timeStamp};
  e.preventDefault();clock.setPointerCapture(e.pointerId);
  clock.classList.add('dragging');
 });
@@ -71,42 +95,71 @@ function moveDrag(e){
  // Slow motion is roughly 6 pixels per second; fast sweeps have more gain.
  const speed=Math.min(2.5,Math.abs(dx)/elapsed);
  const adjustment=-dx*(.15+.7*speed);
+ const velocity=adjustment/(elapsed/1000);
+ drag.velocity=Math.sign(velocity)!==Math.sign(drag.velocity)?velocity:.4*drag.velocity+.6*velocity;
+ drag.lastMotion=e.timeStamp;
  adjustRemaining(adjustment);
+}
+function wheelFeedback(crossed){
+ if(!crossed)return;
+ // Keep rapid sweeps compact, rather than leaving a queue of clicks afterward.
+ const count=Math.min(32,crossed),spacing=Math.min(.025,.06/count);
+ if(audio&&audio.state==='running'){
+  try{for(let i=0;i<count;i++)tone(1800,i*spacing,.025,'triangle',.035);}catch(e){}
+ }
+ if(typeof navigator!=='undefined'&&typeof navigator.vibrate==='function'){
+  const pulses=[];
+  for(let i=0;i<count;i++){if(i)pulses.push(Math.max(2,spacing*1000-5));pulses.push(5);}
+  try{navigator.vibrate(pulses);}catch(e){}
+ }
 }
 function adjustRemaining(adjustment){
  const now=performance.now();
  if(running)remaining=Math.max(0,(deadline-now)/1000);
+ const before=Math.ceil(remaining);
  remaining=Math.max(0,Math.min(59999,remaining+adjustment));
  if(remaining>0){if(completed)stopAlarm();completed=false}
  if(running)deadline=now+remaining*1000;
+ wheelFeedback(Math.abs(Math.ceil(remaining)-before));
  if(remaining===0&&!drag&&!completed)done();else render();
 }
 // Horizontal scroll follows drag direction; vertical wheel down subtracts time.
 clock.addEventListener('wheel',e=>{
  if(e.ctrlKey||drag)return;
  e.preventDefault();
+ unlock();stopMomentum();
+ const now=performance.now(),elapsed=lastWheelTime===null?32:Math.max(16,Math.min(120,now-lastWheelTime));
+ lastWheelTime=now;
  const units=e.deltaMode===1?16:e.deltaMode===2?260:1;
  const horizontal=Math.abs(e.deltaX||0)>Math.abs(e.deltaY||0);
  const delta=Math.max(-300,Math.min(300,(horizontal?-e.deltaX:-e.deltaY)*units));
- if(delta)adjustRemaining(delta*(.08+.08*Math.min(2,Math.abs(delta)/120)));
+ if(delta){
+  const adjustment=delta*(.08+.08*Math.min(2,Math.abs(delta)/120));
+  adjustRemaining(adjustment);
+  // Native trackpad tails end with tiny events: do not amplify their momentum.
+  const velocity=adjustment/(elapsed/1000);
+  wheelEnd=setTimeout(()=>{wheelEnd=null;lastWheelTime=null;coast(velocity);},100);
+ }
 },{passive:false});
 clock.addEventListener('keydown',e=>{
  if(e.key!=='ArrowRight'&&e.key!=='ArrowLeft')return;
- e.preventDefault();adjustRemaining(e.key==='ArrowLeft'?1:-1);
+ e.preventDefault();unlock();stopMomentum();adjustRemaining(e.key==='ArrowLeft'?1:-1);
 });
 clock.addEventListener('pointermove',moveDrag);
 function endDrag(e){
  if(!drag||drag.id!==e.pointerId)return;
  if(e.type==='pointerup')moveDrag(e);
  if(running)tick();
- const id=drag.id;
+ const id=drag.id,velocity=e.type==='pointerup'&&e.timeStamp-drag.lastMotion<100?drag.velocity:0;
  drag=null;clock.classList.remove('dragging');
  if(clock.hasPointerCapture(id))clock.releasePointerCapture(id);
- if(remaining<=0&&!completed)done();else render();
+ if(remaining<=0&&!completed)done();else {render();coast(velocity);}
 }
 clock.addEventListener('pointerup',endDrag);
 clock.addEventListener('pointercancel',endDrag);
 clock.addEventListener('lostpointercapture',endDrag);
+window.addEventListener('blur',stopMomentum);
+window.addEventListener('pagehide',stopMomentum);
 $('volume').addEventListener('input',()=>{$('volume-value').textContent=$('volume').value+'%'});
-function setDuration(n){stopAlarm();stop();original=n;remaining=n;completed=false;render()}document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{let n=Number(b.dataset.preset);$('mins').value=Math.floor(n/60);$('secs').value=n%60;setDuration(n)});$('set').onclick=()=>{let m=Number($('mins').value),s=Number($('secs').value);if(!Number.isInteger(m)||!Number.isInteger(s)||m<0||m>999||s<0||s>59||m*60+s===0){alert('Enter a valid duration greater than zero.');return}setDuration(m*60+s)};$('test').onclick=bell;render()})();
+function setDuration(n){stopMomentum();stopAlarm();stop();original=n;remaining=n;completed=false;render()}document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>{let n=Number(b.dataset.preset);setDuration(n)});render()})();
 </script></body></html>
