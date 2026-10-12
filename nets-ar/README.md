@@ -1,6 +1,6 @@
 # Nets of Polyhedra
 
-Four models: cube, rectangular prism, triangular prism, and square pyramid.
+Five models: cube, rectangular prism, triangular prism, square pyramid, and hexagonal prism.
 The square pyramid has five faces, eight edges, and five vertices. Its net
 has one square with a triangle hinged to each of its four sides.
 
@@ -8,8 +8,8 @@ has one square with a triangle hinged to each of its four sides.
 
 Replace the `nets-ar` folder in the existing GitHub Pages repository with this
 folder. The root `index.html` in the update package also mentions the pyramid.
-The original three printed markers still work. The fourth page of
-`print-markers.pdf` is the new square pyramid marker.
+The original three printed markers still work. Pages four and five of
+`print-markers.pdf` are the square pyramid and hexagonal prism markers.
 
 ## AR viewport repair
 
@@ -32,7 +32,7 @@ and the projection adapter lifecycle. Run with a local Three.js ES module:
     node nets-ar/tests/geometry.mjs /absolute/path/to/three.module.mjs
 
 The square pyramid solid and top-view net have also been checked in browser
-preview. The marker PDF has four pages and its new page has been visually checked.
+preview. The marker PDF has five pages and its new page has been visually checked.
 
 Before classroom use, scan each marker on iPhone Safari and Android Chrome.
 Check a front, oblique, and side view with the unfold slider at 0%, 50%, and 100%.

@@ -26,7 +26,20 @@ for(let i=0;i<4;i++){
  pf.push({ids:[i,4,j],normal:n.map(x=>x/length),parent:0,edge:[i,j]});
 }
 defs.pyramid={name:'Square pyramid',vertices:pv,faces:pf};
-const colors=[0xe8ac47,0x53a9b2,0xe87c59,0x8695cf,0x84b28a,0xd989af];
+// Regular hexagonal prism: side rectangles hinge outward from the lower base.
+const hv=[];
+for(const y of [0,1.05])for(let i=0;i<6;i++){
+ const angle=-Math.PI/2+i*Math.PI/3;
+ hv.push([.65*Math.cos(angle),y,.65*Math.sin(angle)]);
+}
+const hf=[{ids:[0,1,2,3,4,5],normal:[0,-1,0]}];
+for(let i=0;i<6;i++){
+ const j=(i+1)%6,dx=hv[j][0]-hv[i][0],dz=hv[j][2]-hv[i][2],length=Math.hypot(dx,dz);
+ hf.push({ids:[i,i+6,j+6,j],normal:[dz/length,0,-dx/length],parent:0,edge:[i,j]});
+}
+hf.push({ids:[6,11,10,9,8,7],normal:[0,1,0],parent:1,edge:[6,7]});
+defs.hexagonal={name:'Hexagonal prism',vertices:hv,faces:hf};
+const colors=[0xe8ac47,0x53a9b2,0xe87c59,0x8695cf,0x84b28a,0xd989af,0x72b8dd,0xc6a77b];
 window.NetModels={defs,create(T,key){
  const def=defs[key],group=new T.Group(),matrices=def.faces.map(()=>new T.Matrix4()),meshes=[];
  def.faces.forEach((f,i)=>{

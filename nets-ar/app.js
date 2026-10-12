@@ -17,7 +17,7 @@ async function start(which){
   if(!window.AFRAME)await load('https://aframe.io/releases/1.6.0/aframe.min.js');
   if(mode==='ar'){
    if(!AFRAME.systems.arjs)await load('https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.7/aframe/build/aframe-ar.js');
-   await Promise.all(['camera_para.dat','cube.patt','rectangular.patt','triangular.patt','pyramid.patt'].map(async file=>{let r=await fetch('assets/'+file);if(!r.ok)throw Error('Missing assets/'+file+'. Upload the entire nets-ar folder.');}));
+   await Promise.all(['camera_para.dat',...Object.keys(NetModels.defs).map(key=>key+'.patt')].map(async file=>{let r=await fetch('assets/'+file);if(!r.ok)throw Error('Missing assets/'+file+'. Upload the entire nets-ar folder.');}));
   }
   register();if(mode==='ar')NetARViewport.register();scene=document.createElement('a-scene');scene.setAttribute('embedded','');scene.setAttribute('vr-mode-ui','enabled: false');scene.setAttribute('device-orientation-permission-ui','enabled: false');scene.setAttribute('renderer','antialias: true; alpha: true; colorManagement: true');
   if(mode==='ar'){
