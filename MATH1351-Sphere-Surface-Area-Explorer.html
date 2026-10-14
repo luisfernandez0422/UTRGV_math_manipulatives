@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="description" content="Explore the surface area of a sphere by arranging orange peel onto four circles of the same radius."><title>Sphere Surface Area Explorer | MATH 1351</title><link rel="icon" href="favicon.ico"><style>
+:root{color-scheme:light;--ink:#292c2c;--muted:#5d6264;--line:#dedfdf;--accent:#ad4b21;--a:#2563a6;--b:#267564;--c:#8449a2;--af:#e4effb;--bf:#e2f2ec;--cf:#f0e7f7}
+*{box-sizing:border-box}body{margin:0;border-top:4px solid var(--accent);background:#f8f9f8;color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent)}header{background:white;border-bottom:1px solid var(--line)}.wrap{max-width:1200px;margin:auto;padding:28px 32px}.nav{display:flex;justify-content:space-between;gap:16px;align-items:center;font-size:.8rem;font-weight:700}.nav a{text-decoration:none}.eyebrow{text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-size:.75rem;font-weight:700}h1{font:700 clamp(2rem,4.5vw,3rem)/1.12 Georgia,serif;margin:26px 0 12px;letter-spacing:-.025em}header p{margin:0 0 10px;color:var(--muted)}.author{font-size:.85rem;font-weight:600}main.wrap{padding-top:24px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:22px;box-shadow:0 1px 3px #00000004}.scene-card{padding:0;overflow:hidden}.scene-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid #eee;font-size:.86rem;color:var(--muted)}.badge{font-size:.75rem;font-weight:700;white-space:nowrap;background:#f3f4f3;border-radius:30px;padding:5px 10px;color:var(--ink)}svg{display:block;width:100%;height:auto}#scene{aspect-ratio:760/590}.scene-note{padding:10px 20px 15px;font-size:.8rem;color:var(--muted);margin:0}.legend{display:flex;gap:18px;flex-wrap:wrap;padding:0 20px 15px;font-size:.84rem;font-weight:600}.a{color:var(--a)}.b{color:var(--b)}.c{color:var(--c)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:currentColor;margin-right:6px}.sidebar{display:grid;gap:16px}h2{font-size:1rem;margin:0 0 8px}p{margin:8px 0}.hint{font-size:.85rem;color:var(--muted)}.range-head{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:650;font-size:.92rem}output{font-variant-numeric:tabular-nums}.percent{font:700 1.3rem Georgia,serif;color:var(--accent)}input[type=range]{width:100%;height:44px;margin:3px 0 0;accent-color:var(--accent);cursor:pointer}input[type=checkbox]{width:19px;height:19px;accent-color:var(--accent);margin:0}.ticks{display:flex;justify-content:space-between;gap:8px;font-size:.72rem;color:var(--muted)}.stage{background:#f5f5f3;border-radius:9px;padding:12px;font-size:.85rem;min-height:94px;margin:15px 0}.buttons{display:flex;gap:9px}.extra-buttons{display:grid;gap:9px;margin-top:9px}button[aria-pressed="true"]{background:#f9e9df;border-color:var(--accent);color:var(--accent)}button{border:1px solid var(--line);border-radius:8px;min-height:44px;padding:10px 15px;font:600 .87rem system-ui;cursor:pointer;background:white;color:var(--ink)}button.primary{background:var(--accent);color:white;border-color:var(--accent);flex:1}button:hover{filter:brightness(.95)}:focus-visible{outline:3px solid #202f65;outline-offset:4px}.leg-control{margin:16px 0 6px}.readout{border-top:1px solid var(--line);padding-top:12px;margin-top:12px;font-size:.86rem}.check{display:flex;gap:10px;align-items:center;min-height:44px;font-size:.86rem;cursor:pointer}.areas{margin-top:20px}.areas-head{display:flex;align-items:start;justify-content:space-between;gap:20px}.formula{font:700 clamp(1.4rem,3vw,2rem)/1.3 Georgia,serif;white-space:nowrap;margin:0}.area-rows{display:grid;grid-template-columns:155px minmax(0,1fr);gap:12px 18px;align-items:center;margin:20px 0}.bar{display:flex;height:32px;background:#f0f1ef;border:1px solid #d9ddda;border-radius:5px;overflow:hidden}.bar span{display:block;height:100%;background:var(--a);min-width:0}.bar .b-fill{background:var(--b)}.bar .c-fill{background:var(--c)}.row-label{font-size:.86rem;font-weight:600}.numeric{font-size:1.05rem;font-weight:650;font-variant-numeric:tabular-nums}.question{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:.9rem}.status{color:var(--muted);font-size:.85rem;min-height:1.6em}footer{text-align:center;padding:24px 18px 30px;color:var(--muted);font-size:.75rem}.skip{position:absolute;left:12px;top:-80px;background:white;padding:10px;z-index:5}.skip:focus{top:8px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}svg text{font-family:system-ui,sans-serif;paint-order:stroke;stroke:white;stroke-width:5px;stroke-linejoin:round}svg .square-label{stroke-width:4px;font-weight:700}svg path,svg line,svg polygon{stroke-linejoin:round;stroke-linecap:round}
+@media(max-width:850px){.layout{grid-template-columns:minmax(0,1fr)}.sidebar{grid-template-columns:1fr 1fr}.wrap{padding:24px}.areas-head{flex-wrap:wrap}}@media(max-width:540px){.wrap{padding:20px 14px}.nav{align-items:start}.eyebrow{font-size:.64rem;text-align:right;max-width:155px}.sidebar{grid-template-columns:1fr}.card{padding:18px}.scene-card{padding:0}.scene-top{padding:12px;font-size:.75rem}.scene-note,.legend{padding-left:12px;padding-right:12px}.legend{gap:12px;font-size:.75rem}.area-rows{grid-template-columns:1fr;gap:6px;margin:15px 0}.bar{margin-bottom:6px}.formula{font-size:1.7rem}.scene-top .badge{font-size:.65rem}h1{margin-top:22px}.stage{min-height:0}svg text{font-size:27px}svg .square-label{font-size:30px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+#circle-area-canvas{display:block;width:100%;height:auto;aspect-ratio:1.9;background:#fff}
+#circle-legend[hidden]{display:none}.key{display:inline-block;width:20px;height:4px;margin-right:6px;vertical-align:middle}.circumference{background:#005bbb}.radius{background:#6822aa}
+#circle-area-applet{--foreground:#333336}.scene-note{min-height:45px}.sidebar .extra-buttons button{text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.switch-track{width:34px;height:20px;background:#d9ddda;border-radius:20px;display:inline-flex;align-items:center;padding:3px;flex-shrink:0}.switch-track:after{content:"";width:14px;height:14px;background:white;border-radius:50%;box-shadow:0 1px 3px #0002;transition:transform .15s}
+button[aria-pressed=true] .switch-track{background:var(--accent)}button[aria-pressed=true] .switch-track:after{transform:translateX(14px)}
+#circle-area-applet button:active{transform:translateY(1px)}.sidebar input[type=range]{touch-action:pan-y}
+@media(prefers-reduced-motion:reduce){.switch-track:after{transition:none}}
+
+#orange-explorer{--foreground:#333336;--muted-foreground:#646469;--background:#fff;--orange:#e47b18;--border:#dedee0;--viz-series-1:#e47b18;background:white;border:1px solid var(--line);border-radius:15px;padding:24px}
+.viz-controls,.viz-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.viz-controls .form-label{flex:1 1 180px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;font-weight:600}.form-label input{flex-basis:100%}.form-select{width:100%;min-height:44px;border:1px solid var(--line);background:white;color:var(--ink);border-radius:8px;padding:8px;font:inherit}.btn-primary{background:var(--accent);color:white;border-color:var(--accent)}#orange-result{font-size:.9rem;color:var(--muted)}.activity{margin-top:20px}.activity h2{margin-bottom:12px}.activity p{max-width:850px}.model-note{color:var(--muted);font-size:.85rem}#orange-explorer canvas{height:410px!important}@media(max-width:480px){#orange-explorer{padding:14px}#orange-explorer canvas{height:500px!important}.viz-controls button{flex:1 1 120px}}
+</style></head><body>
+<a class="skip" href="#main">Skip to explorer</a><header><div class="wrap"><nav class="nav" aria-label="Collection navigation"><a href="index.html#course-heading">← Back to collection</a><span class="eyebrow">MATH 1351 · Interactive Mathematics</span></nav><h1>Sphere Surface Area Explorer</h1><p>Peel a sphere. Arrange the pieces. Discover the surface area relationship.</p><div class="author">Luis Miguel Fernández, Ph.D.</div></div></header><main id="main" class="wrap"><div id="orange-explorer">
+  <h2>Peel a sphere</h2>
+  <div class="viz-controls">
+    <button type="button" class="btn btn-primary" id="orange-peel">Peel the orange</button>
+    <button type="button" class="btn" id="orange-arrange">Arrange the peel</button>
+    <button type="button" class="btn btn-ghost" id="orange-reset">Start over</button>
+  </div>
+  <canvas role="img" aria-label="Orange peel patches move from a sphere onto four circles of the same radius."></canvas>
+  <div class="viz-controls">
+    <label class="form-label">Remove the peel <span id="orange-percent" class="tabular-nums">0%</span><input id="orange-progress" class="form-range" type="range" min="0" max="100" value="0"></label>
+    <label class="form-label">Piece size<select id="orange-size" class="form-select"><option value="6">Large</option><option value="12" selected>Medium</option><option value="24">Small</option></select></label>
+    <label class="form-label">Radius <span id="orange-r-label">3</span><input id="orange-radius" class="form-range" type="range" min="2" max="4" step="0.5" value="3"></label>
+  </div>
+  <div class="viz-row"><button type="button" class="btn" id="orange-reveal">Show the relationship</button><span id="orange-result" aria-live="polite">Orange intact · four matching circles</span></div>
+</div>
+<style>
+#orange-explorer canvas {display:block;width:100%;height:370px; margin:12px 0;}
+#orange-explorer .viz-controls {margin-bottom:12px;}
+@media(max-width:480px){#orange-explorer canvas{height:500px;}}
+</style>
+<script>
+(() => {
+ const root=document.getElementById('orange-explorer'), canvas=root.querySelector('canvas'),ctx=canvas.getContext('2d');
+ const el=id=>root.querySelector('#orange-'+id);
+ let p=0,n=12,r=3,reveal=false,animation=0;
+ function restore(s){if(!s)return; p=Math.max(0,Math.min(1,Number(s.progress)||0)); n=[6,12,24].includes(s.pieces)?s.pieces:12;r=Math.max(2,Math.min(4,Number(s.radius)||3));reveal=!!s.reveal;sync();draw();}
+ function save(){try{localStorage.setItem('sphere-surface-area-v1',JSON.stringify({progress:p,pieces:n,radius:r,reveal}));}catch{}}
+ function sync(){el('reveal').textContent=reveal?'Hide the relationship':'Show the relationship';el('progress').value=p*100;el('percent').textContent=Math.round(p*100)+'%';el('size').value=n;el('radius').value=r;el('r-label').textContent=r;el('result').textContent=reveal?'S = 4 × πr² = 4πr²':p===1?'Peel arranged · four matching circles':p===0?'Orange intact · four matching circles':'Peel separating';}
+ function draw(){
+ const w=canvas.clientWidth,h=canvas.clientHeight,dpr=window.devicePixelRatio||1;canvas.width=w*dpr;canvas.height=h*dpr;ctx.scale(dpr,dpr);
+ const styles=getComputedStyle(root),color=k=>styles.getPropertyValue(k).trim();
+ const ink=color('--foreground')||'CanvasText',muted=color('--muted-foreground')||ink,orange=color('--orange')||color('--viz-series-1'),border=color('--border')||muted;
+ const probe=document.createElement('span');root.appendChild(probe);
+ function resolved(value){probe.style.color=value;return getComputedStyle(probe).color;}
+ const shade=resolved('light-dark(color-mix(in srgb, var(--foreground) 95%, var(--orange)), color-mix(in srgb, var(--background) 95%, var(--orange)))');
+ const shine=resolved('light-dark(var(--background), var(--foreground))');probe.remove();
+ const narrow=w<480, R=(narrow?Math.min(w/6,48):Math.min(w/11,60))*r/3;
+ const sx=narrow?w/2:w*.20, sy=narrow?100:h/2;
+ const centers=narrow?[[w*.30,270],[w*.70,270],[w*.30,405],[w*.70,405]]:[[w*.57,110],[w*.82,110],[w*.57,280],[w*.82,280]];
+ ctx.font='14px system-ui';ctx.textAlign='center';ctx.fillStyle=ink;ctx.fillText('Orange',sx,narrow?19:35);
+ centers.forEach(([x,y],i)=>{ctx.beginPath();ctx.arc(x,y,R,0,Math.PI*2);ctx.strokeStyle=border;ctx.lineWidth=1.5;ctx.stroke();ctx.fillStyle=muted;ctx.fillText('Circle '+(i+1),x,y+R+21);});
+ const shadow=ctx.createRadialGradient(sx,sy+R*1.12,0,sx,sy+R*1.12,R*.95);
+ shadow.addColorStop(0,shade);shadow.addColorStop(1,'transparent');
+ ctx.save();ctx.translate(sx,sy+R*1.12);ctx.scale(1,.19);ctx.translate(-sx,-sy-R*1.12);ctx.globalAlpha=.25*(1-p);ctx.fillStyle=shadow;ctx.fillRect(sx-R,sy+R*.12,R*2,R*2);ctx.restore();
+ ctx.beginPath();ctx.arc(sx,sy,R,0,Math.PI*2);ctx.fillStyle=orange;ctx.globalAlpha=.12;ctx.fill();ctx.globalAlpha=1;
+ const pieces=[]; const m=n*4;
+ for(let a=0;a<m;a++)for(let b=0;b<n;b++){
+ const lon=(a+.5)/m*Math.PI*2, z=1-2*(b+.5)/n,depth=Math.sqrt(1-z*z)*Math.sin(lon);
+ pieces.push({a,b,depth});}
+ pieces.sort((a,b)=>a.depth-b.depth);
+ const move=Math.max(0,(p-.28)/.72),ease=move*move*(3-2*move);
+ const shellR=R*(1+Math.sin(Math.min(p/.28,1)*Math.PI/2)*.18);
+ const sphereShade=ctx.createRadialGradient(sx-shellR*.40,sy-shellR*.42,shellR*.08,sx-shellR*.16,sy-shellR*.20,shellR*1.26);
+ sphereShade.addColorStop(0,'transparent');sphereShade.addColorStop(.35,'transparent');sphereShade.addColorStop(.75,shade);sphereShade.addColorStop(1,shade);
+ const sphereLight=ctx.createRadialGradient(sx-shellR*.36,sy-shellR*.40,0,sx-shellR*.36,sy-shellR*.40,shellR*.85);
+ sphereLight.addColorStop(0,shine);sphereLight.addColorStop(.35,shine);sphereLight.addColorStop(1,'transparent');
+ for(const {a,b,depth} of pieces){
+ const q=Math.floor(a/n),[tx,ty]=centers[q];let pts=[];
+ const centerLon=(a+.5)/m*Math.PI*2,centerZ=1-2*(b+.5)/n;
+ const originX=sx+shellR*Math.sqrt(1-centerZ*centerZ)*Math.cos(centerLon),originY=sy-shellR*centerZ;
+ const centerAngle=(a+.5-q*n)/n*Math.PI*2,centerRad=R*Math.sqrt((b+.5)/n);
+ const destX=tx+centerRad*Math.cos(centerAngle),destY=ty+centerRad*Math.sin(centerAngle);
+ const travelX=originX+(destX-originX)*ease,travelY=originY+(destY-originY)*ease;
+ const flattenT=Math.max(0,Math.min(1,(move-.75)/.25));
+ const flatten=flattenT*flattenT*(3-2*flattenT);
+ function point(aa,bb){const lon=aa/m*Math.PI*2,z=1-2*bb/n,s=Math.sqrt(Math.max(0,1-z*z));
+ const x0=sx+shellR*s*Math.cos(lon),y0=sy-shellR*z;
+ // Reverse the hidden hemisphere's vertex order to avoid pieces folding through themselves.
+ const diskA=depth<0?2*a+1-aa:aa;
+ const angle=(diskA-q*n)/n*Math.PI*2,rad=R*Math.sqrt(bb/n);
+ const localX=tx+rad*Math.cos(angle)-destX,localY=ty+rad*Math.sin(angle)-destY;
+ // Translate the whole patch along a straight path; reshape only during arrival.
+ return [travelX+(x0-originX)*(1-flatten)+localX*flatten,travelY+(y0-originY)*(1-flatten)+localY*flatten];}
+ const steps=4;
+ for(let k=0;k<=steps;k++)pts.push(point(a+k/steps,b));
+ for(let k=1;k<=steps;k++)pts.push(point(a+1,b+k/steps));
+ for(let k=1;k<=steps;k++)pts.push(point(a+1-k/steps,b+1));
+ for(let k=1;k<steps;k++)pts.push(point(a,b+1-k/steps));
+ ctx.globalAlpha=depth>=0?1:Math.min(1,move*3);if(ctx.globalAlpha===0)continue;
+ const cx=pts.reduce((s,v)=>s+v[0],0)/pts.length,cy=pts.reduce((s,v)=>s+v[1],0)/pts.length;
+ const gap=(.03+ .08*(1-n/30))*Math.sin(p*Math.PI/2);
+ ctx.beginPath();pts.forEach(([x,y],i)=>{x=cx+(x-cx)*(1-gap);y=cy+(y-cy)*(1-gap);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.closePath();ctx.fillStyle=orange;ctx.fill();
+ const opacity=ctx.globalAlpha;
+ ctx.fillStyle=sphereShade;ctx.globalAlpha=opacity*.70*(1-ease);ctx.fill();
+ ctx.fillStyle=sphereLight;ctx.globalAlpha=opacity*.42*(1-ease);ctx.fill();
+ const lon=(a+.5)/m*Math.PI*2,z=1-2*(b+.5)/n;
+ const nx=Math.sqrt(1-z*z)*Math.cos(lon),light=Math.max(0,-.45*nx+.55*z+.70*depth);
+ ctx.fillStyle=shade;ctx.globalAlpha=opacity*(.08+.30*(1-light))*ease;ctx.fill();ctx.globalAlpha=1;
+ }
+ function radius(x,y){ctx.strokeStyle=ink;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+R,y);ctx.stroke();ctx.fillStyle=ink;ctx.fillText('r',x+R/2,y-7);}
+ radius(sx,sy);centers.forEach(([x,y])=>radius(x,y));
+ }
+ function animate(target){cancelAnimationFrame(animation);const start=p,time=performance.now(),duration=matchMedia('(prefers-reduced-motion: reduce)').matches?0:2200;function frame(now){const t=duration?Math.min(1,(now-time)/duration):1;p=start+(target-start)*t;sync();draw();if(t<1)animation=requestAnimationFrame(frame);else save();}animation=requestAnimationFrame(frame);}
+ el('peel').onclick=()=>animate(.28);el('arrange').onclick=()=>animate(1);el('reset').onclick=()=>{reveal=false;animate(0);};
+ el('progress').oninput=e=>{cancelAnimationFrame(animation);p=Number(e.target.value)/100;sync();draw();};el('progress').onchange=save;
+ el('size').onchange=e=>{n=Number(e.target.value);draw();save();};el('radius').oninput=e=>{r=Number(e.target.value);sync();draw();};el('radius').onchange=save;
+ el('reveal').onclick=()=>{reveal=!reveal;el('reveal').textContent=reveal?'Hide the relationship':'Show the relationship';sync();save();};
+ new ResizeObserver(draw).observe(canvas);new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});
+ try{restore(JSON.parse(localStorage.getItem('sphere-surface-area-v1')));}catch{}sync();draw();
+})();
+</script>
+
+<section class="card activity"><h2>Make a conjecture</h2><p>Use the orange-peel model and the formula for the area of a circle with radius <em>r</em> to develop a formula for the surface area, <em>S</em>, of a sphere with radius <em>r</em>. Explain your reasoning.</p><p class="model-note">Each circle has the same radius as the sphere. The animation reshapes curved patches as they flatten and illustrates the relationship approximately. For a perfect sphere, the surface area is exactly four times the area of one circle with the same radius.</p></section><noscript>This explorer requires JavaScript enabled.</noscript></main><footer>© 2026 Luis Miguel Fernández, Ph.D.</footer></body></html>
