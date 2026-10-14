@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="description" content="Increase the number of faces of a regular pyramid to approach a cone, then unfold its lateral surface into a circular sector."><title>Cone Surface Area Explorer | MATH 1351</title><link rel="icon" href="favicon.ico"><style>
+:root{color-scheme:light;--ink:#292c2c;--muted:#5d6264;--line:#dedfdf;--accent:#ad4b21;--a:#2563a6;--b:#267564;--c:#8449a2;--af:#e4effb;--bf:#e2f2ec;--cf:#f0e7f7}
+*{box-sizing:border-box}body{margin:0;border-top:4px solid var(--accent);background:#f8f9f8;color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent)}header{background:white;border-bottom:1px solid var(--line)}.wrap{max-width:1200px;margin:auto;padding:28px 32px}.nav{display:flex;justify-content:space-between;gap:16px;align-items:center;font-size:.8rem;font-weight:700}.nav a{text-decoration:none}.eyebrow{text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-size:.75rem;font-weight:700}h1{font:700 clamp(2rem,4.5vw,3rem)/1.12 Georgia,serif;margin:26px 0 12px;letter-spacing:-.025em}header p{margin:0 0 10px;color:var(--muted)}.author{font-size:.85rem;font-weight:600}main.wrap{padding-top:24px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:22px;box-shadow:0 1px 3px #00000004}.scene-card{padding:0;overflow:hidden}.scene-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid #eee;font-size:.86rem;color:var(--muted)}.badge{font-size:.75rem;font-weight:700;white-space:nowrap;background:#f3f4f3;border-radius:30px;padding:5px 10px;color:var(--ink)}svg{display:block;width:100%;height:auto}#scene{aspect-ratio:760/590}.scene-note{padding:10px 20px 15px;font-size:.8rem;color:var(--muted);margin:0}.legend{display:flex;gap:18px;flex-wrap:wrap;padding:0 20px 15px;font-size:.84rem;font-weight:600}.a{color:var(--a)}.b{color:var(--b)}.c{color:var(--c)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:currentColor;margin-right:6px}.sidebar{display:grid;gap:16px}h2{font-size:1rem;margin:0 0 8px}p{margin:8px 0}.hint{font-size:.85rem;color:var(--muted)}.range-head{display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:650;font-size:.92rem}output{font-variant-numeric:tabular-nums}.percent{font:700 1.3rem Georgia,serif;color:var(--accent)}input[type=range]{width:100%;height:44px;margin:3px 0 0;accent-color:var(--accent);cursor:pointer}input[type=checkbox]{width:19px;height:19px;accent-color:var(--accent);margin:0}.ticks{display:flex;justify-content:space-between;gap:8px;font-size:.72rem;color:var(--muted)}.stage{background:#f5f5f3;border-radius:9px;padding:12px;font-size:.85rem;min-height:94px;margin:15px 0}.buttons{display:flex;gap:9px}.extra-buttons{display:grid;gap:9px;margin-top:9px}button[aria-pressed="true"]{background:#f9e9df;border-color:var(--accent);color:var(--accent)}button{border:1px solid var(--line);border-radius:8px;min-height:44px;padding:10px 15px;font:600 .87rem system-ui;cursor:pointer;background:white;color:var(--ink)}button.primary{background:var(--accent);color:white;border-color:var(--accent);flex:1}button:hover{filter:brightness(.95)}:focus-visible{outline:3px solid #202f65;outline-offset:4px}.leg-control{margin:16px 0 6px}.readout{border-top:1px solid var(--line);padding-top:12px;margin-top:12px;font-size:.86rem}.check{display:flex;gap:10px;align-items:center;min-height:44px;font-size:.86rem;cursor:pointer}.areas{margin-top:20px}.areas-head{display:flex;align-items:start;justify-content:space-between;gap:20px}.formula{font:700 clamp(1.4rem,3vw,2rem)/1.3 Georgia,serif;white-space:nowrap;margin:0}.area-rows{display:grid;grid-template-columns:155px minmax(0,1fr);gap:12px 18px;align-items:center;margin:20px 0}.bar{display:flex;height:32px;background:#f0f1ef;border:1px solid #d9ddda;border-radius:5px;overflow:hidden}.bar span{display:block;height:100%;background:var(--a);min-width:0}.bar .b-fill{background:var(--b)}.bar .c-fill{background:var(--c)}.row-label{font-size:.86rem;font-weight:600}.numeric{font-size:1.05rem;font-weight:650;font-variant-numeric:tabular-nums}.question{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:.9rem}.status{color:var(--muted);font-size:.85rem;min-height:1.6em}footer{text-align:center;padding:24px 18px 30px;color:var(--muted);font-size:.75rem}.skip{position:absolute;left:12px;top:-80px;background:white;padding:10px;z-index:5}.skip:focus{top:8px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}svg text{font-family:system-ui,sans-serif;paint-order:stroke;stroke:white;stroke-width:5px;stroke-linejoin:round}svg .square-label{stroke-width:4px;font-weight:700}svg path,svg line,svg polygon{stroke-linejoin:round;stroke-linecap:round}
+@media(max-width:850px){.layout{grid-template-columns:minmax(0,1fr)}.sidebar{grid-template-columns:1fr 1fr}.wrap{padding:24px}.areas-head{flex-wrap:wrap}}@media(max-width:540px){.wrap{padding:20px 14px}.nav{align-items:start}.eyebrow{font-size:.64rem;text-align:right;max-width:155px}.sidebar{grid-template-columns:1fr}.card{padding:18px}.scene-card{padding:0}.scene-top{padding:12px;font-size:.75rem}.scene-note,.legend{padding-left:12px;padding-right:12px}.legend{gap:12px;font-size:.75rem}.area-rows{grid-template-columns:1fr;gap:6px;margin:15px 0}.bar{margin-bottom:6px}.formula{font-size:1.7rem}.scene-top .badge{font-size:.65rem}h1{margin-top:22px}.stage{min-height:0}svg text{font-size:27px}svg .square-label{font-size:30px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+#cone-lab{--foreground:#333336;--muted-foreground:#646469;--background:#fff;--orange:#e47b18;--border:#dedee0;--viz-series-1:#d9783c;background:white;border:1px solid var(--line);border-radius:15px;padding:24px}
+.viz-controls,.viz-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.viz-controls .form-label{flex:1 1 180px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;font-size:.9rem;font-weight:600}.form-label input{flex-basis:100%}.form-select{width:100%;min-height:44px;border:1px solid var(--line);background:white;color:var(--ink);border-radius:8px;padding:8px;font:inherit}.btn-primary{background:var(--accent);color:white;border-color:var(--accent)}#cone-status{font-size:.9rem;color:var(--muted)}.activity{margin-top:20px}.activity h2{margin-bottom:12px}.activity p{max-width:850px}.model-note{color:var(--muted);font-size:.85rem}#cone-lab canvas{height:380px!important}@media(max-width:480px){#cone-lab{padding:14px}#cone-lab canvas{height:300px!important}.viz-controls button{flex:1 1 120px}}
+
+#cone-lab .viz-controls{margin-bottom:16px}#cone-lab h2{margin-bottom:16px}#cone-status{min-height:1.6em}button[aria-pressed=true]{background:#f9e9df;color:var(--accent)}
+</style></head><body>
+<a class="skip" href="#main">Skip to explorer</a><header><div class="wrap"><nav class="nav" aria-label="Collection navigation"><a href="index.html#course-heading">← Back to collection</a><span class="eyebrow">MATH 1351 · Interactive Mathematics</span></nav><h1>Cone Surface Area Explorer</h1><p>Add faces to a pyramid. Approach a cone. Unfold the lateral surface.</p><div class="author">Luis Miguel Fernández, Ph.D.</div></div></header><main id="main" class="wrap"><div id="cone-lab">
+ <h2>From a pyramid to a cone</h2>
+ <div class="viz-controls">
+  <label class="form-label" for="cone-sides">Base sides <output id="cone-count">4</output><input id="cone-sides" class="form-range" type="range" min="3" max="64" value="4"></label>
+  <button id="cone-smooth" class="btn" type="button" aria-pressed="false">Show cone</button>
+  <button id="cone-grow" class="btn" type="button">Add sides automatically</button>
+ </div>
+ <canvas aria-label="A regular pyramid with an adjustable number of base sides unfolds into a flat fan of triangles." role="img"></canvas>
+ <div class="viz-controls">
+  <label class="form-label" for="cone-unfold">Unfold <output id="cone-percent">0%</output><input id="cone-unfold" class="form-range" type="range" min="0" max="1000" value="0"></label>
+  <button id="cone-play" class="btn btn-primary" type="button">Unfold the surface</button>
+ </div>
+ <div class="viz-controls">
+  <label class="form-label" for="cone-radius">Radius <output id="cone-r-value">2</output><input id="cone-radius" class="form-range" type="range" min="1" max="3" step=".25" value="2"></label>
+  <label class="form-label" for="cone-height">Height <output id="cone-h-value">4</output><input id="cone-height" class="form-range" type="range" min="2" max="6" step=".25" value="4"></label>
+ </div>
+ <div id="cone-status" aria-live="polite">4 triangular faces · square base</div>
+</div>
+<style>
+#cone-lab canvas{display:block;width:100%;height:360px;margin:12px 0}
+#cone-lab .viz-controls{margin-bottom:12px}
+#cone-lab .form-label output{margin-left:8px;font-variant-numeric:tabular-nums}
+@media(max-width:480px){#cone-lab canvas{height:320px}}
+</style>
+<script>
+(()=>{
+ const root=document.getElementById('cone-lab'),c=root.querySelector('canvas'),ctx=c.getContext('2d');
+ const $=name=>root.querySelector('#cone-'+name),clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+ let sides=4,smooth=false,p=0,r=2,h=4,raf=0;
+ const ease=x=>x*x*(3-2*x);
+ function save(){try{localStorage.setItem('cone-surface-area-v1',JSON.stringify({sides,smooth,unfold:p,radius:r,height:h}));}catch{}}
+ function sync(){
+ $('sides').value=sides;$('count').textContent=smooth?'Circle':sides;
+ $('smooth').setAttribute('aria-pressed',String(smooth));$('smooth').textContent=smooth?'Return to pyramid':'Show cone';
+ $('unfold').value=Math.round(p*1000);$('percent').textContent=Math.round(p*100)+'%';
+ $('radius').value=r;$('height').value=h;$('r-value').textContent=r;$('h-value').textContent=h;
+ $('play').textContent=p>.99?'Fold the surface':'Unfold the surface';
+ const names={3:'triangular',4:'square',5:'pentagonal',6:'hexagonal'};
+ $('status').textContent=p>.999?(smooth?'Circular sector + circular base':sides+' triangles in a flat fan + polygonal base'):p>0?'Opening the lateral surface along one seam':smooth?'Cone · circular base':sides+' triangular faces · '+(names[sides]||sides+'-sided')+' base';
+ }
+ function draw(){
+ const w=c.clientWidth,H=c.clientHeight,dpr=Math.min(devicePixelRatio||1,2);c.width=w*dpr;c.height=H*dpr;ctx.scale(dpr,dpr);
+ const cs=getComputedStyle(root),probe=document.createElement('span');root.appendChild(probe);
+ function color(v){probe.style.color=v;return getComputedStyle(probe).color;}
+ const ink=color('var(--foreground)'),muted=color('var(--muted-foreground)'),fill=color('var(--viz-series-1)'),paper=color('var(--background)'),line=color('var(--border)');
+ const dark=color('light-dark(var(--foreground),var(--background))'),light=color('light-dark(var(--background),var(--foreground))');probe.remove();
+ const n=smooth?240:sides,L=Math.hypot(r,h),step=2*Math.PI/n;
+ const flat=smooth?step*r/L:2*Math.asin(r*Math.sin(Math.PI/n)/L);
+ const opening=ease(clamp((p-.12)/.88,0,1)),delta=step+(flat-step)*opening;
+ const R=smooth?r*step/delta:r*Math.sin(Math.PI/n)/Math.sin(delta/2);
+ const drop=Math.sqrt(Math.max(0,L*L-R*R));
+ const tilt=.34+(Math.PI/2-.34)*opening,total=n*delta;
+ const detach=ease(clamp(p/.16,0,1)),baseX=(L+r+.7)*detach,baseTilt=.34+(Math.PI/2-.34)*detach;
+ function ring(i){const a=-total/2+i*delta;return [R*Math.sin(a),drop*Math.cos(tilt)+R*Math.cos(a)*Math.sin(tilt),R*Math.cos(a)*Math.cos(tilt)-drop*Math.sin(tilt)];}
+ const vertices=Array.from({length:n+1},(_,i)=>ring(i));
+ const base=Array.from({length:n},(_,i)=>{const a=-Math.PI+2*Math.PI*i/n;return [baseX+r*Math.sin(a),h*Math.cos(.34)*(1-detach)+(L*.55+r*Math.cos(a))*detach+r*Math.cos(a)*Math.sin(baseTilt)*(1-detach),0];});
+ // Frame both pieces from their actual geometry; retain room for readable labels.
+ const pts=[[0,0,0],...vertices,...base];
+ const minX=Math.min(...pts.map(v=>v[0])),maxX=Math.max(...pts.map(v=>v[0])),minY=Math.min(...pts.map(v=>v[1])),maxY=Math.max(...pts.map(v=>v[1]));
+ const scale=Math.min((w-56)/(maxX-minX||1),(H-100)/(maxY-minY||1));
+ const ox=w/2-(minX+maxX)*scale/2,oy=46-minY*scale;
+ function xy(v){return [ox+v[0]*scale,oy+v[1]*scale];}
+ function path(vs){ctx.beginPath();vs.forEach((v,i)=>{const [x,y]=xy(v);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.closePath();}
+ function stroke(vs,style=ink,dashed=false){ctx.beginPath();vs.forEach((v,i)=>{const [x,y]=xy(v);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.strokeStyle=style;ctx.lineWidth=1.3;ctx.setLineDash(dashed?[5,5]:[]);ctx.stroke();ctx.setLineDash([]);}
+ function text(label,v,dx=0,dy=0){const [x,y]=xy(v);ctx.fillStyle=ink;ctx.font='14px system-ui';ctx.textAlign='center';ctx.fillText(label,x+dx,y+dy);}
+ path(base);ctx.globalAlpha=.30;ctx.fillStyle=fill;ctx.fill();ctx.globalAlpha=1;ctx.strokeStyle=line;ctx.lineWidth=1.2;ctx.stroke();
+ const faces=Array.from({length:n},(_,i)=>({i,z:(vertices[i][2]+vertices[i+1][2])/2})).sort((a,b)=>a.z-b.z);
+ for(const face of faces){const {i}=face,angle=-total/2+(i+.5)*delta;
+ path([[0,0,0],vertices[i],vertices[i+1]]);ctx.fillStyle=fill;ctx.fill();
+ const illumination=clamp(.50+.33*Math.sin(angle)-.16*Math.cos(angle),0,1);
+ ctx.globalAlpha=(1-illumination)*.40*(1-opening);ctx.fillStyle=dark;ctx.fill();
+ ctx.globalAlpha=illumination*.14*(1-opening);ctx.fillStyle=light;ctx.fill();ctx.globalAlpha=1;
+ if(!smooth){ctx.strokeStyle=ink;ctx.lineWidth=sides>32?.45:.9;ctx.globalAlpha=sides>32?.35:.65;ctx.stroke();ctx.globalAlpha=1;}
+ }
+ stroke(vertices,ink);if(opening>.001){stroke([[0,0,0],vertices[0]],ink);stroke([[0,0,0],vertices[n]],ink);}
+ if(p<.001){
+ const center=[0,h*Math.cos(.34),-h*Math.sin(.34)],front=[r,h*Math.cos(.34),0];
+ stroke([[0,0,0],center],muted,true);stroke([center,front],muted,true);text('h',center,-13,-h*scale*.43);text('r',[(center[0]+front[0])/2,center[1],0],0,-8);
+ if(smooth)text('ℓ',[r*.55,h*Math.cos(.34)*.55,0],15,-5);
+ }else if(p>.999){
+ const end=vertices[n];stroke([[0,0,0],end],ink);text(smooth?'ℓ':'L',[end[0]*.55,end[1]*.55,0],10,-6);
+ text(smooth?'Circular sector':'Fan of '+sides+' triangles',[0,maxY,0],0,29);
+ text(smooth?'Circular base':'Polygonal base',[baseX,Math.max(...base.map(v=>v[1])),0],0,29);
+ }
+ ctx.font='14px system-ui';ctx.textAlign='left';ctx.fillStyle=muted;ctx.fillText(smooth?'Cone':sides+'-sided pyramid',12,20);
+ }
+ function refresh(){sync();draw();}
+ function animate(target){cancelAnimationFrame(raf);const from=p,start=performance.now(),duration=matchMedia('(prefers-reduced-motion: reduce)').matches?0:2600;
+ function frame(now){const t=duration?clamp((now-start)/duration,0,1):1;p=from+(target-from)*t;refresh();if(t<1)raf=requestAnimationFrame(frame);else save();}raf=requestAnimationFrame(frame);}
+ $('sides').oninput=e=>{cancelAnimationFrame(raf);sides=Number(e.target.value);smooth=false;refresh();};$('sides').onchange=save;
+ $('smooth').onclick=()=>{cancelAnimationFrame(raf);smooth=!smooth;refresh();save();};
+ $('unfold').oninput=e=>{cancelAnimationFrame(raf);p=Number(e.target.value)/1000;refresh();};$('unfold').onchange=save;
+ $('play').onclick=()=>animate(p>.99?0:1);
+ for(const [id,key] of [['radius','r'],['height','h']]){$(id).oninput=e=>{cancelAnimationFrame(raf);if(key==='r')r=Number(e.target.value);else h=Number(e.target.value);refresh();};$(id).onchange=save;}
+ $('grow').onclick=()=>{cancelAnimationFrame(raf);smooth=false;const start=performance.now(),from=sides,duration=matchMedia('(prefers-reduced-motion: reduce)').matches?0:3200;function frame(now){const t=duration?clamp((now-start)/duration,0,1):1;sides=Math.round(from+(64-from)*t);if(t===1)smooth=true;refresh();if(t<1)raf=requestAnimationFrame(frame);else save();}raf=requestAnimationFrame(frame);};
+ function restore(s){if(!s)return;sides=clamp(Math.round(Number(s.sides)||4),3,64);smooth=!!s.smooth;p=clamp(Number(s.unfold)||0,0,1);r=clamp(Number(s.radius)||2,1,3);h=clamp(Number(s.height)||4,2,6);refresh();}
+ new ResizeObserver(draw).observe(c);new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});
+ try{restore(JSON.parse(localStorage.getItem('cone-surface-area-v1')));}catch{}refresh();
+})();
+</script>
+
+<section class="card activity"><h2>Investigate the connection</h2><p>Increase the number of base sides. What happens to the pyramid’s base and lateral faces? Select <strong>Show cone</strong>, then unfold the surface. Describe the two pieces that make up the cone’s net.</p><p>How does the radius of the circular sector compare with the cone’s slant height? How does its arc length compare with the circumference of the cone’s base?</p><p class="model-note">A cone is not a polyhedron. Regular pyramids with more and more base sides approach a cone when their base radius and height stay fixed. For a pyramid, <em>r</em> is the distance from the base center to a vertex. In the cone view, ℓ labels the slant height; in a pyramid’s flat fan, <em>L</em> labels a lateral edge. The detached base is shown separately for clarity.</p></section><noscript>This explorer requires JavaScript enabled.</noscript></main><footer>© 2026 Luis Miguel Fernández, Ph.D.</footer></body></html>
