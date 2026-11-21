@@ -1,0 +1,22 @@
+{
+  "id": "/UTRGV_math_manipulatives/",
+  "name": "Interactive Mathematics",
+  "short_name": "Mathematics",
+  "start_url": "/UTRGV_math_manipulatives/",
+  "scope": "/UTRGV_math_manipulatives/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "/UTRGV_math_manipulatives/mathematics-apple-touch-v2.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/UTRGV_math_manipulatives/mathematics-v2.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
